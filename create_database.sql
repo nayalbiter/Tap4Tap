@@ -23,8 +23,10 @@ CREATE UNIQUE INDEX IF NOT EXISTS brewery_brewery_id_idx ON brewery (brewery_id)
 
 create table if not exists user
 (
-	user_id serial primary key
-        # TODO: finish table definition
+    user_id serial primary key,
+    username character varying(64) not null,
+    hashed_password character varying(255),
+    display_name character varying(36) not null
 );
 
 
