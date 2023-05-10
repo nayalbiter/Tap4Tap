@@ -1,7 +1,9 @@
 package edu.lwtech.csd297.tap4tap.pojos;
 
+import java.util.UUID;
+
 public class Brewery {
-    private int breweryId;
+    private UUID breweryId;
     private String name;
     private String breweryType;
     private String address1;
@@ -13,13 +15,13 @@ public class Brewery {
     private String country;
     private String websiteUrl;
     private String phone;
-    private float longitude;
-    private float latitude;
+    private double longitude;
+    private double latitude;
 
-    public Brewery(int breweryId, String name, String breweryType,
+    public Brewery(UUID breweryId, String name, String breweryType,
             String address1, String address2, String address3, String city,
             String stateProvince, String postalCode, String country,
-            String websiteUrl, String phone, float longitude, float latitude ){
+            String websiteUrl, String phone, double longitude, double latitude) {
                 this.breweryId = breweryId;
                 this.name = name;
                 this.breweryType = breweryType;
@@ -36,7 +38,7 @@ public class Brewery {
                 this.latitude = latitude;
     }
 
-    public int getBreweryId() {
+    public UUID getBreweryId() {
         return breweryId;
     }
 
@@ -84,11 +86,11 @@ public class Brewery {
         return phone;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 }
