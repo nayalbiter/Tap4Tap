@@ -16,11 +16,11 @@ public interface DAO<T> {
     // Retrieve ------------------------------------------
     // ...one at a time
     T retrieveByID(int id);
-    T retrieveByIndex(int index);
+    //T retrieveByIndex(int index);
     T retrieveByName(String name);
     // ...all at once
     List<T> retrieveAll();
-    List<Integer> retrieveAllIDs();
+    //List<Integer> retrieveAllIDs();
     // ...some at a time
     List<T> search(String keyword);
 

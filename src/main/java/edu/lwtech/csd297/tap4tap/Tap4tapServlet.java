@@ -52,6 +52,7 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("login", new LoginHandler());
         supportedCommands.put("logout", new LogoutHandler());
         supportedCommands.put("showLogin", new ShowLoginHandler());
+        supportedCommands.put("searchResult", new SearchResultHandler());
 
         logger.info("Initializing the DAOs...");
         membersDAO = new MemberMemoryDAO();
@@ -142,6 +143,8 @@ public class Tap4tapServlet extends HttpServlet {
     public DAO<Member> getMembersDAO() {
         return membersDAO;
     }
+
+    public DAO<
 
     // TODO: Add other DAO getters here
 
