@@ -11,7 +11,7 @@ public interface DAO<T> {
     void terminate();
 
     // Create --------------------------------------------
-    int insert(T item);
+    String insert(T item);
 
     // Retrieve ------------------------------------------
     // ...one at a time

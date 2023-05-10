@@ -19,9 +19,7 @@ public class Brewery {
     private double latitude;
 
     public Brewery(UUID breweryId, String name, String breweryType,
-            String address1, String address2, String address3, String city,
-            String stateProvince, String postalCode, String country,
-            String websiteUrl, String phone, double longitude, double latitude ){
+            String address1, String address2, String address3, String city, String stateProvince, String postalCode, String country, String websiteUrl, String phone, double longitude, double latitude){
                 this.breweryId = breweryId;
                 this.name = name;
                 this.breweryType = breweryType;

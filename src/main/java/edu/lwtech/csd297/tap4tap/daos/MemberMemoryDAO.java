@@ -39,7 +39,7 @@ public class MemberMemoryDAO implements DAO<Member> {
         memberDB = null;
     }
 
-    public int insert(Member member) {
+    public String insert(Member member) {
         if (member == null)
             throw new IllegalArgumentException("insert: member cannot be null");
         if (member.getRecID() != -1)
@@ -50,7 +50,7 @@ public class MemberMemoryDAO implements DAO<Member> {
         memberDB.add(member);
 
         logger.debug("Member successfully inserted!");
-        return member.getRecID();
+        return Integer.toString(member.getRecID());
     }
 
     public void delete(int id) {

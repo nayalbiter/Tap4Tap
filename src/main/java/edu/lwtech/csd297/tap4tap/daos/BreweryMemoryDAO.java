@@ -29,7 +29,7 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
      }
 
      // Create --------------------------------------------
-     public int insert(Brewery brewery){
+     public String insert(Brewery brewery){
           if(brewery == null)
                throw new IllegalArgumentException("insert: brewery cannot be null");
           logger.debug("Item successfully inserted!");
@@ -57,7 +57,7 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
 
           Brewery breweryFound = null;
           for(Brewery brewery : breweryDB){
-               if(brewery.getBreweryName() == name){
+               if(brewery.getName() == name){
                     breweryFound = brewery;
                     break;
                }
@@ -93,15 +93,15 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
      // Update ---------------------------------------------
      public boolean update(Brewery brewery){
           if(brewery == null) throw new IllegalArgumentException("update: brewery cannot be null");
-          logger.debug("Trying to update brewery: {} ...", brewery.getBreweryID());
+          logger.debug("Trying to update brewery: {} ...", brewery.getBreweryId());
           for (int i = 0; i < breweryDB.size(); i++){
-               if(breweryDB.get(i).getBreweryID() == brewery.getBreweryID()){
+               if(breweryDB.get(i).getBreweryId() == brewery.getBreweryId()){
                     breweryDB.set(i, brewery);
-                    logger.debug("Successfully updated brewery: {} !", brewery.getBreweryID());
+                    logger.debug("Successfully updated brewery: {} !", brewery.getBreweryId());
                     return true;
                }
           }
-          logger.debug("Unable to update list: {}. BreweryID not found.", brewery.getBreweryID());
+          logger.debug("Unable to update list: {}. BreweryID not found.", brewery.getBreweryId());
           return false;
      }
 
@@ -112,7 +112,7 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
           logger.debug("Trying to delete brewery with brewery name: {} ...", breweryName);
           Brewery breweryFound = null;
           for(Brewery brewery : breweryDB){
-               if(brewery.getBreweryName() == breweryName){
+               if(brewery.getName() == breweryName){
                     breweryFound = brewery;
                     break;
                }
@@ -129,9 +129,18 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
      private void addDemoBreweryData(){
           logger.debug(("Creating demo Breweries"), breweryDB);
 
-          String description;
-          List<String> breweries;
-
-          int 
+          insert(new Brewery(new UUID(0, 0), "Tap", "micro", "1st fl 155st NE", "", "", "Redmond", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", 7.2986, 12.4986));
+          
+          logger.debug("{} lists inserted", breweryDB.size());
+     }
+     @Override
+     public Brewery retrieveByID(int id) {
+          // TODO Auto-generated method stub
+          throw new UnsupportedOperationException("Unimplemented method 'retrieveByID'");
+     }
+     @Override
+     public void delete(int id) {
+          // TODO Auto-generated method stub
+          throw new UnsupportedOperationException("Unimplemented method 'delete'");
      }
 }

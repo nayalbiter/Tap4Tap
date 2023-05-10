@@ -13,7 +13,6 @@ public class HomeHandler implements CommandHandler<Tap4tapServlet> {
         String template = "home.ftl";
         Map<String, Object> templateFields = new HashMap<>();
         CommandUtils.getSessionVariables(request, templateFields);
-
         // TODO: Add template variables to the templateFields map
 
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());

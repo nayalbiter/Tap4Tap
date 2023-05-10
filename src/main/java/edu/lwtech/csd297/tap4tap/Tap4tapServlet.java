@@ -23,6 +23,7 @@ public class Tap4tapServlet extends HttpServlet {
     private static final Map<String, CommandHandler<Tap4tapServlet>> supportedCommands = new HashMap<>();
 
     private DAO<Member> membersDAO = null;
+    private DAO<Brewery> breweryDAO = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -144,7 +145,9 @@ public class Tap4tapServlet extends HttpServlet {
         return membersDAO;
     }
 
-    public DAO<
+    public DAO<Brewery> getBreweryDAD(){
+        return breweryDAO;
+    }
 
     // TODO: Add other DAO getters here
 
@@ -173,7 +176,7 @@ public class Tap4tapServlet extends HttpServlet {
         if (queryString == null)
             return "";
 
-        try { 
+        try {
             queryString = URLDecoder.decode(queryString, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);                         // Should never happen
