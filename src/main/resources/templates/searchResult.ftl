@@ -37,6 +37,8 @@
     You chose city: ${city}
     <br>
     You chose zip code: ${zipCode}
+    <br>
+    Found this breweries: ${breweries}
     </p>
     </section>
     <footer>

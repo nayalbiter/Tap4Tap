@@ -86,6 +86,31 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
           return breweryIds;
      }
      // ...some at a time
+     public List<Brewery> searchByKeys(String country, String stateProvince, String city, String breweryName, String zipCode){
+          if(country == null || country.equals("") || country.trim().equals("")) throw new IllegalArgumentException("SearchByKeys: country cannot be null or empty or blank");
+          logger.debug("Searching for breweries countaining: '{}', '{}', '{}', '{},' '{}'", country, stateProvince, city, breweryName, zipCode);
+          country = country.trim().toLowerCase();
+          stateProvince = stateProvince.trim().toLowerCase();
+          city = city.trim().toLowerCase();
+          breweryName = breweryName.trim().toLowerCase();
+          zipCode = zipCode.trim().toLowerCase();
+          List<Brewery> breweryFound = new ArrayList<>();
+          for(Brewery brewery : breweryDB){
+               if(brewery.getCountry().toLowerCase().contains(country)){
+                    if(brewery.getStateProvince().toLowerCase().contains(stateProvince)){
+                         if(brewery.getName().toLowerCase().contains(breweryName)){
+                              if(brewery.getCity().toLowerCase().contains(city)){
+                                   if(brewery.getPostalCode().contains(zipCode)){
+                                        breweryFound.add(brewery);
+                                   }
+                              }
+                         }
+                    }
+               }
+          }
+          logger.debug("Found {} breweries with keywords '{}', '{}', '{}', '{}', '{}'", breweryFound.size(), country, stateProvince, city, breweryName, zipCode);
+          return breweryFound;
+     }
      public List<Brewery> search(String keyword){
           if (keyword == null || keyword.equals("")|| keyword.trim().equals(""))throw new IllegalArgumentException("search: keyword cannot be null or empty or blank");
           logger.debug("Searching for breweries containing: '{}'", keyword);
@@ -142,7 +167,7 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
           logger.debug(("Creating demo Breweries"), breweryDB);
 
           insert(new Brewery(new UUID(0, 0), "Tap", "micro", "1st fl 155st NE", "", "", "Redmond", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", 7.2986, 12.4986));
-          
+
           logger.debug("{} lists inserted", breweryDB.size());
      }
      @Override

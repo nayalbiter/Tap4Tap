@@ -23,7 +23,7 @@ public interface DAO<T> {
     List<String> retrieveAllIDs();
     // ...some at a time
     List<T> search(String keyword);
-
+    List<T> searchByKeys(String country, String stateProvince, String city, String breweryName, String zipCode);
     // Update ---------------------------------------------
     boolean update(T item);
     
