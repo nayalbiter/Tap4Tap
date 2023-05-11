@@ -38,7 +38,17 @@
     <br>
     You chose zip code: ${zipCode}
     <br>
-    Found this breweries: ${breweries}
+    Found these breweries: <br><br>
+    <i>Breweries</i><br>
+    <#list breweries as brewery>
+    ${brewery.name} <br>
+    </#list>
+    <br>
+   <i> All Breweries</i><br>
+    <#list allBreweries as brewery>
+    ${brewery.name} <br>
+    ${brewery.country} <br>
+    </#list>
     </p>
     </section>
     <footer>

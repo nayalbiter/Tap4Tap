@@ -183,4 +183,11 @@ public class MemberMemoryDAO implements DAO<Member> {
         throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
     }
 
+    @Override
+    public List<Member> searchByKeys(String country, String stateProvince, String city, String breweryName,
+            String zipCode) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'searchByKeys'");
+    }
+
 }

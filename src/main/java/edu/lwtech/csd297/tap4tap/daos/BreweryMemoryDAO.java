@@ -32,6 +32,8 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
      public String insert(Brewery brewery){
           if(brewery == null)
                throw new IllegalArgumentException("insert: brewery cannot be null");
+          logger.debug("Inserting {}...", brewery);
+          breweryDB.add(brewery);
           logger.debug("Item successfully inserted!");
           return brewery.getBreweryId();
      }
@@ -168,6 +170,7 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
 
           insert(new Brewery(new UUID(0, 0), "Tap", "micro", "1st fl 155st NE", "", "", "Redmond", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", 7.2986, 12.4986));
 
+          insert(new Brewery(new UUID(1, 0), "BeerCrawl", "micro", "5st fl 134st NE", "", "", "Seoul", "Seoul", "", "South Korea", "http://www.crawlinbeer.com","784-809-9895", 5.2986, 1.4986));
           logger.debug("{} lists inserted", breweryDB.size());
      }
      @Override

@@ -33,7 +33,7 @@ public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
         //getting zipcode information
         String zipString = request.getParameter("zipCode");
         templateFields.put("zipCode", zipString);
-
+        templateFields.put("allBreweries", servlet.getBreweryDAD().retrieveAll());
         templateFields.put("breweries", servlet.getBreweryDAD().searchByKeys(country, state, city, breweryName, zipString));
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
     }
