@@ -4,7 +4,7 @@ import java.util.*;
 
 // Generic Data Access Object (DAO) Interface
 
-public interface DAO<T> {
+public interface DAO<T, PK> {
 
     // Life Cycle ----------------------------------------
     boolean initialize(String initParams);
