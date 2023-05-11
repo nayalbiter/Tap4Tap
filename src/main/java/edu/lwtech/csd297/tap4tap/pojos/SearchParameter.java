@@ -1,5 +1,6 @@
 package edu.lwtech.csd297.tap4tap.pojos;
-public class SearchParameter{
+
+public class SearchParameter {
     private String name;
     private String value;
     private boolean exact;
@@ -7,8 +8,9 @@ public class SearchParameter{
     public SearchParameter(String name, String value){
         this(name, value, true);
     }
+
     /**
-     *
+     * 
      * @param name
      * @param value
      * @param exact whether the value must exactly match
