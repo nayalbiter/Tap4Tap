@@ -7,21 +7,18 @@ import edu.lwtech.csd297.tap4tap.Tap4tapServlet;
 
 //handle search result page
 public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
-   
+
     @Override
-    public String handle(HttpServletRequest request, Tap4tapServlet servlet) {
+    public String handle(HttpServletRequest request, Tap4tapServlet servlet) throws UserInputException {
         String template = "searchResult.ftl";
         Map<String, Object> templateFields = new HashMap<>();
         CommandUtils.getSessionVariables(request, templateFields);
 
         //putting country information
-        String country = "";
-        try {
-            country = request.getParameter("country");
-        } catch (Exception e) {
-            country = "United States";
+        String country = request.getParameter("country");
+        if ( country == null || country.equals("") || country.trim().equals("")) {
+            throw new UserInputException("The country is invalid");
         }
-        templateFields.put("country", country);
         //putting brewery information
         String breweryName;
         try {

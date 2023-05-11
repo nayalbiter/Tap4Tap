@@ -64,16 +64,27 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
           }
           return breweryFound;
      }
+     // public brewery retureiveBycountry()
+     public Brewery retrieveByIndex(int index) {
+          if (index < 0)throw new IllegalArgumentException("retrieveByIndex: Index cannot be negative");
+          logger.debug("Trying to get Brewery with index: {} ...", index);
+
+          return breweryDB.get(index);
+      }
      // ...all at once
      public List<Brewery> retrieveAll(){
           logger.debug("Getting all breweries ...");
           return new ArrayList<>(breweryDB);
-
      }
-     // public List<Integer> retrieveAllIDs(){
-     //      logger.debug("Getting brewery IDs...");
+     public List<String> retrieveAllIDs() {
+          logger.debug("Getting all Brewery IDs...");
 
-     // }
+          List<String> breweryIds = new ArrayList<>();
+          for(Brewery brewery : breweryDB){
+               breweryIds.add(brewery.getBreweryId());
+          }
+          return breweryIds;
+     }
      // ...some at a time
      public List<Brewery> search(String keyword){
           if (keyword == null || keyword.equals("")|| keyword.trim().equals(""))throw new IllegalArgumentException("search: keyword cannot be null or empty or blank");
@@ -81,8 +92,9 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
           keyword = keyword.toLowerCase();
           List<Brewery> breweriesFound = new ArrayList<>();
           for(Brewery brewery : breweryDB){
-               breweriesFound.add(brewery);
-               break;
+               if(brewery.getName().toLowerCase().contains(keyword)){
+                    breweriesFound.add(brewery);
+               }
           }
           logger.debug("Found {} breweries with the keyword '{}'!", breweriesFound.size(), keyword);
           return breweriesFound;
@@ -112,7 +124,7 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
           logger.debug("Trying to delete brewery with brewery name: {} ...", breweryName);
           Brewery breweryFound = null;
           for(Brewery brewery : breweryDB){
-               if(brewery.getName() == breweryName){
+               if(brewery.getName().equals(breweryName)){
                     breweryFound = brewery;
                     break;
                }
@@ -142,5 +154,10 @@ public class BreweryMemoryDAO implements DAO<Brewery> {
      public void delete(int id) {
           // TODO Auto-generated method stub
           throw new UnsupportedOperationException("Unimplemented method 'delete'");
+     }
+     @Override
+     public Brewery retrieveByIndex(String index) {
+          // TODO Auto-generated method stub
+          throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
      }
 }

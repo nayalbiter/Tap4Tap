@@ -114,12 +114,12 @@ public class MemberMemoryDAO implements DAO<Member> {
         return new ArrayList<>(memberDB);               // Return copy of Member collection
     }
 
-    public List<Integer> retrieveAllIDs() {
+    public List<String> retrieveAllIDs() {
         logger.debug("Getting all member IDs...");
 
-        List<Integer> recIDs = new ArrayList<>();
+        List<String> recIDs = new ArrayList<>();
         for (Member member : memberDB) {
-            recIDs.add(member.getRecID());
+            //recIDs.add(member.getRecID());
         }
         return recIDs;
     }
@@ -175,6 +175,12 @@ public class MemberMemoryDAO implements DAO<Member> {
         insert(member);
 
         logger.debug("{} members inserted!", size());
+    }
+
+    @Override
+    public Member retrieveByIndex(String index) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
     }
 
 }

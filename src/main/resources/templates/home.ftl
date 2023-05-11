@@ -52,6 +52,10 @@
         <!--add the buttons for the search here-->
         <div class="brewerySearch">
 
+        <#if error??>
+            <p>Error was ${error}</p>
+        </#if>
+
             <form action="/tap4tap/servlet" method="get"> <!--FIX THIS PART WITH JAVA CODE-->
                 <input type="hidden" id="cmd" name="cmd" value="searchResult" />
                 <label for="country"> Select a country:</label>
@@ -67,12 +71,8 @@
                     <option value="South Korea">South Korea</option>
                     <option value="United States" selected>United States</option>
                 </select>
-            
                 <br><br>
-
                 <p> Search by brewery name:</p>
-      
-
                 <label for="breweryName">Brewery Name: </label>
                 <input type="text" id="breweryName" name="breweryName"><br><br>
 

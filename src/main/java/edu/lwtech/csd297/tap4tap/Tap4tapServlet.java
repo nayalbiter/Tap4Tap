@@ -57,11 +57,13 @@ public class Tap4tapServlet extends HttpServlet {
 
         logger.info("Initializing the DAOs...");
         membersDAO = new MemberMemoryDAO();
+        breweryDAO = new BreweryMemoryDAO();
 
         String initParams = "";
         if (!membersDAO.initialize(initParams))
             throw new UnavailableException("Unable to initialize the MembersDAO.");
-
+        if (!breweryDAO.initialize(initParams))
+            throw new UnavailableException("Unable to initialize the BreweryDAO.");
         // TODO: Initialize other DAOs here
 
         logger.info("Successfully initialized the DAOs!");
@@ -74,6 +76,7 @@ public class Tap4tapServlet extends HttpServlet {
     @Override
     public void destroy() {
         membersDAO.terminate();
+        breweryDAO.terminate();
         // TODO: Terminate other DAOs here
         logger.warn("-----------------------------------------");
         logger.warn("  tap4tap destroy() completed!");
@@ -107,7 +110,13 @@ public class Tap4tapServlet extends HttpServlet {
             }
 
             // Handle the command request
-            String output = command.handle(request, this);
+            String output;
+            try {
+                output = command.handle(request, this);
+            } catch (UserInputException e) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString());
+                return;
+            }
             if (output == null || output.isBlank()) {
                 logger.info("Null/Empty response returned when command was handled. cmd: {}", cmd);
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);
