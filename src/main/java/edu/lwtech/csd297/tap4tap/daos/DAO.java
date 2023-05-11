@@ -6,7 +6,7 @@ import edu.lwtech.csd297.tap4tap.pojos.SearchParameter;
 
 // Generic Data Access Object (DAO) Interface
 
-public interface DAO<T, K> {
+public interface DAO<T> {
 
     // Life Cycle ----------------------------------------
     boolean initialize(String initParams);
