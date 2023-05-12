@@ -23,7 +23,7 @@ public interface DAO<T> {
     T retrieveByIndex(int index);
 
     // ...all at once
-    List<T> retrieveByName(String naame);
+    List<T> retrieveByName(String name);
 
     List<T> retrieveAll();
 
