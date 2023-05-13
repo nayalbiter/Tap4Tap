@@ -127,9 +127,9 @@ public class Tap4tapServlet extends HttpServlet {
             try (ServletOutputStream out = response.getOutputStream(); ) {
                 out.println(output);
             }
-        } catch (IOException e) {
+            } catch (IOException e) {
             logger.debug("Unexpected I/O exception: ", e);
-        } catch (RuntimeException e) {
+            } catch (RuntimeException e) {
             logger.error("Unexpected runtime exception: ", e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unexpected server error.");

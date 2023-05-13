@@ -7,24 +7,20 @@
         <link rel="stylesheet" href="resources/css/tap4tap.css">
     </head>
     <body>
-        <header>
+        <header>  
         <!--add here the nav section with the home button and  login/
             create an account & my name/ log out button-->
-        <#if loggedIn>
-            <a href="?cmd=logout">Log Out</a>
-        <#else>
-            <a href="?cmd=showLogin">Log In</a><br />
-        </#if>
-        <div class="navbar">
-            <a href="homepage.html">Home</a>
+
+        <a href="index.html">Home</a>
 
             <div class="dropdown1">
-                <button class="dropbtn" onclick="selectLoginOrCreateAccount()">Log In / Create Account
+                <button class="dropbtn" onclick="selectLoginOrCreateAccount()"> <#if loggedIn>Log out  <#else> Log in </#if>/ Create Account
 
                 </button>
                 <div class="dropdown-content" id="logInCreateAccount">
-                    <a href="pages/logIn.html">Log In</a>
-                    <a href="pages/createAccount.html">Create an Account</a>
+                    <a href="login.ftl">
+                    <#--  <input type="hidden" id="cmd" name="cmd" value="login" /><#if loggedIn>Log Out<#else>Log In</#if></a>  -->
+                    <a href="createAccount.html">Create an Account</a>
 
                 </div>
             </div>
@@ -47,7 +43,7 @@
     <#if user??><h2> Welcome ${user}!</h2></#if>
     <h3> Find the best beer places here!</h3>
 
-    <section class="searchButtons">
+    <section class="searchButtons"> 
 
         <!--add the buttons for the search here-->
         <div class="brewerySearch">
@@ -56,7 +52,7 @@
             <p>Error was ${error}</p>
         </#if>
 
-            <form action="/tap4tap/servlet" method="get"> <!--FIX THIS PART WITH JAVA CODE-->
+            <form action="/tap4tap/servlet" method="get"> <!--FIX THIS PART WITH JAVA CODE--> 
                 <input type="hidden" id="cmd" name="cmd" value="searchResult" />
                 <label for="country"> Select a country:</label>
                 <select name="country" id="countries">
@@ -86,7 +82,7 @@
                 <label for="zipCode">Zip Code: </label>
                 <input type="text" id="zipCode" name="zipCode"><br><br>
 
-                <input type="submit" value="Let's go!"> <!--FIX THIS PART WITH JAVA CODE-->
+                <input type="submit" value="Let's go!"> <!--FIX THIS PART WITH JAVA CODE--> 
             </form>
 
 
@@ -107,7 +103,7 @@
 
 
 
-    <script>
+    <script> 
         /*this code is used for the dropdown button in the navigation bar*/
 
         function selectLoginOrCreateAccount() {
@@ -126,4 +122,4 @@
 
     </script>
     </body>
-</html>
+</html> 

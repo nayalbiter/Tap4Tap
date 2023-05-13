@@ -97,15 +97,15 @@ public class MemberMemoryDAO implements DAO<Member> {
         return memberDB.get(index);
     }
 
-    public Member retrieveByName(String name) {
+    public List<Member> retrieveByName(String name) {
         if (name == null || name.isEmpty())
             throw new IllegalArgumentException("retrieveByName: name cannot be empty or null");
         logger.debug("Getting member with name: {} ...", name);
 
-        for (Member member : memberDB) {
-            if (member.getUsername().equals(name))
-                return member;
-        }
+        // for (Member member : memberDB) {
+        //     if (member.getUsername().equals(name))
+        //         return member;
+        // }
         return null;
     }
 
@@ -178,16 +178,34 @@ public class MemberMemoryDAO implements DAO<Member> {
     }
 
     @Override
-    public Member retrieveByIndex(String index) {
+    public Member retrieveByID(String id) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
+        throw new UnsupportedOperationException("Unimplemented method 'retrieveByID'");
     }
 
     @Override
-    public List<Member> searchByKeys(String country, String stateProvince, String city, String breweryName,
-            String zipCode) {
+    public List<Member> search(String[] params) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchByKeys'");
+        throw new UnsupportedOperationException("Unimplemented method 'search'");
     }
+
+    @Override
+    public void delete(String id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+    // @Override
+    // public Member retrieveByIndex(String index) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
+    // }
+
+    // @Override
+    // public List<Member> searchByKeys(String country, String stateProvince, String city, String breweryName,
+    //         String zipCode) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'searchByKeys'");
+    // }
 
 }

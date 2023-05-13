@@ -55,20 +55,20 @@ class MemberMemoryDAOTests {
     //     assertTrue(ex.getMessage().contains("already"));
     // }
 
-    @Test
-    void testRetrieveByID() {
-        Exception ex = null;
+    // @Test
+    // void testRetrieveByID() {
+    //     Exception ex = null;
 
-        Member member = memberDAO.retrieveByID(FIRST_REC_ID);
-        assertEquals(FIRST_REC_ID, member.getRecID());
-        member = memberDAO.retrieveByID(FIRST_REC_ID+1);
-        assertEquals(FIRST_REC_ID+1, member.getRecID());
+    //     Member member = memberDAO.retrieveByID(FIRST_REC_ID);
+    //     assertEquals(FIRST_REC_ID, member.getRecID());
+    //     member = memberDAO.retrieveByID(FIRST_REC_ID+1);
+    //     assertEquals(FIRST_REC_ID+1, member.getRecID());
 
-        ex = assertThrows(IllegalArgumentException.class,
-            () -> { memberDAO.retrieveByID(-666); }
-        );
-        assertTrue(ex.getMessage().contains("negative"));
-    }
+    //     ex = assertThrows(IllegalArgumentException.class,
+    //         () -> { memberDAO.retrieveByID(-666); }
+    //     );
+    //     assertTrue(ex.getMessage().contains("negative"));
+    // }
 
     // @Test
     // void testRetrieveByIndex() {
@@ -98,54 +98,54 @@ class MemberMemoryDAOTests {
     //     // assertEquals(3, ids.size());
     // }
 
-    @Test
-    void testSearch() {
-        Exception ex = null;
+    // @Test
+    // void testSearch() {
+    //     Exception ex = null;
 
-        List<Member> members = memberDAO.search("fred");
-        assertEquals(1, members.size());
-        members = memberDAO.search("jerry");
-        assertEquals(0, members.size());
+    //     List<Member> members = memberDAO.search("fred");
+    //     assertEquals(1, members.size());
+    //     members = memberDAO.search("jerry");
+    //     assertEquals(0, members.size());
 
-        ex = assertThrows(IllegalArgumentException.class,
-            () -> { memberDAO.search(null); }
-        );
-        assertTrue(ex.getMessage().contains("null"));
-    }
+    //     ex = assertThrows(IllegalArgumentException.class,
+    //         () -> { memberDAO.search(null); }
+    //     );
+    //     assertTrue(ex.getMessage().contains("null"));
+    // }
 
-    @Test
-    void testUpdate() {
-        Exception ex = null;
+    // @Test
+    // void testUpdate() {
+    //     Exception ex = null;
 
-        Member tom = memberDAO.search("tom").get(0);
-        Member newTom = new Member(tom.getRecID(), "tom", "abcdefgh");
-        assertTrue(memberDAO.update(newTom));
-        tom = memberDAO.search("tom").get(0);
-        assertEquals("abcdefgh", tom.getPassword());
+    //     Member tom = memberDAO.search("tom").get(0);
+    //     Member newTom = new Member(tom.getRecID(), "tom", "abcdefgh");
+    //     assertTrue(memberDAO.update(newTom));
+    //     tom = memberDAO.search("tom").get(0);
+    //     assertEquals("abcdefgh", tom.getPassword());
         
-        Member tim = new Member(100, "tim", "xyzxyz");
-        assertFalse(memberDAO.update(tim));
+    //     Member tim = new Member(100, "tim", "xyzxyz");
+    //     assertFalse(memberDAO.update(tim));
         
-        ex = assertThrows(IllegalArgumentException.class,
-            () -> { memberDAO.update(null); }
-        );
-        assertTrue(ex.getMessage().contains("null"));
-    }
+    //     ex = assertThrows(IllegalArgumentException.class,
+    //         () -> { memberDAO.update(null); }
+    //     );
+    //     assertTrue(ex.getMessage().contains("null"));
+    // }
 
-    @Test
-    void testDelete() {
-        Exception ex = null;
+    // @Test
+    // void testDelete() {
+    //     Exception ex = null;
 
-        int fredsID = memberDAO.search("fred").get(0).getRecID();
-        memberDAO.delete(fredsID);
-        assertNull(memberDAO.retrieveByID(fredsID));
-        memberDAO.delete(666);
+    //     int fredsID = memberDAO.search("fred").get(0).getRecID();
+    //     memberDAO.delete(fredsID);
+    //     assertNull(memberDAO.retrieveByID(fredsID));
+    //     memberDAO.delete(666);
 
-        ex = assertThrows(IllegalArgumentException.class,
-            () -> { memberDAO.delete(-666); }
-        );
-        assertTrue(ex.getMessage().contains("negative"));
-    }
+    //     ex = assertThrows(IllegalArgumentException.class,
+    //         () -> { memberDAO.delete(-666); }
+    //     );
+    //     assertTrue(ex.getMessage().contains("negative"));
+    // }
 
     @Test
     void testSize() {

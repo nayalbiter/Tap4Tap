@@ -15,20 +15,21 @@ public interface DAO<T> {
 
     // Retrieve ------------------------------------------
     // ...one at a time
-    T retrieveByID(int id);
-    T retrieveByIndex(String index);
-    T retrieveByName(String name);
+    T retrieveByID(String id);
+    T retrieveByIndex(int index);
     // ...all at once
+    List<T> retrieveByName(String name);
     List<T> retrieveAll();
     List<String> retrieveAllIDs();
+    
     // ...some at a time
-    List<T> search(String keyword);
-    List<T> searchByKeys(String country, String stateProvince, String city, String breweryName, String zipCode);
+    List<T> search(String[] params);
+    //List<T> searchByKeys(String country, String stateProvince, String city, String breweryName, String zipCode);
     // Update ---------------------------------------------
     boolean update(T item);
     
     // Delete ---------------------------------------------
-    void delete(int id);
+    void delete(String id);
 
     // Miscellaneous -------------------------------------
     int size();

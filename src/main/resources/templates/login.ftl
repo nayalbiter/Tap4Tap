@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>tap4tap CSD297 Project</h1>
+        <h1>Tap4Tap</h1>
         <h2>Log in to your account</h2>
 
         <#if loggedIn>
@@ -18,7 +18,7 @@
                 Password: <input type="password" name="password" size=60 /><br />
 
                 <input type="submit" value="Submit" />
-                <input class="button" type="button" onclick="window.location.replace('/tap4tap?cmd=home')" value="Cancel" />
+                <input class="button" type="button" onclick="window.location.replace('/tap4tap/servlet?cmd=home')" value="Cancel" />
             </form><br />
         </#if>
         <a href="?cmd=home">Home</a>

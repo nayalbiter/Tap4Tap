@@ -34,7 +34,8 @@ public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
         String zipString = request.getParameter("zipCode");
         templateFields.put("zipCode", zipString);
         templateFields.put("allBreweries", servlet.getBreweryDAD().retrieveAll());
-        templateFields.put("breweries", servlet.getBreweryDAD().searchByKeys(country, state, city, breweryName, zipString));
+        String [] keys = {country, state, city, breweryName, zipString};
+        templateFields.put("breweries", servlet.getBreweryDAD().search(keys));
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
     }
 }

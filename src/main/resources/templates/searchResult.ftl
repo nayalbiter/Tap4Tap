@@ -11,12 +11,10 @@
 
 <body>
     <header>
-
-
         <div class="navbar">
 
             <nav>
-                <a href="homepage.ftl">Home</a>
+                <a href="home.ftl">Home</a>
 
             </nav>
 
