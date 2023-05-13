@@ -42,7 +42,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="homepage.html">Home</a>
+                                <a href="index.html">Home</a>
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -142,7 +142,7 @@
                                         <form id="brewerySearchForm" class="user" action="/tap4tap/servlet"
                                             method="get">
                                             <input type="hidden" id="cmd" name="cmd" value="searchResult" />
-                                            <input type="hidden" id="test" name="country" value="USA" />
+                                            <input type="hidden" id="hiddenCountry" name="country" value="United States" />
                                             <div class="container">
                                                 <div class="row w-100">
                                                     <div class="col-6">
