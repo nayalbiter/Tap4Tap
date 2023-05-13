@@ -11,15 +11,21 @@
     <title>Brewery Search Results</title>
 
     <!-- Custom fonts for this page-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this page-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../css/brewery-search-results.css" rel="stylesheet">
+    <link href="../css/breweryResults.css" rel="stylesheet">
 </head>
+
 
 <body id="page-top" class="bg-gradient-warning">
     <!-- Page Wrapper -->
@@ -32,17 +38,17 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-gradient-warning topbar mb-4 static-top shadow">
 
-                    <!-- Topbar Search -->
-                    
-                        <div class="input-group">
-                            <div class="input-group-appesnd">
-                                <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                    <a href="../homepage.html">Home</a>
-                                    <i class="fa fa-home fa-lg"></i>
-                                </button>
-                            </div>
+                    <!-- Topbar Home -->
+
+                    <div class="input-group">
+                        <div class="input-group-appesnd">
+                            <button class="btn btn-danger btn-lg alert-warning" type="button">
+                                <a href="../homepage.html">Home</a>
+                                <i class="fa fa-home fa-lg"></i>
+                            </button>
                         </div>
-                    
+                    </div>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -52,8 +58,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">Login</span>
-                                <img class="img-profile rounded-circle"
-                                    src="../img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
@@ -69,8 +74,9 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
 
-                                <!-- JOY: this is going to be hidden until the user log in-->
-                                <a class="dropdown-item  text-white" href="#" data-toggle="modal" data-target="#logoutModal" style="visibility: hidden;">
+                                <!-- JOY:Check this please, this (log out) is going to be hidden until the user log in-->
+                                <a class="dropdown-item  text-white" href="#" data-toggle="modal"
+                                    data-target="#logoutModal" style="visibility: hidden;">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-1 00"></i>
                                     Logout
                                 </a>
@@ -82,180 +88,152 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                
-<!-- Begin Page Content -->
-<div class="container-xl">
-    <div class="row">
-    
-      <div class="col-12">
-         <!-- Logo Text -->
-        <div class="text-center">
-            <div class="logo text-gray-400" data-text="Tap4Tap">Tap4Tap</div>
-    <br/><br/>
-        </div>
-      </div>
-     
-    </div>
 
-    <div class="row bg-gradient-warning">
+                <!-- Begin Page Content -->
+                <div class="container-xl">
+                    <div class="row">
 
-        <div class="col-lg">
-            <br/>
-
-            <section class="Image">
-
-                <div class="imageContainer">
-        
-                    <!--add the beer picture here  -->
-                    <img src="img/18.jpg" alt="Beer" class="center">
-        
-                </div>
-        
-            </section>
-            <br/>
-        </div>
-
-        <div class="col-lg">
-            <div class="container">
-                <div class="row">
-                   
-                  <div class="col-12">
-                    <br/>
-                    <h1 class="logo-sm mb-1 text-gray-900">Click the brewery name for more info:</h1>
-                    
-                  </div>
-                  
-                </div>
-                <div class="row bg-gradient-warning">
-                    
-                    <div class="col-12">
-                        <div class="text-center">
-                            <br/> 
+                        <div class="col-12">
+                            <!-- Logo Text -->
+                            <div class="text-center">
+                                <div class="logo text-gray-400" data-text="Tap4Tap">Tap4Tap</div>
+                                <br /><br />
+                            </div>
                         </div>
-                        <form class="user" action="brewerySearch.php"> <!--FIX THIS PART WITH JAVA CODE-->
-                            <div class="container">
-                            <div class="row w-100">
-                                <div class="col-6">
-                                    <h4 class="text-gray-800">Select a country: </h3>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" value="United States">
-                                        <div class="input-group-append">
-                                          <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                          </button>
-                                          <div class="dropdown-menu bg-gradient-danger">
 
-                                            <!--
-                                            <select name="country" id="countries">
-                                                <option value="Austria">Austria</option>
-                                                <option value="England">England</option>
-                                                <option value="France">France</option>
-                                                <option value="Isle of Man">Isle of Man</option>
-                                                <option value="Ireland">Ireland</option>
-                                                <option value="Poland">Poland</option>
-                                                <option value="Portugal">Portugal</option>
-                                                <option value="Scotland">Scotland</option>
-                                                <option value="South Korea">South Korea</option>
-                                                <option value="United States">United States</option>
-                                            </select>
-                                        -->
-
-                                            
-                                            <a class="dropdown-item text-white" href="#">Austria</a>
-                                            <a class="dropdown-item text-white" href="#">England</a>
-                                            <a class="dropdown-item text-white" href="#">France</a>
-                                            <a class="dropdown-item text-white" href="#">Isle of Man</a>
-                                            <a class="dropdown-item text-white" href="#">Ireland</a>
-                                            <a class="dropdown-item text-white" href="#">Poland</a>
-                                            <a class="dropdown-item text-white" href="#">Portugal</a>
-                                            <a class="dropdown-item text-white" href="#">Scotland</a>
-                                            <a class="dropdown-item text-white" href="#">South Korea</a>
-                                            <a class="dropdown-item  text-white" href="#">United States</a>
-                                            
-                                            
-                                            
-                                            <div role="separator" class="dropdown-divider text-white"></div>
-                                         
-                                          </div>
-                                        </div>
-                                </div>
-                            </div>
-                            <br/><br/><br/>
-                            <div class="row w-100">
-                                <div class="col-4 mb-3 mb-sm-0">
-                                    
-                                    <h4 class="text-gray-800">Search by Name:</h3>
-                                </div>
-                                <div class="col-8">
-                                    <input class="form-control form-control-user " 
-                                    placeholder="Brewery Name">
-                                    <br/>
-                                </div>
-                            </div>
-                            <div class="row w-100">
-                                <div class="col-4 mb-3 mb-sm-0">
-                                    <h4 class="text-left text-gray-800">Or Location:</h3>
-                                </div>
-                                <div class="col-8">
-                                    <input  class="form-control form-control-user" id="exampleInputEmail"
-                                    placeholder="State/Province:">
-                                    <br/>
-                                    <input  class="form-control form-control-user" id="exampleInputEmail"
-                                    placeholder="City:">
-                                    <br/>
-                                    <input  class="form-control form-control-user" id="exampleInputEmail"
-                                    placeholder="Zip Code:">
-                                    <br/>
-                                </div>
-                            </div>
-                           
-                            <hr>
-                            <a href="index.html" class="btn btn-google btn-user btn-block">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </div>
-                        </form>
                     </div>
-                    
+
+                    <div class="row bg-gradient-warning">
+
+                        <div class="col-lg">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <br />
+                                        <h1 class="logo-sm mb-1 text-gray-900 text-center">Click the brewery name for
+                                            more info...</h1>
+                                    </div>
+
+                                </div>
+                                <div class="row bg-gradient-warning">
+                                   
+                                    <!--create table here-->
+
+                                    <!-- DataTales Example -->
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Brewery Search Results:</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive"> <!--check this-->
+                                                <table class="table table-bordered" id="dataTable" width="100%"
+                                                    cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Brewery Name</th>
+                                                            <th>Location</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Brewery Name</th>
+                                                            <th>Location</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>brewey 1</td>
+                                                            <td>map icon 1</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 2</td>
+                                                            <td>map icon 2</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 3</td>
+                                                            <td>map icon 3</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 4</td>
+                                                            <td>map icon 4</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 5</td>
+                                                            <td>map icon 5</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 6</td>
+                                                            <td>map icon 6</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 7</td>
+                                                            <td>map icon 7</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 8</td>
+                                                            <td>map icon 8</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 9</td>
+                                                            <td>map icon 9</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>brewey 10</td>
+                                                            <td>map icon 10</td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--copia hasta aqui-->
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                    </div>
+
                 </div>
-            </div>
 
-        </div>
-        <br/>
-      </div>
-  </div>
-
-  <br/>
-
-<!-- /.container-fluid -->
+                <br />
 
             </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer t4t-gradient-primary">
-                
+
                 <div class="container my-auto">
-                    
+
                     <div class="copyright text-center my-auto text-white">
-                        <span>Disclaimer: This website is for informational purposes only and does not sell or otherwise provide any age-restricted products. Tap4Tap urges you to follow your local laws regarding the consumption, sales, and possession of alcoholic beverages.</span>
-                        
+                        <span class="disclaimer">Disclaimer: This website is for informational purposes only and does
+                            not sell or otherwise
+                            provide any age-restricted products. Tap4Tap urges you to follow your local laws regarding
+                            the consumption, sales, and possession of alcoholic beverages.</span>
+
                     </div>
                 </div>
                 <div class="text-white text-center">
-                    <br/>
-                    <span>Kirkland, WA © 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales and Joy Hyunjung Oh.</span>
+                    <br />
+                    <span class="authors1">Kirkland, WA © 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales
+                        and Joy Hyunjung
+                        Oh.</span>
                 </div>
             </footer>
             <!-- End of Footer -->
 
         </div>
-        </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   
 </body>
 
 </html>

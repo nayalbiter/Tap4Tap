@@ -86,3 +86,14 @@ a.dropdown-item:hover {
   background-size: cover;
 
 }
+
+.custom-control {
+  font-size: medium;
+  color: #0D3B66;
+}
+
+.mb-4{
+  font-size: large;
+}
+
+
