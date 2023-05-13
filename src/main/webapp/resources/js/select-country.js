@@ -1,4 +1,7 @@
-$(".countryOption").on('click',function () {$("#selectedCountry").val($(this).text());});
+$(".countryOption").on('click',function () {
+    $("#selectedCountry").val($(this).text());
+    $("#hiddenCountry").val($(this).text());
+});
 
 $("#selectedCountry").prop('disabled', true);
 

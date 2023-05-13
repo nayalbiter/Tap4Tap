@@ -33,3 +33,4 @@ target/*
 !.vscode/launch.json
 .factorypath
 nbproject/
+nb-configuration.xml

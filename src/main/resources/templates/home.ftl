@@ -11,7 +11,8 @@
     <title>Tap4Tap</title>
 
     <!-- Custom fonts for this page-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         type="text/css">
 
@@ -138,8 +139,10 @@
                                         </div>
 
                                         <!--FIX THIS PART WITH JAVA CODE-->
-                                        <form id="brewerySearchForm" class="user" action="/tap4tap/servlet" method="get">
-
+                                        <form id="brewerySearchForm" class="user" action="/tap4tap/servlet"
+                                            method="get">
+                                            <input type="hidden" id="cmd" name="cmd" value="searchResult" />
+                                            <input type="hidden" id="test" name="country" value="USA" />
                                             <div class="container">
                                                 <div class="row w-100">
                                                     <div class="col-6">
@@ -147,9 +150,9 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-group">
-                                                            <input id="selectedCountry" type="text" name="country" class="form-control"
-                                                                aria-label="Text input with segmented dropdown button"
-                                                                value="United States">
+                                                            <input id="selectedCountry" type="text" 
+                                                                class="form-control form-control-user"
+                                                                value="United States" />
 
                                                             <div class="input-group-append">
                                                                 <button type="button"
@@ -196,7 +199,8 @@
                                                             <h4 class="name1 text-gray-800">Search by name:</h4>
                                                         </div>
                                                         <div class="col-8">
-                                                            <input class="form-control form-control-user "
+                                                            <input name="breweryName"
+                                                                class="form-control form-control-user "
                                                                 placeholder="Brewery Name">
                                                             <br />
                                                         </div>
@@ -207,14 +211,15 @@
                                                                 location:</h4>
                                                         </div>
                                                         <div class="col-8">
-                                                            <input name="state" class="form-control form-control-user"
+                                                            <input name="stateProvince"
+                                                                class="form-control form-control-user"
                                                                 id="stateProvince" placeholder="State/Province:">
                                                             <br />
-                                                            <input name="city" class="form-control form-control-user" id="city"
-                                                                placeholder="City:">
+                                                            <input name="city" class="form-control form-control-user"
+                                                                id="city" placeholder="City:">
                                                             <br />
-                                                            <input name="zipcode" class="form-control form-control-user" id="zipCode"
-                                                                placeholder="Zip Code:">
+                                                            <input name="zipCode" class="form-control form-control-user"
+                                                                id="zipCode" placeholder="Zip Code:">
                                                             <br />
                                                         </div>
                                                     </div>
