@@ -39,7 +39,7 @@ public class MemberMemoryDAO implements DAO<Member> {
         memberDB = null;
     }
 
-    public int insert(Member member) {
+    public String insert(Member member) {
         if (member == null)
             throw new IllegalArgumentException("insert: member cannot be null");
         if (member.getRecID() != -1)
@@ -50,7 +50,7 @@ public class MemberMemoryDAO implements DAO<Member> {
         memberDB.add(member);
 
         logger.debug("Member successfully inserted!");
-        return member.getRecID();
+        return Integer.toString(member.getRecID());
     }
 
     public void delete(int id) {
@@ -97,15 +97,15 @@ public class MemberMemoryDAO implements DAO<Member> {
         return memberDB.get(index);
     }
 
-    public Member retrieveByName(String name) {
+    public List<Member> retrieveByName(String name) {
         if (name == null || name.isEmpty())
             throw new IllegalArgumentException("retrieveByName: name cannot be empty or null");
         logger.debug("Getting member with name: {} ...", name);
 
-        for (Member member : memberDB) {
-            if (member.getUsername().equals(name))
-                return member;
-        }
+        // for (Member member : memberDB) {
+        //     if (member.getUsername().equals(name))
+        //         return member;
+        // }
         return null;
     }
 
@@ -114,12 +114,12 @@ public class MemberMemoryDAO implements DAO<Member> {
         return new ArrayList<>(memberDB);               // Return copy of Member collection
     }
 
-    public List<Integer> retrieveAllIDs() {
+    public List<String> retrieveAllIDs() {
         logger.debug("Getting all member IDs...");
 
-        List<Integer> recIDs = new ArrayList<>();
+        List<String> recIDs = new ArrayList<>();
         for (Member member : memberDB) {
-            recIDs.add(member.getRecID());
+            //recIDs.add(member.getRecID());
         }
         return recIDs;
     }
@@ -176,5 +176,36 @@ public class MemberMemoryDAO implements DAO<Member> {
 
         logger.debug("{} members inserted!", size());
     }
+
+    @Override
+    public Member retrieveByID(String id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'retrieveByID'");
+    }
+
+    @Override
+    public List<Member> search(String[] params) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'search'");
+    }
+
+    @Override
+    public void delete(String id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+    // @Override
+    // public Member retrieveByIndex(String index) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
+    // }
+
+    // @Override
+    // public List<Member> searchByKeys(String country, String stateProvince, String city, String breweryName,
+    //         String zipCode) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'searchByKeys'");
+    // }
 
 }

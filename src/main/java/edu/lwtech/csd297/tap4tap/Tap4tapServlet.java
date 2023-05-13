@@ -23,6 +23,7 @@ public class Tap4tapServlet extends HttpServlet {
     private static final Map<String, CommandHandler<Tap4tapServlet>> supportedCommands = new HashMap<>();
 
     private DAO<Member> membersDAO = null;
+    private DAO<Brewery> breweryDAO = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -52,14 +53,17 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("login", new LoginHandler());
         supportedCommands.put("logout", new LogoutHandler());
         supportedCommands.put("showLogin", new ShowLoginHandler());
+        supportedCommands.put("searchResult", new SearchResultHandler());
 
         logger.info("Initializing the DAOs...");
         membersDAO = new MemberMemoryDAO();
+        breweryDAO = new BreweryMemoryDAO();
 
         String initParams = "";
         if (!membersDAO.initialize(initParams))
             throw new UnavailableException("Unable to initialize the MembersDAO.");
-
+        if (!breweryDAO.initialize(initParams))
+            throw new UnavailableException("Unable to initialize the BreweryDAO.");
         // TODO: Initialize other DAOs here
 
         logger.info("Successfully initialized the DAOs!");
@@ -72,6 +76,7 @@ public class Tap4tapServlet extends HttpServlet {
     @Override
     public void destroy() {
         membersDAO.terminate();
+        breweryDAO.terminate();
         // TODO: Terminate other DAOs here
         logger.warn("-----------------------------------------");
         logger.warn("  tap4tap destroy() completed!");
@@ -105,7 +110,13 @@ public class Tap4tapServlet extends HttpServlet {
             }
 
             // Handle the command request
-            String output = command.handle(request, this);
+            String output;
+            try {
+                output = command.handle(request, this);
+            } catch (UserInputException e) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString());
+                return;
+            }
             if (output == null || output.isBlank()) {
                 logger.info("Null/Empty response returned when command was handled. cmd: {}", cmd);
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -116,9 +127,9 @@ public class Tap4tapServlet extends HttpServlet {
             try (ServletOutputStream out = response.getOutputStream(); ) {
                 out.println(output);
             }
-        } catch (IOException e) {
+            } catch (IOException e) {
             logger.debug("Unexpected I/O exception: ", e);
-        } catch (RuntimeException e) {
+            } catch (RuntimeException e) {
             logger.error("Unexpected runtime exception: ", e);
             try {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unexpected server error.");
@@ -141,6 +152,10 @@ public class Tap4tapServlet extends HttpServlet {
 
     public DAO<Member> getMembersDAO() {
         return membersDAO;
+    }
+
+    public DAO<Brewery> getBreweryDAD(){
+        return breweryDAO;
     }
 
     // TODO: Add other DAO getters here
@@ -170,7 +185,7 @@ public class Tap4tapServlet extends HttpServlet {
         if (queryString == null)
             return "";
 
-        try { 
+        try {
             queryString = URLDecoder.decode(queryString, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);                         // Should never happen

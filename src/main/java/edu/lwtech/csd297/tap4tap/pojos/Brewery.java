@@ -19,9 +19,7 @@ public class Brewery {
     private double latitude;
 
     public Brewery(UUID breweryId, String name, String breweryType,
-            String address1, String address2, String address3, String city,
-            String stateProvince, String postalCode, String country,
-            String websiteUrl, String phone, double longitude, double latitude) {
+            String address1, String address2, String address3, String city, String stateProvince, String postalCode, String country, String websiteUrl, String phone, double longitude, double latitude){
                 this.breweryId = breweryId;
                 this.name = name;
                 this.breweryType = breweryType;
@@ -38,8 +36,8 @@ public class Brewery {
                 this.latitude = latitude;
     }
 
-    public UUID getBreweryId() {
-        return breweryId;
+    public String getBreweryId() {
+        return breweryId.toString();
     }
 
     public String getName() {
@@ -92,5 +90,10 @@ public class Brewery {
 
     public double getLatitude() {
         return latitude;
+    }
+
+    @Override
+    public String toString(){
+        return "Brewery ID: " + breweryId + "\n" + "Brewery Name: " + name + "\n" + "Brewery Type: " + breweryType + "\n" + "Brewery Address: " + address1 + " " + address2 + " " + address3 + " " + city + " " + stateProvince + " " + postalCode + " " + country+ ".\n" + "Website: " + websiteUrl + " Phone: " + phone;
     }
 }
