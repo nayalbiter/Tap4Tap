@@ -23,7 +23,7 @@ public class LoginHandler implements CommandHandler<Tap4tapServlet> {
 
         List<Member> members = servlet.getMembersDAO().retrieveByName(username);
         if (members == null) {
-            message = "We do not have a member with that username on file. Please try again.<br /><a href='?cmd=showLogin'>Log In</a>";
+            message = "We do not have a member with that username on file. Please try again.";
             templateFields.put("message", message);
             templateFields.put("loggedIn", false);
             return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
