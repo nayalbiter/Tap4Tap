@@ -64,7 +64,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item text-white" href="pages/logIn.html">
+                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-100"></i>
                                     Login
