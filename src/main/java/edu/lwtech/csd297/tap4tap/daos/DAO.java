@@ -11,24 +11,25 @@ public interface DAO<T> {
     void terminate();
 
     // Create --------------------------------------------
-    int insert(T item);
+    String insert(T item);
 
     // Retrieve ------------------------------------------
     // ...one at a time
-    T retrieveByID(int id);
+    T retrieveByID(String id);
     T retrieveByIndex(int index);
-    T retrieveByName(String name);
     // ...all at once
+    List<T> retrieveByName(String name);
     List<T> retrieveAll();
-    List<Integer> retrieveAllIDs();
+    List<String> retrieveAllIDs();
+    
     // ...some at a time
-    List<T> search(String keyword);
-
+    List<T> search(String[] params);
+    //List<T> searchByKeys(String country, String stateProvince, String city, String breweryName, String zipCode);
     // Update ---------------------------------------------
     boolean update(T item);
     
     // Delete ---------------------------------------------
-    void delete(int id);
+    void delete(String id);
 
     // Miscellaneous -------------------------------------
     int size();
