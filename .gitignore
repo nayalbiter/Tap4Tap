@@ -32,3 +32,5 @@ target/*
 !.vscode/tasks.json
 !.vscode/launch.json
 .factorypath
+nbproject/
+nb-configuration.xml

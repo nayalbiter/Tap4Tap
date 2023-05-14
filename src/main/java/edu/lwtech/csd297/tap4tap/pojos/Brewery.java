@@ -91,6 +91,7 @@ public class Brewery {
     public double getLatitude() {
         return latitude;
     }
+
     @Override
     public String toString(){
         return "Brewery ID: " + breweryId + "\n" + "Brewery Name: " + name + "\n" + "Brewery Type: " + breweryType + "\n" + "Brewery Address: " + address1 + " " + address2 + " " + address3 + " " + city + " " + stateProvince + " " + postalCode + " " + country+ ".\n" + "Website: " + websiteUrl + " Phone: " + phone;

@@ -12,7 +12,8 @@
 
     <!-- Custom fonts for this page-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        type="text/css">
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         type="text/css">
 
@@ -21,8 +22,8 @@
         rel="stylesheet">
 
     <!-- Custom styles for this page-->
-    <link href="resources/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
-    <link href="resources/css/tap4tap.css" rel="stylesheet" type="text/css">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/tap4tap.css" rel="stylesheet">
 </head>
 
 
@@ -42,7 +43,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="index.html">Home</a>
+                                <a href="homepage.html">Home</a>
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -56,15 +57,13 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-900">
-                                    <#if user??>Welcome ${user}!<#else>Login</#if>
-                                </span>
-                                <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-900">Login</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
+                                <a class="dropdown-item text-white" href="pages/logIn.html">
 
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-100"></i>
                                     Login
@@ -113,7 +112,7 @@
                                 <div class="imageContainer">
 
                                     <!--add the beer picture here  -->
-                                    <img src="resources/img/18.jpg" alt="Beer" class="center">
+                                    <img src="img/18.jpg" alt="Beer" class="center">
 
                                 </div>
 
@@ -139,10 +138,8 @@
                                         </div>
 
                                         <!--FIX THIS PART WITH JAVA CODE-->
-                                        <form id="brewerySearchForm" class="user" action="/tap4tap/servlet"
-                                            method="get">
-                                            <input type="hidden" id="cmd" name="cmd" value="searchResult" />
-                                            <input type="hidden" id="hiddenCountry" name="country" value="United States" />
+                                        <form class="user" action="brewerySearch.php">
+
                                             <div class="container">
                                                 <div class="row w-100">
                                                     <div class="col-6">
@@ -150,10 +147,9 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-group">
-                                                            <input id="selectedCountry" type="text" 
-                                                                class="form-control form-control-user"
-                                                                value="United States" />
-
+                                                            <input id="selectedCountry" type="text" class="form-control"
+                                                                aria-label="Text input with segmented dropdown button"
+                                                                value="United States" name="country">
                                                             <div class="input-group-append">
                                                                 <button type="button"
                                                                     class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
@@ -191,7 +187,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <br /><br /><br /><br /><br /><br />
+                                                    <br /><br /><br />
 
                                                     <div class="row w-100">
                                                         <div class="col-4 mb-3 mb-sm-0">
@@ -199,8 +195,7 @@
                                                             <h4 class="name1 text-gray-800">Search by name:</h4>
                                                         </div>
                                                         <div class="col-8">
-                                                            <input name="breweryName"
-                                                                class="form-control form-control-user "
+                                                            <input class="form-control form-control-user "
                                                                 placeholder="Brewery Name">
                                                             <br />
                                                         </div>
@@ -211,21 +206,20 @@
                                                                 location:</h4>
                                                         </div>
                                                         <div class="col-8">
-                                                            <input name="stateProvince"
-                                                                class="form-control form-control-user"
+                                                            <input class="form-control form-control-user"
                                                                 id="stateProvince" placeholder="State/Province:">
                                                             <br />
-                                                            <input name="city" class="form-control form-control-user"
-                                                                id="city" placeholder="City:">
+                                                            <input class="form-control form-control-user" id="city"
+                                                                placeholder="City:">
                                                             <br />
-                                                            <input name="zipCode" class="form-control form-control-user"
-                                                                id="zipCode" placeholder="Zip Code:">
+                                                            <input class="form-control form-control-user" id="zipCode"
+                                                                placeholder="Zip Code:">
                                                             <br />
                                                         </div>
                                                     </div>
 
                                                     <hr>
-                                                    <a id="submitButton" href="#"
+                                                    <a href="pages/brewerySearchResults.html"
                                                         class="btn btn-google btn-user btn-block">
                                                         <i class="fa fa-search"></i> Let's go!
                                                         <!--FIX THIS PART WITH JAVA CODE to make the search-->
@@ -275,7 +269,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="resources/js/select-country.js"></script>
+    <script src="js/select-country.js"></script>
 </body>
 
 </html>
