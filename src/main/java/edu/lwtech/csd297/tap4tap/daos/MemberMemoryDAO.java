@@ -9,7 +9,7 @@ import edu.lwtech.csd297.tap4tap.pojos.*;
 
 // Memory-based DAO class - stores objects in a List.  No persistance.
 
-public class MemberMemoryDAO implements DAO<Member, Integer> {
+public class MemberMemoryDAO implements DAO<Member> {
 
     private static final Logger logger = LogManager.getLogger(MemberMemoryDAO.class.getName());
 
@@ -53,7 +53,7 @@ public class MemberMemoryDAO implements DAO<Member, Integer> {
         return Integer.toString(member.getRecID());
     }
 
-    public void delete(Integer id) {
+    public void delete(int id) {
         if (id < 0)
             throw new IllegalArgumentException("delete: id cannot be negative");
         logger.debug("Trying to delete member with ID: {} ...", id);
