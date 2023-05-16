@@ -2,10 +2,9 @@ package edu.lwtech.csd297.tap4tap.daos;
 
 import java.util.List;
 
-import edu.lwtech.csd297.tap4tap.pojos.SearchParameter;
 import edu.lwtech.csd297.tap4tap.pojos.User;
 
-public class UserSqlDAO implements DAO<User, Integer> {
+public class UserSqlDAO implements DAO<User> {
 
     @Override
     public boolean initialize(String initParams) {
@@ -20,13 +19,13 @@ public class UserSqlDAO implements DAO<User, Integer> {
     }
 
     @Override
-    public int insert(User item) {
+    public String insert(User item) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'insert'");
     }
 
     @Override
-    public User retrieveByID(Integer id) {
+    public User retrieveByID(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'retrieveByID'");
     }
@@ -44,13 +43,13 @@ public class UserSqlDAO implements DAO<User, Integer> {
     }
 
     @Override
-    public List<Integer> retrieveAllIDs() {
+    public List<String> retrieveAllIDs() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'retrieveAllIDs'");
     }
 
     @Override
-    public List<User> search(SearchParameter[] params) {
+    public List<User> search(String[] params) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'search'");
     }
@@ -62,7 +61,7 @@ public class UserSqlDAO implements DAO<User, Integer> {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
@@ -71,6 +70,12 @@ public class UserSqlDAO implements DAO<User, Integer> {
     public int size() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'size'");
+    }
+
+    @Override
+    public List<User> retrieveByName(String name) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'retrieveByName'");
     }
     
 }

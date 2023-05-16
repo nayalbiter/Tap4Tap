@@ -3,9 +3,8 @@ package edu.lwtech.csd297.tap4tap.daos;
 import java.util.List;
 
 import edu.lwtech.csd297.tap4tap.pojos.Favorite;
-import edu.lwtech.csd297.tap4tap.pojos.SearchParameter;
 
-public class FavoriteSqlDAO implements DAO<Favorite, Integer> {
+public class FavoriteSqlDAO implements DAO<Favorite> {
 
     @Override
     public boolean initialize(String initParams) {
@@ -20,13 +19,13 @@ public class FavoriteSqlDAO implements DAO<Favorite, Integer> {
     }
 
     @Override
-    public int insert(Favorite item) {
+    public String insert(Favorite item) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'insert'");
     }
 
     @Override
-    public Favorite retrieveByID(Integer id) {
+    public Favorite retrieveByID(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'retrieveByID'");
     }
@@ -44,13 +43,13 @@ public class FavoriteSqlDAO implements DAO<Favorite, Integer> {
     }
 
     @Override
-    public List<Integer> retrieveAllIDs() {
+    public List<String> retrieveAllIDs() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'retrieveAllIDs'");
     }
 
     @Override
-    public List<Favorite> search(SearchParameter[] params) {
+    public List<Favorite> search(String[] params) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'search'");
     }
@@ -62,7 +61,7 @@ public class FavoriteSqlDAO implements DAO<Favorite, Integer> {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
@@ -71,6 +70,12 @@ public class FavoriteSqlDAO implements DAO<Favorite, Integer> {
     public int size() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'size'");
+    }
+
+    @Override
+    public List<Favorite> retrieveByName(String name) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'retrieveByName'");
     }
     
 }

@@ -21,22 +21,22 @@ class MemberTests {
 
     @Test
     void testGetRecID() {
-        assertEquals(-1, fred.getRecID());
-        assertEquals(-1, tom.getRecID());
-        assertEquals(2001, mary.getRecID());
+        assertEquals(-1, fred.getUserId());
+        assertEquals(-1, tom.getUserId());
+        assertEquals(2001, mary.getUserId());
     }
 
     @Test
     void testSetRecID() {
-        fred.setRecID(123);
-        assertEquals(123, fred.getRecID());
+        fred.setUserId(123);
+        assertEquals(123, fred.getUserId());
         Exception ex;
         ex = assertThrows(IllegalArgumentException.class,
-            () -> { fred.setRecID(456); }
+            () -> { fred.setUserId(456); }
         );
         assertTrue(ex.getMessage().contains("already"));
         ex = assertThrows(IllegalArgumentException.class,
-            () -> { fred.setRecID(-789); }
+            () -> { fred.setUserId(-789); }
         );
         assertTrue(ex.getMessage().contains("positive"));
     }
