@@ -101,12 +101,13 @@ public class MemberMemoryDAO implements DAO<Member> {
         if (name == null || name.isEmpty())
             throw new IllegalArgumentException("retrieveByName: name cannot be empty or null");
         logger.debug("Getting member with name: {} ...", name);
-
-        // for (Member member : memberDB) {
-        //     if (member.getUsername().equals(name))
-        //         return member;
-        // }
-        return null;
+        List<Member> members = new ArrayList<>();
+        for (Member member : memberDB) {
+            if (member.getUsername().equals(name))
+                members.add(member);
+                
+        }
+        return members;
     }
 
     public List<Member> retrieveAll() {
@@ -201,11 +202,6 @@ public class MemberMemoryDAO implements DAO<Member> {
     //     throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
     // }
 
-    // @Override
-    // public List<Member> searchByKeys(String country, String stateProvince, String city, String breweryName,
-    //         String zipCode) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'searchByKeys'");
-    // }
+
 
 }

@@ -14,7 +14,7 @@
         <div class="navbar">
 
             <nav>
-                <a href="home.ftl">Home</a>
+                <a href="/tap4tap/servlet?cmd=home">Home</a>
 
             </nav>
 

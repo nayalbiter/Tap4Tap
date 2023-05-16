@@ -170,12 +170,12 @@
                                         </div>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="large" href="../pages/forgotPassword.html">Forgot Password?</a>
+                                            <a class="large" href="/tap4tap/servlet?cmd=forgotPassword">Forgot Password?</a>
                                         </div>
 
                                         <br />
                                         <div class="text-center">
-                                            <a class="large" href="../pages/createAccount.html">Create an Account!</a>
+                                            <a class="large" href="/tap4tap/servlet?cmd=createAccount">Create an Account!</a>
                                         </div>
 
 

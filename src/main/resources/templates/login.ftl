@@ -42,7 +42,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="/tap4tap/index.html">Home</a>
+                                <a href="/tap4tap/servlet?cmd=home">Home</a>
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -165,12 +165,12 @@
                                         
                                         <hr>
                                         <div class="text-center">
-                                            <a class="large" href="../pages/forgotPassword.html">Forgot Password?</a>
+                                            <a class="large" href="/tap4tap/servlet?cmd=forgotPassword">Forgot Password?</a>
                                         </div>
 
                                         <br />
                                         <div class="text-center">
-                                            <a class="large" href="../pages/createAccount.html">Create an Account!</a>
+                                            <a class="large" href="/tap4tap/servlet?cmd=createAccount">Create an Account!</a>
                                         </div>
 
 

@@ -28,17 +28,18 @@ public class LoginHandler implements CommandHandler<Tap4tapServlet> {
             templateFields.put("loggedIn", false);
             return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
         }
-        // for(Member member : members){
-        //     if (member.getPassword().equals(password)) {
-        //         int ownerID = member.getUserId();
-        //         loggedIn = true;
-        //         HttpSession session = request.getSession(true);         // true == Create a new session for this user
-        //         session.setAttribute("owner", ownerID);
-        //         message = "You have been successfully logged in to your account.<br /><a href='?cmd=home'>Home</a>";
-        //     } else {
-        //         message = "Your password did not match what we have on file. Please try again.<br /><a href='?cmd=showLogin'>Log In</a>";
-        //     }
-        // }
+        for(Member member : members){
+            if (member.getPassword().equals(password)) {
+                // int ownerID = member.getUserId();
+                loggedIn = true;
+                HttpSession session = request.getSession(true);         // true == Create a new session for this user
+                session.setAttribute("owner", 1);
+                // session.setAttribute("owner", ownerID);
+                message = "You have been successfully logged in to your account.<br /><a href='?cmd=home'>Home</a>";
+            } else {
+                message = "Your password did not match what we have on file. Please try again.<br /><a href='?cmd=showLogin'>Log In</a>";
+            }
+        }
         
         templateFields.put("loggedIn", loggedIn);
         templateFields.put("message", message);
