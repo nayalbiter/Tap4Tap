@@ -70,9 +70,10 @@
                                     <i class="fa fa-sign-in mr-2 text-gray-100"></i>
                                     Login
                                 </a>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin"> <#--fix this to show page create account -->
-                                    <i class="fa fa-user mr-2 text-gray-100"></i>
-                                    Create Account
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin"> <#--fix this
+                                        to show page create account -->
+                                        <i class="fa fa-user mr-2 text-gray-100"></i>
+                                        Create Account
                                 </a>
                                 <div class="dropdown-divider"></div>
 
@@ -144,58 +145,20 @@
                                                         </tr>
                                                     </tfoot>
                                                     <tbody>
-                                                        <tr>
 
-                                                            <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
-                                                                brewey 1</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 2</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 3</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 4</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 5</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 6</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 7</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 8</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 9</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 10
-                                                            </td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
+                                                        <#list allBreweries as brewery>
+                                                            <tr>
+                                                                <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
+                                                                    ${brewery.name}</td>
+                                                                <td>
+                                                                    <a href="https://www.google.com/maps/@${brewery.longitude},${brewery.latitude}">
+                                                                    <i class="fa fa-map fa-2x" aria-hidden="true"></i>
+                                                                    </a>
+                                                                    ${brewery.country}
+                                                                </td>
+                                                            </tr>
+                                                        </#list>
+
 
                                                     </tbody>
                                                 </table>
@@ -214,23 +177,7 @@
                 </div>
 
                 <br />
-			
 
-                <#--Fix this part with data inside the table, also with the map-->
-                    <div>
-				
-                    <i>Breweries</i><br>
-                    <#list breweries as brewery>
-                    ${brewery.name} <br>
-                    </#list>
-                    <br>
-                    <i> All Breweries</i><br>
-                    <#list allBreweries as brewery>
-                    ${brewery.name} <br>
-                    ${brewery.country} <br>
-                    </#list>
-
-		</div>
 
             </div>
             <!-- End of Main Content -->
