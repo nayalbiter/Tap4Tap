@@ -24,7 +24,6 @@ public interface DAO<T> {
     
     // ...some at a time
     List<T> search(String[] params);
-    //List<T> searchByKeys(String country, String stateProvince, String city, String breweryName, String zipCode);
     // Update ---------------------------------------------
     boolean update(T item);
     

@@ -49,6 +49,11 @@
             <artifactId>freemarker</artifactId>
             <version>2.3.31</version>
         </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.1.4</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -84,7 +89,7 @@
                             <exclude>**/commands/*</exclude>
                             <exclude>**/*Sql*</exclude>
                             <exclude>**/*SQL*</exclude>
-                        </excludes>    
+                        </excludes>
                     </configuration>
                     <executions>
                         <execution>

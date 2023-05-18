@@ -127,7 +127,7 @@
                                                         id="exampleRepeatPassword" placeholder="Confirm Password:">
                                                 </div>
                                             </div>
-                                            <a href="/tap4tap/index.html" class="btn btn-primary btn-user btn-block">
+                                            <a href="/tap4tap/servlet?cmd=createAccount" class="btn btn-primary btn-user btn-block">
                                                 Create Account
                                             </a>
                                             <hr>
@@ -136,7 +136,7 @@
 
                                         <hr>
                                         <div class="text-center">
-                                            <a class="large" href="?cmd=login">Already have an account?
+                                            <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an account?
                                                 Login!</a>
                                         </div>
 

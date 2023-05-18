@@ -69,7 +69,7 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-100"></i>
                                     Login
                                 </a>
-                                <a class="dropdown-item  text-white" href="pages/createAccount.html">
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=createAccount">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>

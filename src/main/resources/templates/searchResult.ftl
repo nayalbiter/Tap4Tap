@@ -45,8 +45,10 @@
    <i> All Breweries</i><br>
     <#list allBreweries as brewery>
     ${brewery.name} <br>
-    ${brewery.country} <br>
+    ${brewery.country} <br><br>
     </#list>
+    <a href = "/tap4tap/servlet?cmd=searchResult?page=1" >previous</a>
+    <a href = "/tap4tap/servlet?cmd=searchResult?page=2" >next</a>
     </p>
     </section>
     <footer>
