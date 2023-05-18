@@ -2,6 +2,7 @@ package edu.lwtech.csd297.tap4tap;
 
 import java.io.*;
 import java.net.*;
+import java.sql.Connection;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.*;
 import edu.lwtech.csd297.tap4tap.commands.*;
 import edu.lwtech.csd297.tap4tap.daos.*;
 import edu.lwtech.csd297.tap4tap.pojos.*;
+import edu.lwtech.csd297.tap4tap.utils.SQLUtils;
 import freemarker.template.*;
 
 @WebServlet(name = "tap4tap", urlPatterns = {"/servlet"}, loadOnStartup = 0)
@@ -23,7 +25,7 @@ public class Tap4tapServlet extends HttpServlet {
     private static final Map<String, CommandHandler<Tap4tapServlet>> supportedCommands = new HashMap<>();
 
     private DAO<Member> membersDAO = null;
-    private DAO<Brewery> breweryDAO = null;
+    private BreweryDAO<Brewery> breweryDAO = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -31,7 +33,7 @@ public class Tap4tapServlet extends HttpServlet {
         logger.warn("");
         logger.warn("========================================================");
         logger.warn("   tap4tap init() started");
-        logger.warn("      http://localhost:8080/tap4tap");
+        logger.warn("      http://http://134.122.35.209:8080/tap4tap/servlet");
         logger.warn("========================================================");
         logger.warn("");
 
@@ -54,16 +56,43 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("logout", new LogoutHandler());
         supportedCommands.put("showLogin", new ShowLoginHandler());
         supportedCommands.put("searchResult", new SearchResultHandler());
+        supportedCommands.put("createAccount", new createAccountHandler());
+        supportedCommands.put("forgotPassword", new forgotPasswordHandler());
+        //to connect to database
+
+        boolean useSqlDao = true;
+        //put username
+        String username = "";
+        //put password
+        String password = "";
+
+        if (useSqlDao) {
+            String initParams = "jdbc:mariadb://localhost:3306/tap4tap?user=" + username + "&password=" + password;
+            Connection conn = SQLUtils.connect(initParams);
+            if (conn == null) {
+                throw new UnavailableException("Failed to connect to SQL database");
+            }
+
+            breweryDAO = new BrewerySqlDAO(conn);
+        } else {
+            breweryDAO = new BreweryMemoryDAO();
+            if (!breweryDAO.initialize(""))
+                throw new UnavailableException("Unable to initialize the BreweryDAO.");
+    }
 
         logger.info("Initializing the DAOs...");
+        //memoryDAOs
         membersDAO = new MemberMemoryDAO();
-        breweryDAO = new BreweryMemoryDAO();
 
-        String initParams = "";
-        if (!membersDAO.initialize(initParams))
-            throw new UnavailableException("Unable to initialize the MembersDAO.");
-        if (!breweryDAO.initialize(initParams))
-            throw new UnavailableException("Unable to initialize the BreweryDAO.");
+        //sqlDAOs
+        // breweryDAO = new BrewerySqlDAO();
+        // breweryDAO.initialize(initParams);
+        // if (!membersDAO.initialize(initParams))
+        //     throw new UnavailableException("Unable to initialize the MembersDAO.");
+
+        //initialize breweryMemoryDAO
+        // String initParams = "";
+
         // TODO: Initialize other DAOs here
 
         logger.info("Successfully initialized the DAOs!");
@@ -76,7 +105,7 @@ public class Tap4tapServlet extends HttpServlet {
     @Override
     public void destroy() {
         membersDAO.terminate();
-        breweryDAO.terminate();
+        // breweryDAO.terminate();
         // TODO: Terminate other DAOs here
         logger.warn("-----------------------------------------");
         logger.warn("  tap4tap destroy() completed!");
@@ -154,7 +183,7 @@ public class Tap4tapServlet extends HttpServlet {
         return membersDAO;
     }
 
-    public DAO<Brewery> getBreweryDAD(){
+    public BreweryDAO<Brewery> getBreweryDAD(){
         return breweryDAO;
     }
 
@@ -197,5 +226,4 @@ public class Tap4tapServlet extends HttpServlet {
     private static String sanitizedString(String s) {
         return s.replaceAll("[\n|\t]", "_");
     }
-
 }

@@ -34,6 +34,17 @@ public class SQLUtils {
         return conn;
     }
 
+    public static ResultSet executeSelect(Connection conn, String query, String... arguments) throws SQLException {
+        try ( PreparedStatement stmt = conn.prepareStatement(query); ) {
+            int position = 1;
+            for (String arg : arguments) {
+                stmt.setString(position++, arg);
+            }
+
+            return stmt.executeQuery();
+        }
+    }
+
     public static List<SQLRow> executeSQL(Connection conn, String query, String... arguments) {
         logger.debug("Executing SQL statement: {}", query);
 
@@ -61,7 +72,6 @@ public class SQLUtils {
                 for (int i=0; i < md.getColumnCount(); i++) {
                     columns.add(md.getColumnName(i+1));
                 }
-
                 // Store each row in a List
                 List<SQLRow> rows = new ArrayList<>();
                 while (sqlResults.next()) {
@@ -79,30 +89,31 @@ public class SQLUtils {
     }
 
 
-    public static int executeSQLInsert(Connection conn, String query, String recID, String... arguments) {
+    public static String executeSQLInsert(Connection conn, String query, String id, String... arguments) {
         logger.debug("Executing SQL Insert: {}", query);
 
-        int newID = -1;
-        String[] returnColumns = new String[] { recID };
+        String newID = "";
+        String[] returnColumns = new String[] { id };
 
         try ( PreparedStatement stmt = conn.prepareStatement(query, returnColumns); ) {
             // Create the new statement object, specifying the recID return column as well
 
             // Substitute in the argument values for the question marks
-            int position = 1;
-            for (String arg : arguments)
-                stmt.setString(position++, arg);
-
+            for (int i = 1; i < 13 ; i++)
+                stmt.setString(i, arguments[i]);
+            for (int i =13; i < 15; i++){
+                stmt.setDouble(i, Double.parseDouble(arguments[i]));
+            }
             // Execute the INSERT statement
             stmt.executeUpdate();
-            
+
             // Get the new recID value from the query results and return it to the caller
             ResultSet keys = stmt.getGeneratedKeys();
             keys.next();
-            newID = keys.getInt(1);
+            newID = keys.getString(1);
         } catch (SQLException e) {
             logger.error("SQL Exception caught in executeSQLInsert: {}", query, e);
-            return -1;
+            return null;
         }
 
         return newID;

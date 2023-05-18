@@ -121,14 +121,14 @@
                                             <hr>
                                             <br/>
                                             <div class="text-center">
-                                                <a class="large" href="../pages/createAccount.html">Create an
+                                                <a class="large" href="/tap4tap/servlet?cmd=createAccount">Create an
                                                     Account!</a>
                                             </div>
 
                                             <br/>
 
                                             <div class="text-center">
-                                                <a class="large" href="../pages/logIn.html">Already have an account?
+                                                <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an account?
                                                     Login!</a>
                                             </div>
 

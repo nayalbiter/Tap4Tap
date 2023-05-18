@@ -69,6 +69,7 @@
                                     <i class="fa fa-sign-in mr-2 text-gray-100"></i>
                                     Login
                                 </a>
+
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin">  <#--fix this to show page create account -->
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account

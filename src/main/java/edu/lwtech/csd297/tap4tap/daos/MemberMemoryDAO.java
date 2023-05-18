@@ -105,7 +105,6 @@ public class MemberMemoryDAO implements DAO<Member> {
         for (Member member : memberDB) {
             if (member.getUsername().equals(name))
                 members.add(member);
-                
         }
         return members;
     }

@@ -36,8 +36,8 @@ public class Brewery {
                 this.latitude = latitude;
     }
 
-    public String getBreweryId() {
-        return breweryId.toString();
+    public UUID getBreweryId() {
+        return breweryId;
     }
 
     public String getName() {
