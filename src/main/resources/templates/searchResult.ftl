@@ -47,8 +47,8 @@
     ${brewery.name} <br>
     ${brewery.country} <br><br>
     </#list>
-    <a href = "/tap4tap/servlet?cmd=searchResult?page=1" >previous</a>
-    <a href = "/tap4tap/servlet?cmd=searchResult?page=2" >next</a>
+    <a href = "/tap4tap/servlet?${prevPageLink}" >previous</a>
+    <a href = "/tap4tap/servlet?${nextPageLink}" >next</a>
     </p>
     </section>
     <footer>

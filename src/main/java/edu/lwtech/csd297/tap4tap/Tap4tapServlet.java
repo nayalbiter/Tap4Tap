@@ -59,28 +59,39 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("createAccount", new createAccountHandler());
         supportedCommands.put("forgotPassword", new forgotPasswordHandler());
         //to connect to database
-        // String initParams = "jdbc:mariadb://localhost:3306/tap4tap?user=&password=";
-        // Connection conn = SQLUtils.connect(initParams);
-        // if (conn == null) {
-        //     throw new UnavailableException("Failed to connect to SQL database");
-        // }
+
+        boolean useSqlDao = true;
+        //put username
+        String username = "";
+        //put password
+        String password = "";
+
+        if (useSqlDao) {
+            String initParams = "jdbc:mariadb://localhost:3306/tap4tap?user=" + username + "&password=" + password;
+            Connection conn = SQLUtils.connect(initParams);
+            if (conn == null) {
+                throw new UnavailableException("Failed to connect to SQL database");
+            }
+
+            breweryDAO = new BrewerySqlDAO(conn);
+        } else {
+            breweryDAO = new BreweryMemoryDAO();
+            if (!breweryDAO.initialize(""))
+                throw new UnavailableException("Unable to initialize the BreweryDAO.");
+    }
 
         logger.info("Initializing the DAOs...");
         //memoryDAOs
         membersDAO = new MemberMemoryDAO();
 
-        breweryDAO = new BreweryMemoryDAO();
         //sqlDAOs
-        // breweryDAO = new BrewerySqlDAO(conn);
         // breweryDAO = new BrewerySqlDAO();
         // breweryDAO.initialize(initParams);
         // if (!membersDAO.initialize(initParams))
         //     throw new UnavailableException("Unable to initialize the MembersDAO.");
 
         //initialize breweryMemoryDAO
-        String initParams = "";
-        if (!breweryDAO.initialize(initParams))
-            throw new UnavailableException("Unable to initialize the BreweryDAO.");
+        // String initParams = "";
 
         // TODO: Initialize other DAOs here
 

@@ -9,6 +9,25 @@ import edu.lwtech.csd297.tap4tap.pojos.SearchParameter;
 //handle search result page
 public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
 
+    private static String makePageLink(HttpServletRequest request, int page) {
+        Map<String, String> newParams = new HashMap<>();
+        for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+            if (!entry.getKey().equals("page")) {
+                newParams.put(entry.getKey(), entry.getValue()[0]);
+            }
+        }
+        newParams.put("page", "" + page);
+
+        String url = "";
+        for (Map.Entry<String, String> entry : newParams.entrySet()) {
+            if (!url.isEmpty()) {
+                url += "&";
+            }
+            url += entry.getKey() + "=" + entry.getValue();
+        }
+        return url;
+    }
+
     @Override
     public String handle(HttpServletRequest request, Tap4tapServlet servlet) throws UserInputException {
         String template = "searchResult.ftl";
@@ -17,9 +36,13 @@ public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
 
         int limit = 20;
         int offset = 0;
+        String prevPageLink = "NOT SET";
+        String nextPageLink = makePageLink(request, 2);
         try {
             int page = Integer.parseInt(request.getParameter("page"));
             offset = page * limit;
+            prevPageLink = makePageLink(request, page - 1);
+            nextPageLink = makePageLink(request, page + 1);
         } catch (NumberFormatException e) {
             // Rely on default above.
         }
@@ -60,6 +83,10 @@ public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
         templateFields.put("breweries", servlet.getBreweryDAD().search(params.toArray(new SearchParameter[]{}), limit, offset));
 
         templateFields.put("allBreweries", servlet.getBreweryDAD().search(new SearchParameter[]{}, 5, 0));
+
+        templateFields.put("prevPageLink", prevPageLink);
+        templateFields.put("nextPageLink", nextPageLink);
+
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
     }
 }

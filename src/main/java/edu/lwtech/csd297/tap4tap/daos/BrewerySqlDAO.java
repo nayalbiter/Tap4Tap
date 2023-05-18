@@ -311,30 +311,32 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
 
     @Override
     public List<Brewery> search(SearchParameter[] params, int limit, int offset) {
-
-        logger.debug("Searching for brewery with '{}'", params[0].getName());
-        List<String> sqlParams = new ArrayList();
         String sqlStatement = "SELECT * FROM brewery";
         if (params.length > 0) {
-            sqlStatement += " WHERE";
-
+            String particle = "WHERE";
             for (SearchParameter param : params) {
+                sqlStatement += " " + particle;
                 if (param.isExact()) {
-                    sqlStatement += param.getName() + " = ?";
+                    sqlStatement += " " + param.getName() + " = ?";
                 } else {
-                    sqlStatement += param.getName() + " LIKE ?";
+                    sqlStatement += " " + param.getName() + " LIKE ?";
                 }
-                sqlParams.add(param.getValue());
+                particle = " AND";
             }
         }
         sqlStatement += " ORDER BY brewery_id LIMIT ? OFFSET ?";
+        logger.error("Preparing search statement: " + sqlStatement);
 
         List<Brewery> breweries = new ArrayList<>();
         ResultSet sqlResults;
         try (PreparedStatement stmt = conn.prepareStatement(sqlStatement)) {
             int position = 1;
-            for(String param: sqlParams){
-                stmt.setString(position++, param);
+            for (SearchParameter param : params) {
+                if (param.isExact()) {
+                    stmt.setString(position++, param.getValue());
+                } else {
+                    stmt.setString(position++, "%" + param.getValue() + "%");
+                }
             }
             stmt.setInt(position++, limit);
             stmt.setInt(position++, offset);
@@ -417,7 +419,7 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
         String stateProvince = result.getString("state_province");
         String country = result.getString("country");
         String postalCode = result.getString("postal_code");
-        String websiteUrl = result.getString("webiste_url");
+        String websiteUrl = result.getString("website_url");
         String phone = result.getString("phone");
         double latitude = result.getDouble("latitude");
         double longitude = result.getDouble("longitude");
