@@ -58,34 +58,32 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("searchResult", new SearchResultHandler());
         supportedCommands.put("createAccount", new createAccountHandler());
         supportedCommands.put("forgotPassword", new forgotPasswordHandler());
-
-        String initParams = "jdbc:mariadb://localhost:3306/tap4tap?user=tap4tap&password=aspectmoneybagsmatrixsharpie";
-    //     "jdbc:mariadb://localhost:3306/database_name",
-    // "user", "password"
-        Connection conn = SQLUtils.connect(initParams);
-        if (conn == null) {
-            throw new UnavailableException("Failed to connect to SQL database");
-        }
+        //to connect to database
+        // String initParams = "jdbc:mariadb://localhost:3306/tap4tap?user=&password=";
+        // Connection conn = SQLUtils.connect(initParams);
+        // if (conn == null) {
+        //     throw new UnavailableException("Failed to connect to SQL database");
+        // }
 
         logger.info("Initializing the DAOs...");
         //memoryDAOs
         membersDAO = new MemberMemoryDAO();
-        
-        // breweryDAO = new BreweryMemoryDAO();
+
+        breweryDAO = new BreweryMemoryDAO();
         //sqlDAOs
-        breweryDAO = new BrewerySqlDAO(conn);
+        // breweryDAO = new BrewerySqlDAO(conn);
         // breweryDAO = new BrewerySqlDAO();
         // breweryDAO.initialize(initParams);
         // if (!membersDAO.initialize(initParams))
         //     throw new UnavailableException("Unable to initialize the MembersDAO.");
 
         //initialize breweryMemoryDAO
-        // String initParams = "";
-        // if (!breweryDAO.initialize(initParams))
-        //     throw new UnavailableException("Unable to initialize the BreweryDAO.");
+        String initParams = "";
+        if (!breweryDAO.initialize(initParams))
+            throw new UnavailableException("Unable to initialize the BreweryDAO.");
 
         // TODO: Initialize other DAOs here
-        
+
         logger.info("Successfully initialized the DAOs!");
 
         logger.warn("");
