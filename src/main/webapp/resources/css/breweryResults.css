@@ -1,0 +1,99 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Courgette&family=Neonderthaw&family=Permanent+Marker&family=Quintessential&family=Sedgwick+Ave&display=swap');
+
+
+
+.logo {
+  color: #5a5c69;
+  font-size: 8.0vw;
+  position: relative;
+  line-height: 1;
+  font-family: 'Courgette', cursive;
+}
+
+@media screen and (max-width : 600px) {
+  .logo {
+    font-size: 4rem;
+  }
+
+  .logo-sm {
+    font-size: 7rem;
+
+  }
+
+  .country1 {
+    font-size: 1rem;
+  }
+
+  .name1 {
+    font-size: 1rem;
+  }
+
+  .location1 {
+    font-size: 1rem;
+  }
+
+  .disclaimer {
+    font-size: 0.6rem;
+  }
+
+  .authors1 {
+    font-size: 0.7rem;
+  }
+
+}
+
+
+.logo-sm {
+
+  font-size: 3.0vw;
+  position: relative;
+}
+
+.imageContainer {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.t4t-primary {
+  background-color: #0D3B66 !important;
+}
+
+a.t4t-primary:hover,
+a.t4t-primary:focus,
+button.t4t-primary:hover,
+button.t4t-primary:focus {
+  background-color: #2653d4 !important;
+}
+
+.t4t-gradient-primary {
+  background-color: #0D3B66;
+  background-image: linear-gradient(180deg, #224abe 10%, #0D3B66 100%);
+  background-size: cover;
+}
+
+a.dropdown-item:hover {
+  background-color: #f6c23e;
+  background-image: linear-gradient(180deg, #f6c23e 10%, #dda20a 100%);
+  background-size: cover;
+
+}
+
+.custom-control {
+  font-size: medium;
+  color: #0D3B66;
+}
+
+.mb-4{
+  font-size: large;
+}
+
+

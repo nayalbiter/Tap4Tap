@@ -66,11 +66,12 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-100"></i>
+                                    <i class="fa fa-sign-in mr-2 text-gray-100"></i>
                                     Login
                                 </a>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=createAccount">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-100"></i>
+
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin">  <#--fix this to show page create account -->
+                                    <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
                                 <div class="dropdown-divider"></div>
@@ -78,7 +79,7 @@
                                 <!-- JOY:Check this please, this (log out) is going to be hidden until the user log in-->
                                 <a class="dropdown-item  text-white" href="#" data-toggle="modal"
                                     data-target="#logoutModal" style="visibility: hidden;">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-1 00"></i>
+                                    <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                     Logout
                                 </a>
                             </div>
