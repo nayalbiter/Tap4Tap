@@ -40,7 +40,7 @@ public class LoginHandler implements CommandHandler<Tap4tapServlet> {
                 message = "Your password did not match what we have on file. Please try again.<br /><a href='?cmd=showLogin'>Log In</a>";
             }
         }
-        
+
         templateFields.put("loggedIn", loggedIn);
         templateFields.put("message", message);
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());

@@ -33,14 +33,15 @@ public class CommandUtils {
     }
 
     public static String mergeTemplate(String template, Map<String, Object> templateFields, Configuration config) {
-        StringWriter out = new StringWriter();
         try {
+            StringWriter out = new StringWriter();
             Template view = config.getTemplate(template);
             view.process(templateFields, out);
+            return out.toString();
         } catch (IOException | TemplateException e) {
             logger.error("Unexpected error processing Freemarker template: {}", template, e);
+            return "Template error: " + e.toString();
         }
-        return out.toString();
     }
 
     public static int parseInt(String s) {

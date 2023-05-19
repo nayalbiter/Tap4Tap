@@ -18,29 +18,11 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
         this.conn = conn;
     }
 
-
-    public boolean initialize(String initParams) {
-        // logger.info("Connecting to the database...");
-
-        // conn = SQLUtils.connect(initParams);
-        // if (conn == null) {
-        //     logger.error("Unable to connect to SQL Database: {}", initParams);
-        //     return false;
-        // }
-        // logger.info("...connected!");
-
-        return false;
-    }
-//does not need it
-    // public void terminate() {
-    //     // SQLUtils.disconnect(conn);
-    //     // conn = null;
-    // }
     @Override
     public boolean insert(Brewery brewery) {
         logger.debug("Inserting {}, from city {}, state/province {}, country {}, address {}, {}, {}...", brewery.getName(), brewery.getCity(), brewery.getStateProvince(), brewery.getCountry(), brewery.getAddress1(), brewery.getAddress2(), brewery.getAddress3());
 
-//check if brewery was already inserted
+        //!!implement to check if brewery was already inserted
 
         String query = "INSERT INTO brewery";
         query += "(brewery_id, name, brewery_type, address_1, address_2, address_3, city, state_province, postal_code, country, phone, website_url, longitude, latitude)";
@@ -85,8 +67,7 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
 
         logger.debug("Executing SQL statement: {}", query);
         ResultSet sqlResults;
-        try{
-            PreparedStatement stmt = conn.prepareStatement(query);
+        try(PreparedStatement stmt = conn.prepareStatement(query);){
             // Substitute in the argument values for the question marks
             stmt.setObject(1, breweryId);
 
@@ -99,215 +80,6 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
             return null;
         }
     }
-
-    // public Brewery retrieveByIndex(int index) {
-    //     logger.debug("Trying to get Brewery with index: {}", index);
-
-    //     index++; // SQL uses 1-based indexes
-
-    //     if (index < 1)
-    //         return null;
-
-    //     String query = "SELECT *";
-    //     query += " FROM brewery ORDER BY brewery_id LIMIT " + index;
-    //     //don't understand this query statement.**ask do we need? if so, how does this work?
-
-
-    //     List<SQLRow> rows = SQLUtils.executeSQL(conn, query);
-
-    //     if (rows == null) {
-    //         logger.debug("Did not find brewery.");
-    //         return null;
-    //     }
-
-    //     SQLRow row = rows.get(rows.size() - 1);
-    //     Brewery brewery = convertRowToBrewery(row);
-    //     return brewery;
-    // }
-    // ...some at a time
-    // public List<Brewery> retrievedByName(String name){
-    //     logger.debug("retrieving brewery list by brewery name: {}, name");
-    //     List<Brewery> breweries = new ArrayList<>();
-    //     String query = "SELECT * FROM brewery WHERE name = ? ORDER BY brewery_id";
-    //     ResultSet sqlResults = null;
-    //     try(PreparedStatement stmt = conn.prepareStatement(query)){
-    //         stmt.setString(1, name);
-    //         sqlResults = stmt.executeQuery();
-    //     }catch(Exception e){
-    //     logger.error("SQL Exceptino caught in executeSQL: {}", e);
-    //     }
-    //     if(sqlResults == null){
-    //         return new ArrayList<>();
-    //     }
-    //     try{
-    //         while(sqlResults.next()){
-    //             breweries.add(convertResultToBrewery(sqlResults));
-    //         }
-    //     }catch(SQLException e){
-    //         logger.error("SQL Exception caught in getting results: {}", e);
-    //     }
-    //     return breweries;
-    // }
-    // public List<Brewery> retrievedByCountry(String country){
-    //     logger.debug("retrieve brewery list by country: {}", country);
-    //     List<Brewery> breweries = new ArrayList<>();
-    //     String query = "SELECT * FROM brewery WHERE country = ?";
-    //     query += "ORDER BY brewery_id";
-    //     ResultSet sqlResults = null;
-    //     try (PreparedStatement stmt = conn.prepareStatement(query)){
-    //         //Substitute in the argument value for the question mark
-    //         stmt.setString(1, country);
-    //         // Execute the SELECT query
-    //         sqlResults = stmt.executeQuery();
-    //     }catch(SQLException e){
-    //         logger.error("SQL Exception caught in executeSQL: {}", e);
-    //     }
-    //     if(sqlResults == null){
-    //         return new ArrayList<>();
-    //     }
-    //     try{
-    //     while(sqlResults.next()){
-    //         breweries.add(convertResultToBrewery(sqlResults));
-    //     }}catch(SQLException e){
-    //         logger.error("SQL Exception caught in getting results: {}", e);
-    //     }
-    //     return breweries;
-    // }
-    // public List<Brewery> retrievedByStateProvince(String stateProvince){
-    //     logger.debug("retrieving breweries by state/province {}", stateProvince);
-    //     List<Brewery> breweries = new ArrayList<>();
-    //     String query = "SELECT * FROM brewery WHERE state_province = ? ORDER BY brewery_id";
-    //     ResultSet sqlResults = null;
-    //     try(PreparedStatement stmt = conn.prepareStatement(query)){
-    //         //Substitute in the argument value for the question mark
-    //         stmt.setString(1, stateProvince);
-    //         // Execute the SELECT query
-    //         sqlResults = stmt.executeQuery();
-    //     }catch(SQLException e){
-    //         logger.error("SQL Exception caught in executeSQL: {}", e);
-    //     }
-    //     if(sqlResults == null){
-    //         return new ArrayList<>();
-    //     }
-    //     try{
-    //     while(sqlResults.next()){
-    //         breweries.add(convertResultToBrewery(sqlResults));
-    //     }}catch(SQLException e){
-    //         logger.error("SQL Exception caught in executeSQL: {}", e);
-    //     }
-    //     return breweries;
-    // }
-    // public List<Brewery> retrievedByCity(String city){
-    //     logger.debug("retrieving breweries by city {}", city);
-    //     List<Brewery> breweries = new ArrayList<>();
-    //     String query = "SELECT * FROM brewery WHERE city = ? ORDER BY brewery_id";
-    //     ResultSet sqlResults = null;
-    //     try(PreparedStatement stmt = conn.prepareStatement(query)){
-    //         //Substitute in the argument value for the question mark
-    //         stmt.setString(1, city);
-    //         sqlResults = stmt.executeQuery();
-    //     }
-    //     catch(SQLException e){
-    //         logger.error("SQL exception caught in executeSQL: {}", e);
-    //     }
-    //     if(sqlResults == null){
-    //         return new ArrayList<>();
-    //     }
-    //     try{
-    //         while(sqlResults.next()){
-    //             breweries.add(convertResultToBrewery(sqlResults));
-    //         }
-    //     }catch(SQLException e){
-    //         logger.error("SQL Exception caught in getting results: {}", e);
-    //     }
-    //     return breweries;
-    // }
-    // public List<Brewery> retrievedByZipCode(String zipCode){
-    //     List<Brewery> breweries = new ArrayList<>();
-    //     logger.debug("retrieving breweries by zip code: {}", zipCode);
-
-    //     String query = "SELET * FROM brewery WHERE postal_code = ? ORDER BY brewery_id";
-    //     ResultSet sqlResults = null;
-    //     try(PreparedStatement stmt = conn.prepareStatement(query)){
-    //         stmt.setString(1, zipCode);
-    //         sqlResults = stmt.executeQuery();
-    //     }catch(SQLException e){
-    //         logger.error("SQL Exception caught in executeSQL: {}", e);
-    //     }
-    //     if(sqlResults == null){
-    //         return new ArrayList<>();
-    //     }
-    //     try{
-    //         while(sqlResults.next()){
-    //             breweries.add(convertResultToBrewery(sqlResults));
-    //         }
-    //     }catch(SQLException e){
-    //         logger.error("SQL Exception caught in getting result: {}",e);
-    //     }
-    //     return breweries;
-    // }
-    // ...all at a time
-    // public List<Brewery> retrieveAll() {
-    //     logger.debug("Getting all Breweries...");
-
-    //     String query = "SELECT *";
-    //     query += " FROM brewery ORDER BY brewery_id LIMIT 20";
-
-    //     List<Brewery> breweries = new ArrayList<>();
-    //     ResultSet sqlResults = null;
-    //     try(PreparedStatement stmt = conn.prepareStatement(query)){
-    //         sqlResults = stmt.executeQuery();
-    //     }catch(SQLException e){
-    //         logger.error("SQL Exception caught in executeSQL", e);
-    //     }
-    //     if(sqlResults == null){
-    //         new ArrayList<>();
-    //     }
-    //     try{
-    //         while(sqlResults.next()){
-    //             breweries.add(convertResultToBrewery(sqlResults));
-    //         }
-    //     }catch(SQLException e){
-    //         logger.error("SQL Exception caugh in getting results: {}", e);
-    //     }
-
-    //     return breweries;
-    // }
-
-    // public List<Brewery> retrieveAllIDs() {
-    //     logger.debug("Getting all Brewery IDs...");
-
-    //     String query = "SELECT brewery_id FROM brewery ORDER BY brewery_id";
-    //     ResultSet sqlResults = null;
-
-    //     logger.debug("Executing SQL statement: {}", query);
-    //     try {
-    //         PreparedStatement stmt = conn.prepareStatement(query);
-    //         sqlResults = stmt.executeQuery();
-    //     }
-    //     catch (SQLException e) {
-    //         logger.error("SQL Exception caught in executeSQL: {}", e);
-    //     if (sqlResults == null) {
-    //         logger.debug("No breweries found!");
-    //         return new ArrayList<>();
-    //     }
-    // }
-    //     List<String> breweryIds = new ArrayList<>();
-    //     try{
-    //         while(sqlResults.next()) {
-    //             try{
-    //                 String value = sqlResults.getObject(1).toString();
-    //                 breweryIds.add(value);
-    //             }
-    //             catch(SQLException e){
-    //                 logger.error("SQL Exception caught in getting brewery ids: {}",e);
-    //             }
-    //         }
-    //     }catch(SQLException e){
-    //         logger.debug("SQL exception caught in interating ResultSet: {}", e);
-    //     }
-    //     return breweryIds;
-    // }
 
     @Override
     public List<Brewery> search(SearchParameter[] params, int limit, int offset) {
@@ -325,7 +97,7 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
             }
         }
         sqlStatement += " ORDER BY brewery_id LIMIT ? OFFSET ?";
-        logger.error("Preparing search statement: " + sqlStatement);
+        logger.error("Preparing search statement: " + sqlStatement + "; limit " + limit + " offset " + offset);
 
         List<Brewery> breweries = new ArrayList<>();
         ResultSet sqlResults;
@@ -351,6 +123,7 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
             while(sqlResults.next()){
                 breweries.add(convertResultToBrewery(sqlResults));
             }
+            logger.error("Returning " + breweries.size() + " breweries");
         }catch(SQLException e){
             logger.error("SQL Exception caught in getting results: {}", e);
             return null;
@@ -390,20 +163,27 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
             return -1;
         }
     }
-//?????
+
     public int size() {
         logger.debug("Getting the number of rows...");
-
+        ResultSet sqlResults;
         String query = "SELECT count(*) FROM brewery";
-
-        List<SQLRow> rows = SQLUtils.executeSQL(conn, query);
-        if (rows == null) {
-            logger.error("No breweries found!");
-            return 0;
+        try(PreparedStatement stmt = conn.prepareStatement(query)){
+            sqlResults = stmt.executeQuery();
+        }catch(SQLException e){
+            logger.error("Error caught in excuteQuery: {}", e);
+            return -1;
         }
-
-        String value = rows.get(0).getItem();
-        return Integer.parseInt(value);
+        int count = 0;
+        try{
+            while(sqlResults.next()){
+                count++;
+            }
+            return count;
+        }catch(SQLException e){
+            logger.error("SQL Exception caught in getting results: {}", e);
+            return -1;
+        }
     }
 
     // =====================================================================
