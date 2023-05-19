@@ -26,7 +26,7 @@ public class Tap4tapServlet extends HttpServlet {
 
     private DAO<Member> membersDAO = null;
     private BreweryDAO<Brewery> breweryDAO = null;
-
+    private Connection conn = null;
     @Override
     public void init(ServletConfig config) throws ServletException {
 
@@ -68,32 +68,19 @@ public class Tap4tapServlet extends HttpServlet {
 
         if (useSqlDao) {
             String initParams = "jdbc:mariadb://localhost:3306/tap4tap?user=" + username + "&password=" + password;
-            Connection conn = SQLUtils.connect(initParams);
+            conn = SQLUtils.connect(initParams);
             if (conn == null) {
                 throw new UnavailableException("Failed to connect to SQL database");
             }
-
             breweryDAO = new BrewerySqlDAO(conn);
         } else {
             breweryDAO = new BreweryMemoryDAO();
-            if (!breweryDAO.initialize(""))
-                throw new UnavailableException("Unable to initialize the BreweryDAO.");
+            membersDAO = new MemberMemoryDAO();
     }
 
         logger.info("Initializing the DAOs...");
         //memoryDAOs
-        membersDAO = new MemberMemoryDAO();
 
-        //sqlDAOs
-        // breweryDAO = new BrewerySqlDAO();
-        // breweryDAO.initialize(initParams);
-        // if (!membersDAO.initialize(initParams))
-        //     throw new UnavailableException("Unable to initialize the MembersDAO.");
-
-        //initialize breweryMemoryDAO
-        // String initParams = "";
-
-        // TODO: Initialize other DAOs here
 
         logger.info("Successfully initialized the DAOs!");
 
@@ -104,7 +91,9 @@ public class Tap4tapServlet extends HttpServlet {
 
     @Override
     public void destroy() {
-        membersDAO.terminate();
+        if (conn != null) {
+            SQLUtils.disconnect(conn);
+        }
         // breweryDAO.terminate();
         // TODO: Terminate other DAOs here
         logger.warn("-----------------------------------------");
@@ -152,20 +141,22 @@ public class Tap4tapServlet extends HttpServlet {
                 return;
             }
 
+            response.setContentType("text/html");
+            response.setCharacterEncoding("UTF-8");
             // Send the command's output to the user (using try-with-resources)
-            try (ServletOutputStream out = response.getOutputStream(); ) {
+            try (PrintWriter out = response.getWriter()) {
                 out.println(output);
             }
             } catch (IOException e) {
-            logger.debug("Unexpected I/O exception: ", e);
+                logger.error("Unexpected I/O exception: ", e);
             } catch (RuntimeException e) {
-            logger.error("Unexpected runtime exception: ", e);
-            try {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unexpected server error.");
-            } catch (IOException ex) {
-                logger.error("Unable to send 500 response code.", ex);
+                logger.error("Unexpected runtime exception: ", e);
+                try {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Unexpected server error.");
+                } catch (IOException ex) {
+                    logger.error("Unable to send 500 response code.", ex);
+                }
             }
-        }
         long time = System.currentTimeMillis() - startTime;
         logger.info("OUT- {} {}ms", logInfo, time);
     }
