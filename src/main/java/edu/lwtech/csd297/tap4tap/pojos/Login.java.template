@@ -1,9 +1,0 @@
-package edu.lwtech.csd297.tap4tap.pojos;
-
-public class Login {
-    public static final String username = "";
-    public static final String password = "";
-    public static final String hostname = "localhost";
-    public static final String database = "tap4tap";
-    public static int port = 3306;
-}
