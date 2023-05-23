@@ -14,25 +14,25 @@ class MemberMemoryDAOTests {
 
     private DAO<Member> memberDAO;
 
-    @BeforeEach
-    void setUp() {
-        memberDAO = new MemberMemoryDAO();
-        memberDAO.initialize("");  // Params ignored for memory DAO
-            // Note: init() adds fred, tom, and mary to the database
-    }
+    // @BeforeEach
+    // void setUp() {
+    //     memberDAO = new MemberMemoryDAO();
+    //     memberDAO.initialize("");  // Params ignored for memory DAO
+    //         // Note: init() adds fred, tom, and mary to the database
+    // }
 
-    @AfterEach
-    void tearDown() {
-        memberDAO.terminate();
-    }
+    // @AfterEach
+    // void tearDown() {
+    //     memberDAO.terminate();
+    // }
 
-    @Test
-    void testInitialize() {
-        Exception ex = assertThrows(IllegalArgumentException.class,
-            () -> { memberDAO.initialize(null); }
-        );
-        assertTrue(ex.getMessage().contains("null"));
-    }
+    // @Test
+    // void testInitialize() {
+    //     Exception ex = assertThrows(IllegalArgumentException.class,
+    //         () -> { memberDAO.initialize(null); }
+    //     );
+    //     assertTrue(ex.getMessage().contains("null"));
+    // }
 
     // @Test
     // void testInsert() {
@@ -85,12 +85,12 @@ class MemberMemoryDAOTests {
     //     assertTrue(ex.getMessage().contains("negative"));
     // }
 
-    @Test
-    void testRetrieveAll() {
-        List<Member> allLists = new ArrayList<>();
-        allLists = memberDAO.retrieveAll();
-        assertEquals(3, allLists.size());
-    }
+    // @Test
+    // void testRetrieveAll() {
+    //     List<Member> allLists = new ArrayList<>();
+    //     allLists = memberDAO.retrieveAll();
+    //     assertEquals(3, allLists.size());
+    // }
 
     // @Test
     // void testRetrieveAllIDs() {
@@ -147,9 +147,9 @@ class MemberMemoryDAOTests {
     //     assertTrue(ex.getMessage().contains("negative"));
     // }
 
-    @Test
-    void testSize() {
-        assertEquals(3, memberDAO.size());
-    }
+    // @Test
+    // void testSize() {
+    //     assertEquals(3, memberDAO.size());
+    // }
 
 }

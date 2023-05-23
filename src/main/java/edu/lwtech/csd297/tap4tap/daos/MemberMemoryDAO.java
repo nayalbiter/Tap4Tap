@@ -42,15 +42,15 @@ public class MemberMemoryDAO implements DAO<Member> {
     public String insert(Member member) {
         if (member == null)
             throw new IllegalArgumentException("insert: member cannot be null");
-        if (member.getRecID() != -1)
+        if (member.getUserId() != -1)
             throw new IllegalArgumentException("insert: member is already in database (recID != -1)");
         logger.debug("Inserting {}...", member);
 
-        member.setRecID(nextMemberRecID.incrementAndGet());
+        member.setUserId(nextMemberRecID.incrementAndGet());
         memberDB.add(member);
 
         logger.debug("Member successfully inserted!");
-        return Integer.toString(member.getRecID());
+        return Integer.toString(member.getUserId());
     }
 
     public void delete(int id) {
@@ -60,7 +60,7 @@ public class MemberMemoryDAO implements DAO<Member> {
 
         Member memberFound = null;
         for (Member member : memberDB) {
-            if (member.getRecID() == id) {
+            if (member.getUserId() == id) {
                 memberFound = member;
                 break;
             }
@@ -80,7 +80,7 @@ public class MemberMemoryDAO implements DAO<Member> {
 
         Member memberFound = null;
         for (Member member : memberDB) {
-            if (member.getRecID() == id) {
+            if (member.getUserId() == id) {
                 memberFound = member;
                 break;
             }
@@ -119,7 +119,7 @@ public class MemberMemoryDAO implements DAO<Member> {
 
         List<String> recIDs = new ArrayList<>();
         for (Member member : memberDB) {
-            //recIDs.add(member.getRecID());
+            //recIDs.add(member.getUserId());
         }
         return recIDs;
     }
@@ -148,12 +148,12 @@ public class MemberMemoryDAO implements DAO<Member> {
     public boolean update(Member member) {
         if (member == null)
             throw new IllegalArgumentException("update: member cannot be null");
-        logger.debug("Trying to update member: {} ...", member.getRecID());
+        logger.debug("Trying to update member: {} ...", member.getUserId());
 
         for (int i = 0; i < memberDB.size(); i++) {
-            if (memberDB.get(i).getRecID() == member.getRecID()) {
+            if (memberDB.get(i).getUserId() == member.getUserId()) {
                 memberDB.set(i, member);
-                logger.debug("Successfully updated member: {} !", member.getRecID());
+                logger.debug("Successfully updated member: {} !", member.getUserId());
                 return true;
             }
         }
