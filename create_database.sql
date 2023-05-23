@@ -29,26 +29,16 @@ create table if not exists user
     display_name character varying(36) not null
 );
 
-
-create table if not exists favorites_list
-(
-	list_id serial primary key,
-	user_id bigint unsigned not null,
-	constraint fk_favorites_list_user
-		foreign key (user_id) references user (user_id)
-		on delete cascade
-);
-
 create table if not exists favorite
 (
 	favorite_id serial primary key,
 	brewery_id UUID not null,
-	list_id bigint unsigned not null,
+	user_id bigint unsigned not null,
 	constraint fk_favorite_brewery
 		foreign key (brewery_id) references brewery (brewery_id)
 		on delete cascade,
-	constraint fk_favorite_favorites_list
-		foreign key (list_id) references favorites_list (list_id)
+	constraint fk_favorite_user
+		foreign key (user_id) references user (user_id)
 		on delete cascade
 
 );

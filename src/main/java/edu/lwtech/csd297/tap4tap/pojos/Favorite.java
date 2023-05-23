@@ -3,12 +3,12 @@ package edu.lwtech.csd297.tap4tap.pojos;
 public class Favorite {
     private int favoriteId;
     private String breweryId;
-    private int listId;
+    private int userId;
 
-    public Favorite(int favoriteId, String breweryId, int listId) {
+    public Favorite(int favoriteId, String breweryId, int userId) {
         this.favoriteId = favoriteId;
         this.breweryId = breweryId;
-        this.listId = listId;
+        this.userId = userId;
     }
 
     public int getFavoriteId() {
@@ -19,7 +19,7 @@ public class Favorite {
         return breweryId;
     }
 
-    public int getListId() {
-        return listId;
+    public int getUserId() {
+        return userId;
     }
 }
