@@ -49,10 +49,10 @@ public class BreweryMemoryDAO implements BreweryDAO<Brewery> {
      }
 
      @Override
-     public List<Brewery> search(SearchParameter[] params){
+     public List<Brewery> search(List<SearchParameter> params) {
           List<Brewery> result = new ArrayList<>();
           for(Brewery brewery : breweryDB){
-               if(params.length > 0){
+               if(!params.isEmpty()){
                     for (SearchParameter param : params) {
                          if (param.getName().equals("country")) {
                               if (!brewery.getCountry().equals(param.getValue())) {

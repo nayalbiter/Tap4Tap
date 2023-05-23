@@ -15,7 +15,7 @@ public interface BreweryDAO<T> {
     T retrieveByID(UUID id);
 
     // ...some at a time
-    List<T> search(SearchParameter[] params);
+    List<T> search(List<SearchParameter> params);
 
     // Update ---------------------------------------------
     boolean update(T item);

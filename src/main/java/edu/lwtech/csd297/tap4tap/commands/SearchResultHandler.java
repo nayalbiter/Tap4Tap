@@ -70,7 +70,7 @@ public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
             params.add(new SearchParameter("zip_code", zipString, false));
         }
 
-        templateFields.put("breweries", servlet.getBreweryDAD().search(params.toArray(new SearchParameter[]{})));
+        templateFields.put("breweries", servlet.getBreweryDAD().search(params));
 
 
         String html = CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
