@@ -33,7 +33,7 @@ public class Tap4tapServlet extends HttpServlet {
         logger.warn("");
         logger.warn("========================================================");
         logger.warn("   tap4tap init() started");
-        logger.warn("      http://http://134.122.35.209:8080/tap4tap/servlet");
+        logger.warn("      http://http://localhost:8080/tap4tap/servlet");
         logger.warn("========================================================");
         logger.warn("");
 
@@ -61,13 +61,12 @@ public class Tap4tapServlet extends HttpServlet {
         //to connect to database
 
         boolean useSqlDao = true;
-        //put username
-        String username = "";
-        //put password
-        String password = "";
+
+        String username = Login.username;
+        String password = Login.password;
 
         if (useSqlDao) {
-            String initParams = "jdbc:mariadb://localhost:3306/tap4tap?user=" + username + "&password=" + password;
+            String initParams = "jdbc:mariadb://" + Login.hostname + ":" + Login.port + "/" + Login.database + "?user=" + username + "&password=" + password;
             conn = SQLUtils.connect(initParams);
             if (conn == null) {
                 throw new UnavailableException("Failed to connect to SQL database");
