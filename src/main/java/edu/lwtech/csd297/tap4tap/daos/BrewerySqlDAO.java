@@ -82,7 +82,7 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
     }
 
     @Override
-    public List<Brewery> search(SearchParameter[] params, int limit, int offset) {
+    public List<Brewery> search(SearchParameter[] params) {
         String sqlStatement = "SELECT * FROM brewery";
         if (params.length > 0) {
             String particle = "WHERE";
@@ -96,22 +96,17 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
                 particle = " AND";
             }
         }
-        sqlStatement += " ORDER BY brewery_id LIMIT ? OFFSET ?";
-        logger.error("Preparing search statement: " + sqlStatement + "; limit " + limit + " offset " + offset);
+        sqlStatement += " ORDER BY brewery_id LIMIT 8300";
+        logger.error("Preparing search statement: " + sqlStatement);
 
         List<Brewery> breweries = new ArrayList<>();
         ResultSet sqlResults;
         try (PreparedStatement stmt = conn.prepareStatement(sqlStatement)) {
-            int position = 1;
-            for (SearchParameter param : params) {
-                if (param.isExact()) {
-                    stmt.setString(position++, param.getValue());
-                } else {
-                    stmt.setString(position++, "%" + param.getValue() + "%");
-                }
+            for (int i = 0; i < params.length; i++){
+                // Substitute in the argument values for the question marks
+                if(params[i].isExact()){stmt.setString(i + 1, params[i].getValue());}
+                else{stmt.setString(1 + i, "%" + params[1].getValue() + "%");}
             }
-            stmt.setInt(position++, limit);
-            stmt.setInt(position++, offset);
 
             sqlResults = stmt.executeQuery();
         }catch(SQLException e){

@@ -146,7 +146,7 @@
                                                     </tfoot>
                                                     <tbody>
 
-                                                        <#list allBreweries as brewery>
+                                                        <#list breweries as brewery>
                                                             <tr>
                                                                 <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
                                                                     ${brewery.name}</td>
