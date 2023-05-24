@@ -252,7 +252,7 @@
                     </div>
                     <div class="text-white text-center">
                         <br />
-                        <span class="authors1">Kirkland, WA © 2023 Tap4Tap created by Carmen Albiter, Carolina
+                        <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina
                             Solar-Morales
                             and Joy Hyunjung
                             Oh.</span>
