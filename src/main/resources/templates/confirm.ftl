@@ -42,7 +42,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="/tap4tap/index.html">Home</a>
+                                <a href="/tap4tap/servlet?cmd=home">Home</a>
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -133,7 +133,7 @@
                                                                 </div>
                                                                 <div class="col-8">
                                                                     <input class="form-control form-control-user"
-                                                                        enctype="multipart/form-data"   
+                                                                        enctype="multipart/form-data"
                                                                         name="password" type="password"
                                                                         id="inputPassword" size=60
                                                                         placeholder="Password">
@@ -149,7 +149,7 @@
                                                                         Me</label>
                                                                 </div>
                                                             </div>
-                                                            
+
                                                             <a id="loginSubmitButton" href="#"
                                                                 class="btn btn-primary btn-user btn-block">
                                                                 Login
@@ -158,7 +158,7 @@
                                                             <hr>
                                                             <!--FIX THIS PART WITH JAVA CODE to make the log in-->
                                                         </div>
-                                                        
+
                                                 </form>
                                         </#if>
                                         <br />

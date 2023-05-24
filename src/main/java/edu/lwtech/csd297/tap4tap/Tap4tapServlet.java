@@ -97,7 +97,6 @@ public class Tap4tapServlet extends HttpServlet {
         if (conn != null) {
             SQLUtils.disconnect(conn);
         }
-        // breweryDAO.terminate();
         // TODO: Terminate other DAOs here
         logger.warn("-----------------------------------------");
         logger.warn("  tap4tap destroy() completed!");
@@ -146,6 +145,7 @@ public class Tap4tapServlet extends HttpServlet {
 
             response.setContentType("text/html");
             response.setCharacterEncoding("UTF-8");
+
             // Send the command's output to the user (using try-with-resources)
             try (PrintWriter out = response.getWriter()) {
                 out.println(output);
