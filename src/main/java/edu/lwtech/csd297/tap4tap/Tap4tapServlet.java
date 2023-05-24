@@ -61,12 +61,11 @@ public class Tap4tapServlet extends HttpServlet {
         //to connect to database
 
         boolean useSqlDao = true;
-
         // Get connection parameters
         String hostname = "localhost";
         String port = "3306";
         String database = "tap4tap";
-        String username = "tap4tap";
+        String username = System.getProperty("username");
         String password = System.getProperty("tap4tap_password");
 
 
