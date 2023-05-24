@@ -25,7 +25,7 @@ public class Tap4tapServlet extends HttpServlet {
     private static final Map<String, CommandHandler<Tap4tapServlet>> supportedCommands = new HashMap<>();
 
     private DAO<Member> membersDAO = null;
-    private BreweryDAO<Brewery> breweryDAO = null;
+    private BreweryDAO breweryDAO = null;
     private Connection conn = null;
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -178,7 +178,7 @@ public class Tap4tapServlet extends HttpServlet {
         return membersDAO;
     }
 
-    public BreweryDAO<Brewery> getBreweryDAD(){
+    public BreweryDAO getBreweryDAD(){
         return breweryDAO;
     }
 

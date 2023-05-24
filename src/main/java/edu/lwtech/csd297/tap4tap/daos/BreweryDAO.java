@@ -5,20 +5,20 @@ import java.util.*;
 
 // Brewery Data Access Object (DAO) Interface
 
-public interface BreweryDAO<T> {
+public interface BreweryDAO {
 
     // Create --------------------------------------------
-    boolean insert(T item);
+    boolean insert(Brewery item);
 
     // Retrieve ------------------------------------------
     // ...one at a time
-    T retrieveByID(UUID id);
+    Brewery retrieveByID(UUID id);
 
     // ...some at a time
-    List<T> search(List<SearchParameter> params);
+    List<Brewery> search(List<SearchParameter> params);
 
     // Update ---------------------------------------------
-    boolean update(T item);
+    boolean update(Brewery item);
 
     // Delete ---------------------------------------------
     int delete(UUID id);

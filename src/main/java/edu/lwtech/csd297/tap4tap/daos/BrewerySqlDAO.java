@@ -8,7 +8,7 @@ import org.apache.logging.log4j.*;
 import edu.lwtech.csd297.tap4tap.pojos.*;
 import edu.lwtech.csd297.tap4tap.utils.*;
 
-public class BrewerySqlDAO implements BreweryDAO<Brewery> {
+public class BrewerySqlDAO implements BreweryDAO {
 
     private static final Logger logger = LogManager.getLogger(BrewerySqlDAO.class.getName());
 
