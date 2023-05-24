@@ -67,7 +67,7 @@ public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
         //getting zipcode information
         String zipString = request.getParameter("zipCode");
         if (zipString != null && !zipString.isEmpty()){
-            params.add(new SearchParameter("zip_code", zipString, false));
+            params.add(new SearchParameter("postal_code", zipString, false));
         }
 
         templateFields.put("breweries", servlet.getBreweryDAD().search(params));
