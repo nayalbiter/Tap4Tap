@@ -32,7 +32,7 @@ public class UserSqlDAO implements UserDAO {
             stmt.setString(2, user.getUsername());
             stmt.setString(3, user.getHashedPasword());
             stmt.setString(4, user.getDisplayName());
-
+            
             logger.debug("Executing SQL Insert: {}", query);
              // Execute the INSERT statement
             stmt.executeUpdate();
