@@ -97,7 +97,7 @@ public class BrewerySqlDAO implements BreweryDAO {
             }
         }
         sqlStatement += " ORDER BY brewery_id LIMIT 8300";
-        logger.error("Preparing search statement: " + sqlStatement);
+        logger.debug("Preparing search statement: " + sqlStatement);
 
         List<Brewery> breweries = new ArrayList<>();
         ResultSet sqlResults;
@@ -107,7 +107,7 @@ public class BrewerySqlDAO implements BreweryDAO {
                 if(params.get(i).isExact()){stmt.setString(i + 1, params.get(i).getValue());}
                 else{stmt.setString(1 + i, "%" + params.get(i).getValue() + "%");}
             }
-
+            logger.debug(stmt);
             sqlResults = stmt.executeQuery();
         }catch(SQLException e){
             logger.error("SQL Exception caught executeSQL: {}", e);

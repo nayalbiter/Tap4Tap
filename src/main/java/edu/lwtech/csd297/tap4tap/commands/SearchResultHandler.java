@@ -12,26 +12,6 @@ import edu.lwtech.csd297.tap4tap.pojos.SearchParameter;
 public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
     private static final Logger logger = LogManager.getLogger(SearchResultHandler.class.getName());
 
-    //pagination
-    private static String makePageLink(HttpServletRequest request, int page) {
-        Map<String, String> newParams = new HashMap<>();
-        for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
-            if (!entry.getKey().equals("page")) {
-                newParams.put(entry.getKey(), entry.getValue()[0]);
-            }
-        }
-        newParams.put("page", "" + page);
-
-        String url = "";
-        for (Map.Entry<String, String> entry : newParams.entrySet()) {
-            if (!url.isEmpty()) {
-                url += "&";
-            }
-            url += entry.getKey() + "=" + entry.getValue();
-        }
-        return url;
-    }
-
     @Override
     public String handle(HttpServletRequest request, Tap4tapServlet servlet) throws UserInputException {
         String template = "searchResult.ftl";

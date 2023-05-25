@@ -1,6 +1,7 @@
 package edu.lwtech.csd297.tap4tap.daos;
 
 import java.sql.*;
+import java.util.*;
 
 import org.apache.logging.log4j.*;
 
@@ -43,7 +44,12 @@ public class UserSqlDAO implements UserDAO {
             return false;
         }
     }
-
+    //implement
+    @Override
+    public List<User> retrieveByName(String name){
+        List<User> result = new ArrayList<>();
+        return result;
+    }
     @Override
     public User retrieveByID(int userId) {
         logger.debug("Trying to get User with ID: {}", userId);
