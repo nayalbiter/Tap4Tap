@@ -164,7 +164,7 @@
                                         <br />
                                         <div class="card bg-danger text-white shadow text-center">
                                             <div class="card-body">
-                                                ${message}
+                                                <p>${message}</P>
                                                 <div class="text-white-50 medium text-left">If you've forgotten your password, click on the link below.</div>
                                             </div>
                                         </div>

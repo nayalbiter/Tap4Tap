@@ -28,4 +28,7 @@ public class User {
     public String getDisplayName() {
         return displayName;
     }
+    public String toString(){
+        return "User id: " + userId + "\nUser name: " + username + "\nUser display name: " + displayName;
+    }
 }
