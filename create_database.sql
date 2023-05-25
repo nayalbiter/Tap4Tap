@@ -24,7 +24,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS brewery_address ON brewery(name, address_1, ad
 create table if not exists user
 (
     user_id serial primary key,
-    username character varying(64) not null,
+    username character varying(64) not null unique,
     hashed_password character varying(255),
     display_name character varying(36) not null
 );
