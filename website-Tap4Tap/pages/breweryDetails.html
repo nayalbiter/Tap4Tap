@@ -8,7 +8,7 @@
     <meta name="description" content=" tap4tap website">
     <meta name="author" content="Created by Carmen Albiter, Carolina Solar-Morales and Joy Hyunjung Oh">
 
-    <title>Brewery Search Results</title>
+    <title>BreweryDetails</title>
 
     <!-- Custom fonts for this page-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -21,7 +21,7 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this page-->
+    <!-- Custom styles for this page CHECK THIS IN CASE I NEED TO CHANGE IT-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../css/breweryResults.css" rel="stylesheet">
     <link href="../css/dataTables.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="../homepage.html">Home</a>
+                                <a href="../homepage.html">Home</a> <!-- FIX THIS -->
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -61,16 +61,18 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">Login</span>
                                 <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
+                                <!-- FIX THIS -->
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item text-white" href="../pages/logIn.html">
+                                <a class="dropdown-item text-white" href="../pages/logIn.html"> <!-- FIX THIS -->
 
                                     <i class="fa fa-sign-in mr-2 text-gray-100"></i>
                                     Login
                                 </a>
                                 <a class="dropdown-item  text-white" href="../pages/createAccount.html">
+                                    <!-- FIX THIS -->
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
@@ -113,97 +115,183 @@
 
                                     <div class="col-12">
                                         <br />
-                                        <h1 class="logo-sm mb-1 text-gray-900 text-center">Click the brewery name for
-                                            more info...</h1>
+                                        <h1 class="logo-sm mb-1 text-gray-900 text-center"> Find all the details about
+                                            the brewery that you selected:</h1>
                                     </div>
 
                                 </div>
 
 
-                                <!--create table here-->
+                                <!--create the cards with the info here and fix it with the info of the database-->
                                 <div class="container ">
 
                                     <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h3 class="m-0 font-weight-bold text-primary">Brewery Search Results:</h3>
-                                        </div>
-                                        <div class="card-body bg-gradient-light text-black-50">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered bg-gradient-light text-black-50"
-                                                    id="dataTable" width="100%" cellspacing="0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Brewery Name</th>
-                                                            <th>Location</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th>Brewery Name</th>
-                                                            <th>Location</th>
-                                                        </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                        <tr>
+                                        <br />
 
-                                                            <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
-                                                                brewey 1</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 2</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 3</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 4</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 5</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 6</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 7</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 8</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 9</td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 10
-                                                            </td>
-                                                            <td><i class="fa fa-map fa-2x" aria-hidden="true"></i></td>
-                                                        </tr>
+                                        <div class="col-12">
 
-                                                    </tbody>
-                                                </table>
+                                            <div class="card-body bg-gradient-light text-black-50">
+
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Brewery type:
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <i class="fa fa-beer fa-lg" aria-hidden="true"></i>
+                                                        micro
+                                                    </div>
+                                                </div>
+
+
                                             </div>
+
+                                            <br />
+
+                                            <div class="card-body bg-gradient-light text-black-50">
+
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Brewery Address:
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+                                                        9200 Redmond
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br />
+
+                                            <div class="card-body bg-gradient-light text-black-50">
+
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        City:
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <i class="fa fa-university fa-lg" aria-hidden="true"></i>
+                                                        Redmond
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br />
+
+                                            <div class="card-body bg-gradient-light text-black-50">
+
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        State:
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <i class="fa fa-flag fa-lg" aria-hidden="true"></i>
+                                                        Washington
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br />
+
+                                            <div class="card-body bg-gradient-light text-black-50">
+
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Zip Code:
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+                                                        98052
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br />
+
+                                            <div class="card-body bg-gradient-light text-black-50">
+
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Country:
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <i class="fa fa-globe fa-lg" aria-hidden="true"></i>
+                                                        United States
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br />
+
+                                            <div class="card-body bg-gradient-light text-black-50">
+
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Phone (if available):
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
+                                                        12345
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br />
+
+                                            <div class="card-body bg-gradient-light text-black-50">
+
+                                                <div class="col mr-2">
+                                                    <div
+                                                        class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Website (if available):
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                        <i class="fa fa-internet-explorer fa-lg" aria-hidden="true"></i>
+                                                        www.google.com
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br />
+
+
+
                                         </div>
 
                                     </div>
                                 </div>
+
+                                <!--add the save it to my list buttom here and fix it with an on click-->
+
+                                <hr> <!--fix this part-->
+                                <a href="pages/brewerySearchResults.html" class="btn btn-google btn-user btn-block">
+                                    <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!
+                                    <!--FIX THIS PART WITH JAVA CODE to save it into a list-->
+                                </a>
+
+                                <hr>
+
+                                <br/>
 
                             </div>
 
@@ -233,7 +321,8 @@
                 </div>
                 <div class="text-white text-center">
                     <br />
-                    <span class="authors1">Kirkland, WA © 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales
+                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina
+                        Solar-Morales
                         and Joy Hyunjung
                         Oh.</span>
                 </div>
@@ -243,7 +332,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
+    <!-- Bootstrap core JavaScript--> <!-- FIX THIS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
