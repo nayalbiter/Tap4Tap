@@ -59,7 +59,7 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("forgotPassword", new forgotPasswordHandler());
         //to connect to database
 
-        boolean useSqlDao = false;
+        boolean useSqlDao = true;
         // Get connection parameters
         String hostname = "localhost";
         String port = "3306";

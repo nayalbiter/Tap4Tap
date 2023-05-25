@@ -46,10 +46,29 @@ public class UserSqlDAO implements UserDAO {
     }
     //implement
     @Override
-    public List<User> retrieveByName(String name){
-        List<User> result = new ArrayList<>();
-        return result;
+    public User retrieveByUsername(String username){
+
+        logger.debug("Trying to get User with usernam: {}", username);
+
+        String query = "SELECT *";
+        query += " FROM user WHERE username=?";
+
+        logger.debug("Executing SQL statement: {}", query);
+        ResultSet sqlResults;
+        try(PreparedStatement stmt = conn.prepareStatement(query);){
+            // Substitute in the argument values for the question marks
+            stmt.setObject(1, username);
+
+            // Execute the SELECT query
+            sqlResults = stmt.executeQuery();
+
+            return convertResultToUser(sqlResults);
+        } catch(Exception e){
+            logger.debug("Sql Exception caught while selecting user by username: {}", username);
+            return null;
+        }
     }
+
     @Override
     public User retrieveByID(int userId) {
         logger.debug("Trying to get User with ID: {}", userId);

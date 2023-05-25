@@ -14,20 +14,20 @@ public class UserMemoryDAO implements UserDAO{
         addDemoUserData();
     }
     @Override
-    public List<User> retrieveByName(String name){
-        if(name == null || name.trim().isEmpty()) throw new IllegalArgumentException("Name can't be null or empty");
-        logger.debug("retrieving user list by name, {}", name);
+    public User retrieveByUsername(String username){
+        if(username == null || username.trim().isEmpty()) throw new IllegalArgumentException("Name can't be null or empty");
+        logger.debug("retrieving user list by name, {}", username);
         List<User> result = new ArrayList<>();
         for(User user : userDB){
-           if(user.getUsername().equals(name)){
-            logger.debug("found name {}", name);
+           if(user.getUsername().equals(username)){
+            logger.debug("found name {}", username);
             result.add(user);
            }
            else{
-            logger.debug("not found name {}", name);
+            logger.debug("not found name {}", username);
            }
         }
-        return result;
+        return result.get(0);
     }
     @Override
     public boolean insert(User user) {

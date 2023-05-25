@@ -11,7 +11,7 @@ public interface UserDAO {
 
     // Retrieve ------------------------------------------
     User retrieveByID(int id);
-    List<User> retrieveByName(String name);
+    User retrieveByUsername(String username);
     // Update ---------------------------------------------
     boolean update(User item);
 
