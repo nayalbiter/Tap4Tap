@@ -1,81 +1,132 @@
 package edu.lwtech.csd297.tap4tap.daos;
 
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
-import edu.lwtech.csd297.tap4tap.pojos.Favorite;
+import org.apache.logging.log4j.*;
 
-public class FavoriteSqlDAO implements DAO<Favorite> {
+import edu.lwtech.csd297.tap4tap.pojos.*;
 
-    @Override
-    public boolean initialize(String initParams) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initialize'");
+public class FavoriteSqlDAO implements FavoriteDAO {
+
+    private static final Logger logger = LogManager.getLogger(FavoriteSqlDAO.class.getName());
+
+    private Connection conn = null;
+
+    public FavoriteSqlDAO(Connection conn) {
+        this.conn = conn;
     }
 
     @Override
-    public void terminate() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'terminate'");
+    public boolean insert(Favorite favorite) {
+        //!!implement to check if favorite was already inserted
+
+        String query = "INSERT INTO favorite";
+        query += "(favorite_id, brewery_id, user_id)";
+        query += "VALUES (?,?,?)";
+
+        String[] returnColumns = {};
+        try ( PreparedStatement stmt = conn.prepareStatement(query, returnColumns); ){
+            // Substitute in the argument values for the question marks
+            stmt.setInt(1, favorite.getFavoriteId());
+            stmt.setString(2, favorite.getBreweryId());
+            stmt.setInt(3, favorite.getUserId());
+
+            logger.debug("Executing SQL Insert: {}", query);
+             // Execute the INSERT statement
+            stmt.executeUpdate();
+
+            logger.debug("Favorite successfully inserted with ID = {}", favorite.getFavoriteId());
+            return true;
+        }catch (SQLException e) {
+            logger.error("SQL Exception caught in executeSQLInsert: {}, {}", query, e);
+            return false;
+        }
     }
 
     @Override
-    public String insert(Favorite item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+    public Favorite retrieveByID(int favoriteId) {
+        logger.debug("Trying to get Favorite with ID: {}", favoriteId);
+
+        String query = "SELECT *";
+        query += " FROM favorite WHERE favorite_id=?";
+
+        logger.debug("Executing SQL statement: {}", query);
+        ResultSet sqlResults;
+        try(PreparedStatement stmt = conn.prepareStatement(query);){
+            // Substitute in the argument values for the question marks
+            stmt.setInt(1, favoriteId);
+
+            // Execute the SELECT query
+            sqlResults = stmt.executeQuery();
+
+            return convertResultToFavorite(sqlResults);
+        } catch(Exception e){
+            logger.debug("Sql Exception caught while selecting favorite by Id: {}", favoriteId);
+            return null;
+        }
     }
 
-    @Override
-    public Favorite retrieveByID(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveByID'");
+    public boolean update(Favorite favorite) {
+        logger.debug("Trying to update Favorite with Favorite: {}", favorite);
+
+        String query = "UPDATE FROM favorite WHERE favorite_id = ?";
+        int favoriteId = favorite.getFavoriteId();
+        try{
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setObject(1, favoriteId);
+            int rows = stmt.executeUpdate();
+            return rows > 0;
+        }
+        catch(SQLException e){
+            logger.error("Error caught in excuteUpdate: {}", e);
+            return false;
+        }
     }
 
-    @Override
-    public Favorite retrieveByIndex(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
+    public int delete(int favoriteId) {
+        logger.debug("Trying to delete Favorite with ID: {}", favoriteId);
+
+        String query = "DELETE FROM favorite WHERE favorite_id=?";
+
+        try(PreparedStatement stmt = conn.prepareStatement(query)){
+            stmt.setObject(1,favoriteId);
+            return stmt.executeUpdate();
+        }
+        catch(SQLException e){
+            logger.error("Error caught in executeUpdate: {}", e);
+            return -1;
+        }
     }
 
-    @Override
-    public List<Favorite> retrieveAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveAll'");
-    }
-
-    @Override
-    public List<String> retrieveAllIDs() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveAllIDs'");
-    }
-
-    @Override
-    public List<Favorite> search(String[] params) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'search'");
-    }
-
-    @Override
-    public boolean update(Favorite item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-
-    @Override
-    public void delete(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-
-    @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        logger.debug("Getting the number of rows...");
+        ResultSet sqlResults;
+        String query = "SELECT count(*) FROM favorite";
+        try(PreparedStatement stmt = conn.prepareStatement(query)){
+            sqlResults = stmt.executeQuery();
+        }catch(SQLException e){
+            logger.error("Error caught in excuteQuery: {}", e);
+            return -1;
+        }
+        int count = 0;
+        try{
+            while(sqlResults.next()){
+                count++;
+            }
+            return count;
+        }catch(SQLException e){
+            logger.error("SQL Exception caught in getting results: {}", e);
+            return -1;
+        }
     }
 
-    @Override
-    public List<Favorite> retrieveByName(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveByName'");
+    // =====================================================================
+
+    private Favorite convertResultToFavorite(ResultSet result) throws SQLException {
+        int favoriteId =  result.getInt(result.findColumn("favorite_id"));
+        String breweryId = result.getString(result.findColumn("brewery_id"));
+        int userId = result.getInt(result.findColumn("user_id"));
+        return new Favorite(favoriteId, breweryId, userId);
     }
-    
 }
