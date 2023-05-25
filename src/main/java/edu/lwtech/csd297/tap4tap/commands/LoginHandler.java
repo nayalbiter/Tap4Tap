@@ -21,15 +21,15 @@ public class LoginHandler implements CommandHandler<Tap4tapServlet> {
         Map<String, Object> templateFields = new HashMap<>();
         CommandUtils.getSessionVariables(request, templateFields);
 
-        List<Member> members = servlet.getMembersDAO().retrieveByName(username);
-        if (members == null) {
+        List<User> Users = servlet.getUserDAO().retrieveByName(username);
+        if (Users == null) {
             message = "We do not have a member with that username on file. Please try again.";
             templateFields.put("message", message);
             templateFields.put("loggedIn", false);
             return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
         }
-        for(Member member : members){
-            if (member.getPassword().equals(password)) {
+        for(User user : Users){
+            if (user.getHashedPasword().equals(password)) {
                 // int ownerID = member.getUserId();
                 loggedIn = true;
                 HttpSession session = request.getSession(true);         // true == Create a new session for this user

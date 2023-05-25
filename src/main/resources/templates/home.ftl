@@ -70,7 +70,7 @@
                                     Login
                                 </a>
 
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin">  <#--fix this to show page create account -->
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=createAccount">  <#--fix this to show page create account -->
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
@@ -151,7 +151,7 @@
                                                     </div>
                                                     <div class="col-6">
                                                         <div class="input-group">
-                                                            <input id="selectedCountry" type="text" 
+                                                            <input id="selectedCountry" type="text"
                                                                 class="form-control form-control-user"
                                                                 value="United States" />
 

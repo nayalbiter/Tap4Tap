@@ -5,7 +5,7 @@ import edu.lwtech.csd297.tap4tap.pojos.*;
 import org.apache.logging.log4j.*;
 
 
-public class BreweryMemoryDAO implements BreweryDAO<Brewery> {
+public class BreweryMemoryDAO implements BreweryDAO {
      private static final Logger logger = LogManager.getLogger(BreweryMemoryDAO.class.getName());
 
      private List<Brewery> breweryDB;

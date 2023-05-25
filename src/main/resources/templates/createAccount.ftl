@@ -43,7 +43,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="/tap4tap/">Home</a>
+                                <a href="/tap4tap/servlet?cmd=home">Home</a>
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -131,7 +131,7 @@
                                                 Create Account
                                             </a>
                                             <hr>
-                                           
+
                                         </form>
 
                                         <hr>
@@ -186,7 +186,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
 </body>
 
 </html>

@@ -1,81 +1,141 @@
 package edu.lwtech.csd297.tap4tap.daos;
 
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
-import edu.lwtech.csd297.tap4tap.pojos.User;
+import org.apache.logging.log4j.*;
 
-public class UserSqlDAO implements DAO<User> {
+import edu.lwtech.csd297.tap4tap.pojos.*;
 
-    @Override
-    public boolean initialize(String initParams) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initialize'");
+public class UserSqlDAO implements UserDAO {
+
+    private static final Logger logger = LogManager.getLogger(UserSqlDAO.class.getName());
+
+    private Connection conn = null;
+
+    public UserSqlDAO(Connection conn) {
+        this.conn = conn;
     }
 
     @Override
-    public void terminate() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'terminate'");
+    public boolean insert(User user) {
+        //!!implement to check if user was already inserted
+
+        String query = "INSERT INTO user";
+        query += "(user_id, username, hashed_password, display_name)";
+        query += "VALUES (?,?,?,?)";
+
+        String[] returnColumns = {};
+        try ( PreparedStatement stmt = conn.prepareStatement(query, returnColumns); ){
+            // Substitute in the argument values for the question marks
+            stmt.setObject(1, user.getUserId());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getHashedPasword());
+            stmt.setString(4, user.getDisplayName());
+
+            logger.debug("Executing SQL Insert: {}", query);
+             // Execute the INSERT statement
+            stmt.executeUpdate();
+
+            logger.debug("User successfully inserted with ID = {}", user.getUserId());
+            return true;
+        }catch (SQLException e) {
+            logger.error("SQL Exception caught in executeSQLInsert: {}, {}", query, e);
+            return false;
+        }
+    }
+    //implement
+    @Override
+    public List<User> retrieveByName(String name){
+        List<User> result = new ArrayList<>();
+        return result;
+    }
+    @Override
+    public User retrieveByID(int userId) {
+        logger.debug("Trying to get User with ID: {}", userId);
+
+        String query = "SELECT *";
+        query += " FROM user WHERE user_id=?";
+
+        logger.debug("Executing SQL statement: {}", query);
+        ResultSet sqlResults;
+        try(PreparedStatement stmt = conn.prepareStatement(query);){
+            // Substitute in the argument values for the question marks
+            stmt.setObject(1, userId);
+
+            // Execute the SELECT query
+            sqlResults = stmt.executeQuery();
+
+            return convertResultToUser(sqlResults);
+        } catch(Exception e){
+            logger.debug("Sql Exception caught while selecting user by Id: {}", userId);
+            return null;
+        }
     }
 
-    @Override
-    public String insert(User item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+    public boolean update(User user) {
+        logger.debug("Trying to update User with User: {}", user);
+
+        String query = "UPDATE FROM user WHERE user_id = ?";
+        int userId = user.getUserId();
+        try{
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setObject(1, userId);
+            int rows = stmt.executeUpdate();
+            return rows > 0;
+        }
+        catch(SQLException e){
+            logger.error("Error caught in excuteUpdate: {}", e);
+            return false;
+        }
     }
 
-    @Override
-    public User retrieveByID(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveByID'");
+    public int delete(int userId) {
+        logger.debug("Trying to delete User with ID: {}", userId);
+
+        String query = "DELETE FROM user WHERE user_id=?";
+
+        try{
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setObject(1,userId);
+            return stmt.executeUpdate();
+        }
+        catch(SQLException e){
+            logger.error("Error caught in executeUpdate: {}", e);
+            return -1;
+        }
     }
 
-    @Override
-    public User retrieveByIndex(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveByIndex'");
-    }
-
-    @Override
-    public List<User> retrieveAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveAll'");
-    }
-
-    @Override
-    public List<String> retrieveAllIDs() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveAllIDs'");
-    }
-
-    @Override
-    public List<User> search(String[] params) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'search'");
-    }
-
-    @Override
-    public boolean update(User item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-
-    @Override
-    public void delete(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-
-    @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        logger.debug("Getting the number of rows...");
+        ResultSet sqlResults;
+        String query = "SELECT count(*) FROM user";
+        try(PreparedStatement stmt = conn.prepareStatement(query)){
+            sqlResults = stmt.executeQuery();
+        }catch(SQLException e){
+            logger.error("Error caught in excuteQuery: {}", e);
+            return -1;
+        }
+        int count = 0;
+        try{
+            while(sqlResults.next()){
+                count++;
+            }
+            return count;
+        }catch(SQLException e){
+            logger.error("SQL Exception caught in getting results: {}", e);
+            return -1;
+        }
     }
 
-    @Override
-    public List<User> retrieveByName(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'retrieveByName'");
+    // =====================================================================
+
+    private User convertResultToUser(ResultSet result) throws SQLException {
+        int userId =  result.getInt(result.findColumn("user_id"));
+        String username = result.getString(result.findColumn("username"));
+        String hashedPassword = result.getString(result.findColumn("hashed_password"));
+        String displayName = result.getString(result.findColumn("display_name"));
+        return new User(userId, username, hashedPassword, displayName);
     }
-    
 }
+

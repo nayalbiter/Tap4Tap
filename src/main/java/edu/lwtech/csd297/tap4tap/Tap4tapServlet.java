@@ -12,7 +12,6 @@ import org.apache.logging.log4j.*;
 
 import edu.lwtech.csd297.tap4tap.commands.*;
 import edu.lwtech.csd297.tap4tap.daos.*;
-import edu.lwtech.csd297.tap4tap.pojos.*;
 import edu.lwtech.csd297.tap4tap.utils.SQLUtils;
 import freemarker.template.*;
 
@@ -24,8 +23,8 @@ public class Tap4tapServlet extends HttpServlet {
     private static Configuration freeMarkerConfig = null;
     private static final Map<String, CommandHandler<Tap4tapServlet>> supportedCommands = new HashMap<>();
 
-    private DAO<Member> membersDAO = null;
-    private BreweryDAO<Brewery> breweryDAO = null;
+    private UserDAO userDAO = null;
+    private BreweryDAO breweryDAO = null;
     private Connection conn = null;
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -60,13 +59,12 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("forgotPassword", new forgotPasswordHandler());
         //to connect to database
 
-        boolean useSqlDao = true;
-
+        boolean useSqlDao = false;
         // Get connection parameters
         String hostname = "localhost";
         String port = "3306";
         String database = "tap4tap";
-        String username = "tap4tap";
+        String username = System.getProperty("username");
         String password = System.getProperty("tap4tap_password");
 
 
@@ -78,12 +76,11 @@ public class Tap4tapServlet extends HttpServlet {
             }
             breweryDAO = new BrewerySqlDAO(conn);
         } else {
-            breweryDAO = new BreweryMemoryDAO();
-            membersDAO = new MemberMemoryDAO();
+            //breweryDAO = new BreweryMemoryDAO();
+            userDAO = new UserMemoryDAO();
     }
 
         logger.info("Initializing the DAOs...");
-        //memoryDAOs
 
 
         logger.info("Successfully initialized the DAOs!");
@@ -98,7 +95,6 @@ public class Tap4tapServlet extends HttpServlet {
         if (conn != null) {
             SQLUtils.disconnect(conn);
         }
-        // breweryDAO.terminate();
         // TODO: Terminate other DAOs here
         logger.warn("-----------------------------------------");
         logger.warn("  tap4tap destroy() completed!");
@@ -147,6 +143,7 @@ public class Tap4tapServlet extends HttpServlet {
 
             response.setContentType("text/html");
             response.setCharacterEncoding("UTF-8");
+
             // Send the command's output to the user (using try-with-resources)
             try (PrintWriter out = response.getWriter()) {
                 out.println(output);
@@ -174,11 +171,11 @@ public class Tap4tapServlet extends HttpServlet {
         return freeMarkerConfig;
     }
 
-    public DAO<Member> getMembersDAO() {
-        return membersDAO;
+    public UserDAO getUserDAO() {
+        return userDAO;
     }
 
-    public BreweryDAO<Brewery> getBreweryDAD(){
+    public BreweryDAO getBreweryDAD(){
         return breweryDAO;
     }
 

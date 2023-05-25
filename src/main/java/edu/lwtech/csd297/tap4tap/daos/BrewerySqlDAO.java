@@ -8,7 +8,7 @@ import org.apache.logging.log4j.*;
 import edu.lwtech.csd297.tap4tap.pojos.*;
 import edu.lwtech.csd297.tap4tap.utils.*;
 
-public class BrewerySqlDAO implements BreweryDAO<Brewery> {
+public class BrewerySqlDAO implements BreweryDAO {
 
     private static final Logger logger = LogManager.getLogger(BrewerySqlDAO.class.getName());
 
@@ -97,7 +97,7 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
             }
         }
         sqlStatement += " ORDER BY brewery_id LIMIT 8300";
-        logger.error("Preparing search statement: " + sqlStatement);
+        logger.debug("Preparing search statement: " + sqlStatement);
 
         List<Brewery> breweries = new ArrayList<>();
         ResultSet sqlResults;
@@ -107,7 +107,7 @@ public class BrewerySqlDAO implements BreweryDAO<Brewery> {
                 if(params.get(i).isExact()){stmt.setString(i + 1, params.get(i).getValue());}
                 else{stmt.setString(1 + i, "%" + params.get(i).getValue() + "%");}
             }
-
+            logger.debug(stmt);
             sqlResults = stmt.executeQuery();
         }catch(SQLException e){
             logger.error("SQL Exception caught executeSQL: {}", e);

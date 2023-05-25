@@ -3,25 +3,20 @@ import edu.lwtech.csd297.tap4tap.pojos.*;
 
 import java.util.*;
 
-// Brewery Data Access Object (DAO) Interface
-
-public interface BreweryDAO {
+// Data Access Object (DAO)
+public interface UserDAO {
 
     // Create --------------------------------------------
-    boolean insert(Brewery item);
+    boolean insert(User item);
 
     // Retrieve ------------------------------------------
-    // ...one at a time
-    Brewery retrieveByID(UUID id);
-
-    // ...some at a time
-    List<Brewery> search(List<SearchParameter> params);
-
+    User retrieveByID(int id);
+    List<User> retrieveByName(String name);
     // Update ---------------------------------------------
-    boolean update(Brewery item);
+    boolean update(User item);
 
     // Delete ---------------------------------------------
-    int delete(UUID id);
+    int delete(int id);
 
     // Miscellaneous -------------------------------------
     int size();
