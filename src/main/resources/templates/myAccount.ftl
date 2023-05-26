@@ -8,7 +8,7 @@
     <meta name="description" content=" tap4tap website">
     <meta name="author" content="Created by Carmen Albiter, Carolina Solar-Morales and Joy Hyunjung Oh">
 
-    <title>BrewerySearchResults</title>
+    <title>MyAccount</title>
 
     <!-- Custom fonts for this page-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -21,7 +21,7 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this page-->
+    <!-- Custom styles for this page CHECK THIS IN CASE I NEED TO CHANGE IT-->
     <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="resources/css/breweryResults.css" rel="stylesheet">
     <link href="resources/css/dataTables.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="/tap4tap/servlet?cmd=home">Home</a>
+                                <a href="/tap4tap/servlet?cmd=home">Home</a> <!-- fix this link -->
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -59,41 +59,24 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-900">
-                                    <#if loggedIn>Hello ${owner}!
-                                    <#else>Login
-                                    </#if>
-                                </span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-900">My Account</span>
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
+                                
                             </a>
+
                             <!-- Dropdown - User Information -->
+
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
-                                <#if !loggedIn>
-                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
-                                    <i class="fa fa-sign-in mr-2 text-gray-100"></i>
-                                    Login
-                                </a>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin"> 
-                                        <i class="fa fa-user mr-2 text-gray-100"></i>
-                                        Create Account
-                                </a>
-                                <div class="dropdown-divider"></div>
-
-                                <#else>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
+                                <a class="dropdown-item  text-white" href="#" data-toggle="modal"
+                                    data-target="#logoutModal" style="visibility: visible;">
                                     <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                     Logout
                                 </a>
 
-                                 <!---------add link to Manage Account----------->
-                                <a class="dropdown-item  text-white" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fa fa-user mr-2 text-gray-100"></i>
-                                    Manage Account
-                                </a>
-                                </#if>
+                                <div class="dropdown-divider"></div>
+
                             </div>
                         </li>
 
@@ -110,7 +93,7 @@
                         <div class="col-12">
                             <!-- Logo Text -->
                             <div class="text-center">
-                                <div class="logo text-gray-400" data-text="Tap4Tap">Tap4Tap</div>
+                                <div class="logo text-gray-400" data-text="Tap4Tap">My Account</div>
                                 <br /><br />
                             </div>
                         </div>
@@ -121,23 +104,68 @@
 
                         <div class="col-lg">
                             <div class="container">
-                                <div class="row">
+                                <br />
 
-                                    <div class="col-12">
+
+                                <div class="col-12">
+
+                                    <div class="card-body bg-gradient-light text-black-50">
+
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                First Name:
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+                                                Jonh
+                                            </div>
+                                        </div>
+
                                         <br />
-                                        <h1 class="logo-sm mb-1 text-gray-900 text-center">Click the brewery name for
-                                            more info...</h1>
+
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Last Name:
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <i class="fa fa-address-card fa-lg" aria-hidden="true"></i>
+                                                Doe
+                                            </div>
+                                        </div>
+
+                                        <br />
+
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Password:
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i>
+                                                ********
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                <i class="fa fa-unlock fa-lg" aria-hidden="true"></i> Change Password:
+                                            </div> <!--fix this part-->
+
+                                        </div>
+                                        <br />
+
                                     </div>
+                                    <hr>
 
+                                    <br />
                                 </div>
-
 
                                 <!--create table here-->
                                 <div class="container ">
 
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
-                                            <h3 class="m-0 font-weight-bold text-primary">Brewery Search Results:</h3>
+                                            <h3 class="m-0 font-weight-bold text-primary">My List</h3>
                                         </div>
                                         <div class="card-body bg-gradient-light text-black-50">
                                             <div class="table-responsive">
@@ -146,33 +174,27 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Brewery Name</th>
-                                                            <th>Location</th>
+
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
                                                         <tr>
                                                             <th>Brewery Name</th>
-                                                            <th>Location</th>
+
                                                         </tr>
                                                     </tfoot>
                                                     <tbody>
+                                                        <tr>
+                                                            <!--fix this part-->
+                                                            <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
+                                                                brewey 1</td>
 
-                                                        <#list breweries as brewery>
-                                                            <tr>
-                                                                <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
-                                                                    ${brewery.name}</td>
-                                                                <td>
-                    
+                                                        </tr>
+                                                        <tr>
+                                                            <td><i class="fa fa-beer fa-2x" aria-hidden="true"></i>
+                                                                brewey 2</td>
 
-                                                                    <a href="https://www.google.com/maps?q=${brewery.latitude},${brewery.longitude}">
-                                                                        
-                                                                    <i class="fa fa-map fa-2x" aria-hidden="true"></i>
-                                                                    </a>
-                                                                    ${brewery.address1}
-                                                                </td>
-                                                            </tr>
-                                                        </#list>
-
+                                                        </tr>
 
                                                     </tbody>
                                                 </table>
@@ -181,6 +203,16 @@
 
                                     </div>
                                 </div>
+                                <hr>
+
+                                <!--add the log out buttom and fix this part here-->
+                                <a href="#" class="btn btn-dark btn-user btn-block">
+                                    <i class="fa fa-sign-out fa-lg"></i> Log Out
+                                    <!--FIX THIS PART WITH JAVA CODE to make the search-->
+                                </a>
+
+                                <hr>
+                                <br />
 
                             </div>
 
@@ -191,7 +223,6 @@
                 </div>
 
                 <br />
-
 
             </div>
             <!-- End of Main Content -->
@@ -211,7 +242,8 @@
                 </div>
                 <div class="text-white text-center">
                     <br />
-                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales
+                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina
+                        Solar-Morales
                         and Joy Hyunjung
                         Oh.</span>
                 </div>
