@@ -1,4 +1,5 @@
 package edu.lwtech.csd297.tap4tap.daos;
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.apache.logging.log4j.*;
 
 import edu.lwtech.csd297.tap4tap.pojos.*;
@@ -14,20 +15,21 @@ public class UserMemoryDAO implements UserDAO{
         addDemoUserData();
     }
     @Override
-    public User retrieveByUsername(String username){
-        if(username == null || username.trim().isEmpty()) throw new IllegalArgumentException("Name can't be null or empty");
-        logger.debug("retrieving user list by name, {}", username);
-        List<User> result = new ArrayList<>();
+    public User retrieveByUsername(String name){
+        if(name == null || name.trim().isEmpty()) throw new IllegalArgumentException("Name can't be null or empty");
+        logger.debug("retrieving user list by name, {}", name);
+        User result = null;
         for(User user : userDB){
-           if(user.getUsername().equals(username)){
-            logger.debug("found name {}", username);
-            result.add(user);
+           if(user.getUsername().equals(name)){
+            logger.debug("found name {}", name);
+            result = user;
+            break;
            }
            else{
-            logger.debug("not found name {}", username);
+            logger.debug("not found name {}", name);
            }
         }
-        return result.get(0);
+        return result;
     }
     @Override
     public boolean insert(User user) {
@@ -88,7 +90,7 @@ public class UserMemoryDAO implements UserDAO{
     public void addDemoUserData(){
         logger.debug("Creating demo users: {}", userDB);
 
-        insert(new User(1, "fred", "fred", "Fred"));
+        insert(new User(1, "fred", BCrypt.withDefaults().hashToString(12,"fred".toCharArray()) , "Fred"));
 
         insert(new User(3, "mary", "mary", "Mary"));
 

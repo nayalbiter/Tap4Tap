@@ -5,6 +5,8 @@ import java.util.*;
 import javax.servlet.http.*;
 
 import freemarker.template.*;
+import freemarker.template.utility.NullArgumentException;
+
 import org.apache.logging.log4j.*;
 
 public class CommandUtils {
@@ -17,18 +19,20 @@ public class CommandUtils {
 
     // Get the user's session variables (if they exist)
     public static void getSessionVariables(HttpServletRequest request, Map<String, Object> templateFields) {
-        int ownerID = 0;
+        String loggedInUser = "";
         boolean loggedIn = false;
         HttpSession session = request.getSession(false);            // false == don't create a new session if one doesn't exist
         if (session != null) {
             try {
-                ownerID = (Integer)session.getAttribute("owner");
-            } catch (NumberFormatException e) {
-                ownerID = -1;
+                loggedInUser = (String)session.getAttribute("owner");
+                loggedIn = true;
+            } catch (NullArgumentException e) {
+                loggedInUser = null;
+                logger.debug("seesion without loggeduser name");
+                loggedIn = false;
             }
-            loggedIn = (ownerID > 0);
         }
-        templateFields.put("owner", ownerID);
+        templateFields.put("owner", loggedInUser);
         templateFields.put("loggedIn", loggedIn);
     }
 

@@ -90,7 +90,14 @@
 
                                     <div class=" text-center col-12">
                                         <br />
-                                        <h1 class="logo-sm mb-1 text-gray-900"> Welcome Back! </h1>
+                                        <h1 class="logo-sm mb-1 text-gray-900">
+                                        <#if loggedIn?has_content>
+                                            <#if loggedIn>
+                                                Welcome Back, ${owner}!
+                                            </#if>
+                                        <#else> Welcome Back!
+                                        </#if>
+                                        </h1>
 
                                     </div>
 
@@ -102,73 +109,70 @@
                                             <br />
                                         </div>
 
-                                        <!--FIX THIS PART WITH JAVA CODE-->
-                                        <#if loggedIn>
-                                            You are already logged in.<br />
-                                            <#else>
-                                                <form id="loginForm" class="user" action="?cmd=login" method="post">
+                                        <#if !loggedIn>
+                                            <form id="loginForm" class="user" action="?cmd=login" method="post">
 
-                                                    <div class="container">
+                                                <div class="container">
+                                                    <div class="row w-100">
+                                                        <br /><br /><br />
+
                                                         <div class="row w-100">
-                                                            <br /><br /><br />
+                                                            <div class="col-4 mb-3 mb-sm-0">
 
-                                                            <div class="row w-100">
-                                                                <div class="col-4 mb-3 mb-sm-0">
-
-                                                                    <h4 class="name1 text-gray-800">Email:</h4>
-                                                                </div>
-                                                                <div class="col-8">
-                                                                    <input name="username"
-                                                                        enctype="multipart/form-data"
-                                                                        class="form-control form-control-user "
-                                                                        type="email" id="inputEmail"
-                                                                        placeholder="Enter Email Address..." size=60>
-                                                                    <br />
-                                                                </div>
+                                                                <h4 class="name1 text-gray-800">Email:</h4>
                                                             </div>
-                                                            <div class="row w-100">
-                                                                <div class="col-4 mb-3 mb-sm-0">
-                                                                    <h4 class="location1 text-left text-gray-800">
-                                                                        Password:</h4>
-                                                                </div>
-                                                                <div class="col-8">
-                                                                    <input class="form-control form-control-user"
-                                                                        enctype="multipart/form-data"
-                                                                        name="password" type="password"
-                                                                        id="inputPassword" size=60
-                                                                        placeholder="Password">
-                                                                    <br />
-                                                                </div>
+                                                            <div class="col-8">
+                                                                <input name="username"
+                                                                    enctype="multipart/form-data"
+                                                                    class="form-control form-control-user "
+                                                                    type="email" id="inputEmail"
+                                                                    placeholder="Enter Email Address..." size=60>
+                                                                <br />
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="custom-control custom-checkbox small">
-                                                                    <input type="checkbox" name="rememberme"
-                                                                        class="custom-control-input" id="customCheck">
-                                                                    <label class="custom-control-label"
-                                                                        for="customCheck">Remember
-                                                                        Me</label>
-                                                                </div>
+                                                        </div>
+                                                        <div class="row w-100">
+                                                            <div class="col-4 mb-3 mb-sm-0">
+                                                                <h4 class="location1 text-left text-gray-800">
+                                                                    Password:</h4>
                                                             </div>
-
-                                                            <a id="loginSubmitButton" href="#"
-                                                                class="btn btn-primary btn-user btn-block">
-                                                                Login
-                                                            </a>
-
-                                                            <hr>
-                                                            <!--FIX THIS PART WITH JAVA CODE to make the log in-->
+                                                            <div class="col-8">
+                                                                <input class="form-control form-control-user"
+                                                                    enctype="multipart/form-data"
+                                                                    name="password" type="password"
+                                                                    id="inputPassword" size=60
+                                                                    placeholder="Password">
+                                                                <br />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-checkbox small">
+                                                                <input type="checkbox" name="rememberme"
+                                                                    class="custom-control-input" id="customCheck">
+                                                                <label class="custom-control-label"
+                                                                    for="customCheck">Remember
+                                                                    Me</label>
+                                                            </div>
                                                         </div>
 
-                                                </form>
+                                                        <a id="loginSubmitButton" href="#"
+                                                            class="btn btn-primary btn-user btn-block">
+                                                            Login
+                                                        </a>
+
+                                                        <hr>
+                                                    </div>
+
+                                            </form>
                                         </#if>
                                         <br />
                                         <div class="card bg-danger text-white shadow text-center">
                                             <div class="card-body">
-                                                <p>${message}</P>
-                                                <div class="text-white-50 medium text-left">If you've forgotten your password, click on the link below.</div>
+                                                <div class="text-white-50 medium text-center">${message}</div>
+                                                <#--  <div class="text-white-50 medium text-left">If you've forgotten your password, click on the link below.</div>  -->
                                             </div>
                                         </div>
                                         <hr>
+                                        <#if !loggedIn>
                                         <div class="text-center">
                                             <a class="large" href="/tap4tap/servlet?cmd=forgotPassword">Forgot Password?</a>
                                         </div>
@@ -177,7 +181,7 @@
                                         <div class="text-center">
                                             <a class="large" href="/tap4tap/servlet?cmd=createAccount">Create an Account!</a>
                                         </div>
-
+                                        </#if>
 
                                     </div>
                                 </div>

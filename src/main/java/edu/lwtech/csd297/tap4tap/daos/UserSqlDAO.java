@@ -58,6 +58,7 @@ public class UserSqlDAO implements UserDAO {
         try(PreparedStatement stmt = conn.prepareStatement(query);){
             // Substitute in the argument values for the question marks
             stmt.setObject(1, username);
+<<<<<<< Updated upstream
 
             // Execute the SELECT query
             sqlResults = stmt.executeQuery();
@@ -67,6 +68,26 @@ public class UserSqlDAO implements UserDAO {
             logger.debug("Sql Exception caught while selecting user by username: {}", username);
             return null;
         }
+=======
+            logger.debug("setting name to query {}", stmt.toString());
+            // Execute the SELECT query
+            sqlResults = stmt.executeQuery();
+
+        } catch(Exception e){
+            logger.debug("Sql Exception: {} caught while selecting user by username: {} using query: {}", e, username, query);
+            return null;
+        }
+        try{
+            while(sqlResults.next()){
+                return(convertResultToUser(sqlResults));
+            }
+        }
+        catch(SQLException e){
+            logger.error("SQL Exception caught getting results: {}", e);
+            return null;
+        }
+        return null;
+>>>>>>> Stashed changes
     }
 
     @Override

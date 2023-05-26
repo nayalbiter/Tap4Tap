@@ -57,6 +57,7 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("searchResult", new SearchResultHandler());
         supportedCommands.put("createAccount", new createAccountHandler());
         supportedCommands.put("forgotPassword", new forgotPasswordHandler());
+        supportedCommands.put("admin", new AdminHandler());
         //to connect to database
 
         boolean useSqlDao = true;
@@ -75,8 +76,10 @@ public class Tap4tapServlet extends HttpServlet {
                 throw new UnavailableException("Failed to connect to SQL database");
             }
             breweryDAO = new BrewerySqlDAO(conn);
+            userDAO = new UserSqlDAO(conn);
         } else {
-            //breweryDAO = new BreweryMemoryDAO();
+            logger.info("using memory DAOs");
+            breweryDAO = new BreweryMemoryDAO();
             userDAO = new UserMemoryDAO();
     }
 
