@@ -32,7 +32,7 @@ public class UserSqlDAO implements UserDAO {
             stmt.setString(2, user.getUsername());
             stmt.setString(3, user.getHashedPasword());
             stmt.setString(4, user.getDisplayName());
-            
+
             logger.debug("Executing SQL Insert: {}", query);
              // Execute the INSERT statement
             stmt.executeUpdate();
@@ -58,17 +58,6 @@ public class UserSqlDAO implements UserDAO {
         try(PreparedStatement stmt = conn.prepareStatement(query);){
             // Substitute in the argument values for the question marks
             stmt.setObject(1, username);
-<<<<<<< Updated upstream
-
-            // Execute the SELECT query
-            sqlResults = stmt.executeQuery();
-
-            return convertResultToUser(sqlResults);
-        } catch(Exception e){
-            logger.debug("Sql Exception caught while selecting user by username: {}", username);
-            return null;
-        }
-=======
             logger.debug("setting name to query {}", stmt.toString());
             // Execute the SELECT query
             sqlResults = stmt.executeQuery();
@@ -87,7 +76,6 @@ public class UserSqlDAO implements UserDAO {
             return null;
         }
         return null;
->>>>>>> Stashed changes
     }
 
     @Override
