@@ -57,9 +57,12 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("searchResult", new SearchResultHandler());
         supportedCommands.put("createAccount", new createAccountHandler());
         supportedCommands.put("forgotPassword", new forgotPasswordHandler());
+        supportedCommands.put("admin", new AdminHandler());
+        supportedCommands.put("breweryDetails", new BreweryDetailsHandler());
+        supportedCommands.put("myAccount", new MyAccountHandler());
         //to connect to database
 
-        boolean useSqlDao = false;
+        boolean useSqlDao = true;
         // Get connection parameters
         String hostname = "localhost";
         String port = "3306";
@@ -75,8 +78,10 @@ public class Tap4tapServlet extends HttpServlet {
                 throw new UnavailableException("Failed to connect to SQL database");
             }
             breweryDAO = new BrewerySqlDAO(conn);
+            userDAO = new UserSqlDAO(conn);
         } else {
-            //breweryDAO = new BreweryMemoryDAO();
+            logger.info("using memory DAOs");
+            breweryDAO = new BreweryMemoryDAO();
             userDAO = new UserMemoryDAO();
     }
 

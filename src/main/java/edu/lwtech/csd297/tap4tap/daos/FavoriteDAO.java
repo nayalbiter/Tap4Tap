@@ -4,16 +4,16 @@ import edu.lwtech.csd297.tap4tap.pojos.*;
 import java.util.*;
 
 // Data Access Object (DAO)
-public interface UserDAO {
+public interface FavoriteDAO {
 
     // Create --------------------------------------------
-    boolean insert(User item);
+    boolean insert(Favorite item);
 
     // Retrieve ------------------------------------------
-    User retrieveByID(int id);
-    User retrieveByUsername(String username);
+    Favorite retrieveByID(int id);
+
     // Update ---------------------------------------------
-    boolean update(User item);
+    boolean update(Favorite item);
 
     // Delete ---------------------------------------------
     int delete(int id);
