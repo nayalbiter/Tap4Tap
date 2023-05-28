@@ -163,11 +163,13 @@
                                                                     ${brewery.name}</td>
                                                                 <td>
                     
+                                                                    <#if brewery.longitude != 0>
 
                                                                     <a href="https://www.google.com/maps?q=${brewery.latitude},${brewery.longitude}">
                                                                         
-                                                                    <i class="fa fa-map fa-2x" aria-hidden="true"></i>
-                                                                    </a>
+                                                                        <i class="fa fa-map fa-2x" aria-hidden="true"></i>
+                                                                        </a>
+                                                                </#if>
                                                                     ${brewery.address1}
                                                                 </td>
                                                             </tr>
