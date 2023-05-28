@@ -21,10 +21,10 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this page CHECK THIS IN CASE I NEED TO CHANGE IT-->
+    <!-- Custom styles for this page-->
     <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="resources/css/breweryResults.css" rel="stylesheet">
-    
+
 
 </head>
 
@@ -45,7 +45,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="/tap4tap/servlet?cmd=home">Home</a> 
+                                <a href="/tap4tap/servlet?cmd=home">Home</a>
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -61,7 +61,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">Login</span>
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
-                                
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
@@ -72,7 +72,7 @@
                                     Login
                                 </a>
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin">
-                                
+
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
@@ -122,7 +122,7 @@
                                 </div>
 
 
-                                <!--create the cards with the info here and fix it with the info of the database-->
+                                <!--TO DO create the cards with the info here and fix it with the info of the database-->
                                 <div class="container ">
 
                                     <div class="card shadow mb-4">
@@ -283,15 +283,15 @@
 
                                 <!--add the save it to my list buttom here and fix it with an on click-->
 
-                                <hr> <!--fix this part-->
-                                <a href="#" class="btn btn-google btn-user btn-block">
+                                <hr> <!--TO DO fix this part-->
+                                <a href="/tap4tap/servlet?cmd=myAccount" class="btn btn-google btn-user btn-block">
                                     <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!
                                     <!--FIX THIS PART WITH JAVA CODE to save it into a list-->
                                 </a>
 
                                 <hr>
 
-                                <br/>
+                                <br />
 
                             </div>
 
@@ -332,7 +332,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript--> 
+    <!-- Bootstrap core JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 

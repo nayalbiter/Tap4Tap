@@ -21,10 +21,10 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this page CHECK THIS IN CASE I NEED TO CHANGE IT-->
+    <!-- Custom styles for this page-->
     <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="resources/css/breweryResults.css" rel="stylesheet">
-    
+
 
 </head>
 
@@ -45,7 +45,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="/tap4tap/servlet?cmd=home">Home</a> <!-- FIX THIS -->
+                                <a href="/tap4tap/servlet?cmd=home">Home</a>
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -61,18 +61,18 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">Login</span>
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
-                                <!-- FIX THIS -->
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin"> 
+                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
                                     <i class="fa fa-sign-in mr-2 text-gray-100"></i>
                                     Login
                                 </a>
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin">
-                                    
+
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
@@ -116,11 +116,11 @@
                                     <div class="col-12">
                                         <br />
 
-                                        <!-- 404 Error Text -->
+                                        <!--Error code and error Text -->
                                         <div class="text-center">
-                                            <div class="error mx-auto" data-text="404">404</div>
+                                            <div class="error mx-auto" data-text="${errorCode}">${errorCode}</div>
                                             <br />
-                                            <p class="lead text-gray-800 mb-lg-5">Page Not Found</p>
+                                            <p class="lead text-gray-800 mb-lg-5">${errorMessage}</p>
                                             <br />
                                             <p class="text-gray-800 mb-lg-5">It looks like you found a glitch in the
                                                 matrix...</p>
@@ -131,7 +131,7 @@
                                 </div>
 
                             </div>
-                            
+
                         </div>
 
                     </div>
@@ -175,9 +175,9 @@
         <!-- Core plugin JavaScript-->
         <script src="resources/js/jquery-easing.js"></script>
 
-      
 
-        
+
+
 
 
 </body>
