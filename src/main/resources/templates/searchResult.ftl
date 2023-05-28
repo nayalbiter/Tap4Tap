@@ -61,7 +61,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">
                                     <#if loggedIn>Hello ${owner}!
-                                    <#else>Login
+                                        <#else>Login
                                     </#if>
                                 </span>
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
@@ -70,29 +70,29 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
                                 <#if !loggedIn>
-                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
+                                    <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
-                                    <i class="fa fa-sign-in mr-2 text-gray-100"></i>
-                                    Login
-                                </a>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin"> 
+                                        <i class="fa fa-sign-in mr-2 text-gray-100"></i>
+                                        Login
+                                    </a>
+                                    <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin">
                                         <i class="fa fa-user mr-2 text-gray-100"></i>
                                         Create Account
-                                </a>
-                                <div class="dropdown-divider"></div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
 
-                                <#else>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
-                                    <i class="fa fa-sign-out mr-2 text-gray-100"></i>
-                                    Logout
-                                </a>
+                                    <#else>
+                                        <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
+                                            <i class="fa fa-sign-out mr-2 text-gray-100"></i>
+                                            Logout
+                                        </a>
 
-                                 <!---------add link to Manage Account----------->
-                                <a class="dropdown-item  text-white" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fa fa-user mr-2 text-gray-100"></i>
-                                    Manage Account
-                                </a>
+                                        <!---------add link to Manage Account----------->
+                                        <a class="dropdown-item  text-white" href="#" data-toggle="modal"
+                                            data-target="#logoutModal">
+                                            <i class="fa fa-user mr-2 text-gray-100"></i>
+                                            Manage Account
+                                        </a>
                                 </#if>
                             </div>
                         </li>
@@ -159,17 +159,25 @@
 
                                                         <#list breweries as brewery>
                                                             <tr>
-                                                                <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
-                                                                    ${brewery.name}</td>
                                                                 <td>
-                    
-                                                                    <#if brewery.longitude != 0>
+                                                                    <a href="/tap4tap/servlet?cmd=breweryDetails">
+                                                                        <!--TO DO: FIX THIS PART WITH JAVA CODE --- a href="/tap4tap/servlet?cmd=breweryDetails?breweryId=${brewery.breweryId}" -->
+                                                                        <i class="fa fa-beer fa-2x "
+                                                                            aria-hidden="true"></i>
+                                                                        ${brewery.name}
+                                                                </td>
+                                                                </a>
+                                                                <td>
 
-                                                                    <a href="https://www.google.com/maps?q=${brewery.latitude},${brewery.longitude}">
-                                                                        
-                                                                        <i class="fa fa-map fa-2x" aria-hidden="true"></i>
+                                                                    <#if brewery.longitude !=0>
+
+                                                                        <a
+                                                                            href="https://www.google.com/maps?q=${brewery.latitude},${brewery.longitude}">
+
+                                                                            <i class="fa fa-map fa-2x"
+                                                                                aria-hidden="true"></i>
                                                                         </a>
-                                                                </#if>
+                                                                    </#if>
                                                                     ${brewery.address1}
                                                                 </td>
                                                             </tr>
@@ -213,7 +221,8 @@
                 </div>
                 <div class="text-white text-center">
                     <br />
-                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales
+                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina
+                        Solar-Morales
                         and Joy Hyunjung
                         Oh.</span>
                 </div>

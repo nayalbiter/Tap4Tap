@@ -101,42 +101,48 @@
                                             <br />
                                         </div>
 
-                                        <!--FIX THIS PART WITH JAVA CODE-->
-                                        <form class="user action="createAccount.php">
+                                        <!--TO DO: FIX THIS PART WITH JAVA CODE-->
+                                        <form method="post" class="user action=" /tap4tap/servlet?cmd=createAccount">
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                                    <input name="firstName" type="text"
+                                                        class="form-control form-control-user" id="exampleFirstName"
                                                         placeholder="First Name:">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                                    <input name="lastName" type="text"
+                                                        class="form-control form-control-user" id="exampleLastName"
                                                         placeholder="Last Name:">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                                    placeholder="Email Address:">
+                                                <input name="email" type="email" class="form-control form-control-user"
+                                                    id="exampleInputEmail" placeholder="Email Address:">
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="password" class="form-control form-control-user"
-                                                        id="exampleInputPassword" placeholder="Password:">
+                                                    <input name="password" type="password"
+                                                        class="form-control form-control-user" id="exampleInputPassword"
+                                                        placeholder="Password:">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="password" class="form-control form-control-user"
+                                                    <input name="confirmPassword" type="password"
+                                                        class="form-control form-control-user"
                                                         id="exampleRepeatPassword" placeholder="Confirm Password:">
                                                 </div>
                                             </div>
-                                            <a href="/tap4tap/servlet?cmd=createAccount" class="btn btn-primary btn-user btn-block">
+                                            <button type="submit" class="btn btn-primary btn-user btn-block">
                                                 Create Account
-                                            </a>
+                                            </button>
+
                                             <hr>
 
                                         </form>
 
                                         <hr>
                                         <div class="text-center">
-                                            <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an account?
+                                            <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an
+                                                account?
                                                 Login!</a>
                                         </div>
 
@@ -173,7 +179,8 @@
                 </div>
                 <div class="text-white text-center">
                     <br />
-                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales
+                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina
+                        Solar-Morales
                         and Joy Hyunjung
                         Oh.</span>
                 </div>

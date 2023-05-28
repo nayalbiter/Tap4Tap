@@ -5,4 +5,20 @@
     <servlet-name>default</servlet-name>
     <url-pattern>/</url-pattern>
 </servlet-mapping>
+<error-page>
+ <error-code>404</error-code>
+ <location>/servlet?cmd=errors&amp;errorCode=404</location>
+</error-page>
+<error-page>
+ <error-code>500</error-code>
+ <location>/servlet?cmd=errors&amp;errorCode=500</location>
+</error-page>
+<error-page>
+ <error-code>400</error-code>
+ <location>/servlet?cmd=errors&amp;errorCode=400</location>
+</error-page>
+<error-page>
+ <error-code>403</error-code>
+ <location>/servlet?cmd=errors&amp;errorCode=403</location>
+</error-page>
 </web-app>

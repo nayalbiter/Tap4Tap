@@ -21,7 +21,7 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this page CHECK THIS IN CASE I NEED TO CHANGE IT-->
+    <!-- Custom styles for this page-->
     <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="resources/css/breweryResults.css" rel="stylesheet">
     <link href="resources/css/dataTables.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                     <div class="input-group">
                         <div class="input-group-appesnd">
                             <button class="btn btn-danger btn-lg alert-warning" type="button">
-                                <a href="/tap4tap/servlet?cmd=home">Home</a> <!-- fix this link -->
+                                <a href="/tap4tap/servlet?cmd=home">Home</a>
                                 <i class="fa fa-home fa-lg"></i>
                             </button>
                         </div>
@@ -61,7 +61,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">My Account</span>
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
-                                
+
                             </a>
 
                             <!-- Dropdown - User Information -->
@@ -69,8 +69,8 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
 
-                                <a class="dropdown-item  text-white" href="#" data-toggle="modal"
-                                    data-target="#logoutModal" style="visibility: visible;">
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout"
+                                    style="visibility: visible;">
                                     <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                     Logout
                                 </a>
@@ -108,7 +108,7 @@
 
 
                                 <div class="col-12">
-
+                                    <!--TODO fix this part with java code-->
                                     <div class="card-body bg-gradient-light text-black-50">
 
                                         <div class="col mr-2">
@@ -117,7 +117,7 @@
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <i class="fa fa-user fa-lg" aria-hidden="true"></i>
-                                                Jonh
+                                                Jonh <!--fix this part-->
                                             </div>
                                         </div>
 
@@ -129,7 +129,7 @@
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <i class="fa fa-address-card fa-lg" aria-hidden="true"></i>
-                                                Doe
+                                                Doe <!--fix this part-->
                                             </div>
                                         </div>
 
@@ -141,7 +141,7 @@
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i>
-                                                ********
+                                                ******** <!--fix this part-->
                                             </div>
                                         </div>
                                         <br />
@@ -185,7 +185,7 @@
                                                     </tfoot>
                                                     <tbody>
                                                         <tr>
-                                                            <!--fix this part-->
+                                                            <!--TO DO: fix this part with java code-->
                                                             <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
                                                                 brewey 1</td>
 
@@ -206,7 +206,7 @@
                                 <hr>
 
                                 <!--add the log out buttom and fix this part here-->
-                                <a href="#" class="btn btn-dark btn-user btn-block">
+                                <a href="/tap4tap/servlet?cmd=logout" class="btn btn-dark btn-user btn-block">
                                     <i class="fa fa-sign-out fa-lg"></i> Log Out
                                     <!--FIX THIS PART WITH JAVA CODE to make the search-->
                                 </a>
