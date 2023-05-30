@@ -8,11 +8,12 @@
     <meta name="description" content=" tap4tap website">
     <meta name="author" content="Created by Carmen Albiter, Carolina Solar-Morales and Joy Hyunjung Oh">
 
-    <title>Tap4Tap</title>
+    <title>AdminPage</title>
 
     <!-- Custom fonts for this page-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        type="text/css">
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         type="text/css">
 
@@ -21,8 +22,11 @@
         rel="stylesheet">
 
     <!-- Custom styles for this page-->
-    <link href="resources/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
-    <link href="resources/css/tap4tap.css" rel="stylesheet" type="text/css">
+
+    <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="resources/css/breweryResults.css" rel="stylesheet">
+    <link href="resources/css/dataTables.css" rel="stylesheet">
+
 </head>
 
 
@@ -57,41 +61,23 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">
-                                    <#if loggedIn>Hello ${owner}!
-                                    <#else>Login
-                                    </#if>
+                                    Admin
                                 </span>
+
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
                             </a>
-                            <!-- Dropdown - User Information -->
+
+                            <!-- Dropdown - Admin Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
-                                <#if !loggedIn>
-                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
-                                    <i class="fa fa-sign-in mr-2 text-gray-100"></i>
-                                    Login
-                                </a>
-
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=createAccount">
-                                    <i class="fa fa-user mr-2 text-gray-100"></i>
-                                    Create Account
-                                </a>
                                 <div class="dropdown-divider"></div>
 
-                                <#else>
-                                <!---------add link to logout----------->
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
                                     <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                     Logout
                                 </a>
-                                 <!---------add link to manage account----------->
-                                <a class="dropdown-item  text-white" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fa fa-user mr-2 text-gray-100"></i>
-                                    Manage Account
-                                </a>
-                                </#if>
+
                             </div>
                         </li>
 
@@ -116,146 +102,327 @@
                     </div>
 
                     <div class="row bg-gradient-warning">
-                        <div class="col-lg">
-                            <br />
 
-                            <section class="Image">
-
-                                <div class="imageContainer">
-
-                                    <!--add the beer picture here  -->
-                                    <img src="resources/img/18.jpg" alt="Beer" class="center">
-
-                                </div>
-
-                            </section>
-                            <br />
-                        </div>
                         <div class="col-lg">
                             <div class="container">
-                                <div class="row">
+                                <br />
 
-                                    <div class="col-12">
-                                        <br />
-                                        <h1 class="logo-sm mb-1 text-gray-900">Find the best places here!</h1>
+                                <!--button add a new brewery here-->
 
-                                    </div>
+                                <hr>
+                                <!--TO DO FIX THIS PART WITH JAVA CODE -->
+                                <button type="button" class="btn btn-google btn-user btn-block" data-toggle="modal"
+                                    data-target="#exampleModalAdd">
+                                    <i class="fa fa-plus-square fa-lg" aria-hidden="true"></i> Add new brewery
 
-                                </div>
-                                <div class="row bg-gradient-warning">
+                                </button>
 
-                                    <div class="col-12">
-                                        <div class="text-center">
-                                            <br />
+                                <hr>
+
+                                <br />
+
+                                <!--create table here-->
+                                <div class="container ">
+
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h3 class="m-0 font-weight-bold text-primary">Breweries:</h3>
+                                        </div>
+                                        <div class="card-body bg-gradient-light text-black-50">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered bg-gradient-light text-black-50"
+                                                    id="dataTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Brewery Name</th>
+                                                            <th>Location</th>
+                                                            <th>Edit</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Brewery Name</th>
+                                                            <th>Location</th>
+                                                            <th>Edit</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+
+                                                        <#list breweries as brewery>
+                                                            <tr>
+                                                                <td>
+                                                                    <i class="fa fa-beer fa-2x " aria-hidden="true"></i>
+                                                                    ${brewery.name}
+                                                                </td>
+
+                                                                <td>
+                                                                    <#if brewery.longitude !=0>
+                                                                        <a
+                                                                            href="https://www.google.com/maps?q=${brewery.latitude},${brewery.longitude}">
+                                                                            <i class="fa fa-map fa-2x"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    </#if>
+                                                                    ${brewery.address1}
+                                                                </td>
+
+                                                                <td>
+                                                                    <!--fix this part with java code to edit a brewery-->
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#exampleModalEdit">
+                                                                        <i class="fa fa-pencil fa-2x"
+                                                                            aria-hidden="true"></i>
+                                                                    </button>
+
+                                                                </td>
+
+                                                                <td>
+                                                                    <!--fix this part with java code to delete the brewery selected-->
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#exampleModalDelete">
+                                                                        <i class="fa fa-trash fa-2x"
+                                                                            aria-hidden="true"></i>
+                                                                    </button>
+
+                                                                </td>
+                                                            </tr>
+                                                        </#list>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
 
-                                        <!--FIX THIS PART WITH JAVA CODE-->
-                                        <form id="brewerySearchForm" class="user" action="/tap4tap/servlet"
-                                            method="get">
-                                            <input type="hidden" id="cmd" name="cmd" value="searchResult" />
-                                            <input type="hidden" id="hiddenCountry" name="country" value="United States" />
-                                            <div class="container">
-                                                <div class="row w-100">
-                                                    <div class="col-6">
-                                                        <h4 class="country1 text-gray-800">Select a country: </h4>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="input-group">
-                                                            <input id="selectedCountry" type="text"
-                                                                class="form-control form-control-user"
-                                                                value="United States" />
-
-                                                            <div class="input-group-append">
-                                                                <button type="button"
-                                                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                                </button>
-                                                                <div class="dropdown-menu bg-gradient-danger">
-
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">Austria</a>
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">England</a>
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">France</a>
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">Isle of Man</a>
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">Ireland</a>
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">Poland</a>
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">Portugal</a>
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">Scotland</a>
-                                                                    <a class="countryOption dropdown-item text-white"
-                                                                        href="#">South Korea</a>
-                                                                    <a class="countryOption dropdown-item  text-white"
-                                                                        href="#">United States</a>
-
-                                                                    <div role="separator"
-                                                                        class="dropdown-divider text-white"></div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br /><br /><br /><br /><br /><br />
-
-                                                    <div class="row w-100">
-                                                        <div class="col-4 mb-3 mb-sm-0">
-
-                                                            <h4 class="name1 text-gray-800">Search by name:</h4>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <input name="breweryName"
-                                                                class="form-control form-control-user "
-                                                                placeholder="Brewery Name">
-                                                            <br />
-                                                        </div>
-                                                    </div>
-                                                    <div class="row w-100">
-                                                        <div class="col-4 mb-3 mb-sm-0">
-                                                            <h4 class="location1 text-left text-gray-800">Search by
-                                                                location:</h4>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <input name="stateProvince"
-                                                                class="form-control form-control-user"
-                                                                id="stateProvince" placeholder="State/Province:">
-                                                            <br />
-                                                            <input name="city" class="form-control form-control-user"
-                                                                id="city" placeholder="City:">
-                                                            <br />
-                                                            <input name="zipCode" class="form-control form-control-user"
-                                                                id="zipCode" placeholder="Zip Code:">
-                                                            <br />
-                                                        </div>
-                                                    </div>
-
-                                                    <hr>
-                                                    <a id="submitButton" href="#"
-                                                        class="btn btn-google btn-user btn-block">
-                                                        <i class="fa fa-search"></i> Let's go!
-                                                        <!--FIX THIS PART WITH JAVA CODE to make the search-->
-                                                    </a>
-                                                </div>
-                                        </form>
                                     </div>
-
                                 </div>
+
+
                             </div>
 
                         </div>
                         <br />
                     </div>
+
                 </div>
 
                 <br />
 
+
             </div>
+
+            <!-- Modal used to add a new a brewery -->
+            <div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add a new brewery</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <!--TO DO: FIX THIS PART WITH JAVA CODE-->
+                            <form method="post" class="user action=" #">
+
+                                <div class="form-group">
+                                    <i class="fa fa-beer fa-lg " aria-hidden="true"></i>
+                                    <input name="breweryName" type="text" class="form-control form-control-user"
+                                        id="breweryName" placeholder="Brewery Name:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-glass fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryType" type="text" class="form-control form-control-user"
+                                        id="breweryType" placeholder="Brewery Type:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryAddress" type="text" class="form-control form-control-user"
+                                        id="breweryAddress" placeholder="Brewery Address:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-university fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryCity" type="text" class="form-control form-control-user"
+                                        id="breweryCity" placeholder="City:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-flag fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryState" type="text" class="form-control form-control-user"
+                                        id="breweryState" placeholder="State:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryZipCode" type="text" class="form-control form-control-user"
+                                        id="breweryZipCode" placeholder="Zip Code:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-globe fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryCountry" type="text" class="form-control form-control-user"
+                                        id="breweryCountry" placeholder="Country:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryPhone" type="text" class="form-control form-control-user"
+                                        id="breweryPhone" placeholder="Phone:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-internet-explorer fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryWebsite" type="text" class="form-control form-control-user"
+                                        id="breweryWebsite" placeholder="Website:">
+                                </div>
+
+                                <hr>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary">Create new brewery</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End of Modal to add a new brewery -->
+
+
+            <!-- Modal used to edit a brewery -->
+            <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Editing Brewery</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <!--TO DO: FIX THIS PART WITH JAVA CODE-->
+                            <form method="post" class="user action=" #">
+
+                                <div class="form-group">
+                                    <i class="fa fa-beer fa-lg " aria-hidden="true"></i>
+                                    <input name="breweryName" type="text" class="form-control form-control-user"
+                                        id="breweryName" placeholder="Brewery Name:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-glass fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryType" type="text" class="form-control form-control-user"
+                                        id="breweryType" placeholder="Brewery Type:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryAddress" type="text" class="form-control form-control-user"
+                                        id="breweryAddress" placeholder="Brewery Address:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-university fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryCity" type="text" class="form-control form-control-user"
+                                        id="breweryCity" placeholder="City:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-flag fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryState" type="text" class="form-control form-control-user"
+                                        id="breweryState" placeholder="State:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryZipCode" type="text" class="form-control form-control-user"
+                                        id="breweryZipCode" placeholder="Zip Code:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-globe fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryCountry" type="text" class="form-control form-control-user"
+                                        id="breweryCountry" placeholder="Country:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryPhone" type="text" class="form-control form-control-user"
+                                        id="breweryPhone" placeholder="Phone:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-internet-explorer fa-lg" aria-hidden="true"></i>
+
+                                    <input name="breweryWebsite" type="text" class="form-control form-control-user"
+                                        id="breweryWebsite" placeholder="Website:">
+                                </div>
+
+                                <hr>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End of Modal to edit a brewery -->
+
+
+
+            <!-- Modal used to delete a brewery -->
+            <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this entry?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary">Delete Brewery</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Modal -->
+
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -273,7 +440,8 @@
                 </div>
                 <div class="text-white text-center">
                     <br />
-                    <span class="authors1">Kirkland, WA © 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales
+                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina
+                        Solar-Morales
                         and Joy Hyunjung
                         Oh.</span>
                 </div>
@@ -286,7 +454,18 @@
     <!-- Bootstrap core JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="resources/js/select-country.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="resources/js/jquery-easing.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="resources/js/jquery.dataTables.js"></script>
+    <script src="resources/js/dataTables.bootstrap.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="resources/js/dataTables.demo.js"></script>
+
+
 </body>
 
 </html>
