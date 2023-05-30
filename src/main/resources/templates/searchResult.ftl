@@ -169,7 +169,7 @@
                                                                 </a>
                                                                 <td>
 
-                                                                    <#if brewery.longitude !=0>
+                                                                    <#if brewery.longitude?has_content>
 
                                                                         <a
                                                                             href="https://www.google.com/maps?q=${brewery.latitude},${brewery.longitude}">
