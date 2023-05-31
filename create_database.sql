@@ -31,19 +31,22 @@ create table if not exists user
 
 create table if not exists favorite
 (
-	favorite_id serial primary key,
-	brewery_id UUID not null,
-	user_id bigint unsigned not null,
-	constraint fk_favorite_brewery
-		foreign key (brewery_id) references brewery (brewery_id)
-		on delete cascade,
-	constraint fk_favorite_user
-		foreign key (user_id) references user (user_id)
-		on delete cascade
+    favorite_id serial primary key,
+    brewery_id UUID not null,
+    user_id bigint unsigned not null,
 
+    constraint fk_favorite_brewery
+    foreign key (brewery_id) references brewery (brewery_id)
+    on delete cascade,
+
+    constraint fk_favorite_user
+    foreign key (user_id) references user (user_id)
+    on delete cascade,
+
+    UNIQUE(user_id, brewery_id)
 );
 
-# Data from Open Brewery DB
+-- Data from Open Brewery DB
 INSERT INTO
     tap4tap.brewery(brewery_id, name, brewery_type, address_1, address_2, address_3, city, state_province,
                     postal_code, country, phone, website_url, longitude, latitude)
