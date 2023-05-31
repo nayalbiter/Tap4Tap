@@ -158,14 +158,14 @@
                                                             <div class="row w-100">
                                                                 <div class="col-4 mb-3 mb-sm-0">
 
-                                                                    <h4 class="name1 text-gray-800">Email:</h4>
+                                                                    <h4 class="name1 text-gray-800">Username:</h4>
                                                                 </div>
                                                                 <div class="col-8">
                                                                     <input name="username"
                                                                         enctype="multipart/form-data"
                                                                         class="form-control form-control-user "
                                                                         type="email" id="inputEmail"
-                                                                        placeholder="Enter Email Address..." size=60>
+                                                                        placeholder="Enter username..." size=60>
                                                                     <br />
                                                                 </div>
                                                             </div>
