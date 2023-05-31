@@ -73,12 +73,20 @@ public class BrewerySqlDAO implements BreweryDAO {
 
             // Execute the SELECT query
             sqlResults = stmt.executeQuery();
-
-            return convertResultToBrewery(sqlResults);
-        } catch(Exception e){
+        } catch(SQLException e){
             logger.debug("Sql Exception caught while selecting brewery by Id: {}", breweryId);
             return null;
         }
+        try{
+            while(sqlResults.next()){
+                return convertResultToBrewery(sqlResults);
+            }
+        }
+        catch(SQLException e){
+            logger.error("SQL Exception caught getting results: {}", e);
+            return null;
+        }
+        return null;
     }
 
     @Override

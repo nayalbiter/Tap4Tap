@@ -13,13 +13,12 @@ public class LoginHandler implements CommandHandler<Tap4tapServlet> {
     @Override
     public String handle(HttpServletRequest request, Tap4tapServlet servlet) {
 
-        String ownerDisplayName = "";
         boolean loggedIn = false;
         String message = "";
         String template = "confirm.ftl";
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String loggedInUser = "";
+        User loggedInUser = null;
 
         Map<String, Object> templateFields = new HashMap<>();
         CommandUtils.getSessionVariables(request, templateFields);
@@ -31,18 +30,20 @@ public class LoginHandler implements CommandHandler<Tap4tapServlet> {
             templateFields.put("loggedIn", false);
             return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
         }
+        else{
+            BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.getHashedPasword());
+            loggedInUser = user;
+            if (result.verified) {
+                loggedIn = true;
+                HttpSession session = request.getSession(true);         // true == Create a new session for this user
+                session.setAttribute("loggedInUser", loggedInUser);
+                message = "You have been successfully logged in to your account.<br /><a href='?cmd=home'>Home</a>";
 
-        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.getHashedPasword());
-        if (result.verified) {
-            loggedIn = true;
-            loggedInUser = user.getDisplayName();
-            HttpSession session = request.getSession(true);         // true == Create a new session for this user
-            session.setAttribute("owner", loggedInUser);
-            message = "You have been successfully logged in to your account.<br /><a href='?cmd=home'>Home</a>";
-
-        } else {
-            message = "Your password did not match what we have on file. Please try again.<br /><a href='?cmd=showLogin'>Log In</a>";
+            } else {
+                message = "Your password did not match what we have on file. Please try again.<br /><a href='?cmd=showLogin'>Log In</a>";
+            }
         }
+
         templateFields.put("owner", loggedInUser);
         templateFields.put("loggedIn", loggedIn);
         templateFields.put("message", message);
