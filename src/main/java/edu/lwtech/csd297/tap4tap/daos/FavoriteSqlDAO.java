@@ -22,15 +22,14 @@ public class FavoriteSqlDAO implements FavoriteDAO {
         //!!implement to check if favorite was already inserted
 
         String query = "INSERT INTO favorite";
-        query += "(favorite_id, brewery_id, user_id)";
-        query += "VALUES (?,?,?)";
+        query += "(brewery_id, user_id)";
+        query += "VALUES (?,?)";
 
         String[] returnColumns = {};
         try ( PreparedStatement stmt = conn.prepareStatement(query, returnColumns); ){
             // Substitute in the argument values for the question marks
-            stmt.setInt(1, favorite.getFavoriteId());
-            stmt.setString(2, favorite.getBreweryId());
-            stmt.setInt(3, favorite.getUserId());
+            stmt.setString(1, favorite.getBreweryId());
+            stmt.setInt(2, favorite.getUserId());
 
             logger.debug("Executing SQL Insert: {}", query);
              // Execute the INSERT statement
@@ -67,6 +66,34 @@ public class FavoriteSqlDAO implements FavoriteDAO {
         }
     }
 
+    @Override
+    public List<Favorite> retrieveByUserId(int id){
+        List<Favorite> favoriteList = new ArrayList<>();
+        logger.debug("Trying to retrieve Favorite list with id: {}", id);
+
+        String  query = "SELECT *";
+        query += " FROM favorite where user_id=?";
+
+        logger.debug("Excuting SQL statement: {}", query);
+        ResultSet sqlResults;
+        try(PreparedStatement stmt = conn.prepareStatement(query);){
+            stmt.setInt(1, id);
+            sqlResults = stmt.executeQuery();
+        } catch(SQLException e){
+            logger.debug("Sql Exception caught while selecting favorites by id:{}", id);
+            return null;
+        }
+        try{
+            while(sqlResults.next()){
+                favoriteList.add(convertResultToFavorite(sqlResults));
+            }
+            logger.error("Returning " + favoriteList.size() + "favorites");
+        }catch(SQLException e){
+            logger.error("SQL Exception caught in getting results: {}", e);
+            return null;
+        }
+        return favoriteList;
+    }
     public boolean update(Favorite favorite) {
         logger.debug("Trying to update Favorite with Favorite: {}", favorite);
 
