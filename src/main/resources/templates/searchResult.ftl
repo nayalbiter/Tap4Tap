@@ -163,6 +163,8 @@
                                                                     </a>
                                                                 </td>
 
+
+
                                                                 <td>
 
                                                                     <#if brewery.longitude !=0>
