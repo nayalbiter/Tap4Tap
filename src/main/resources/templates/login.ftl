@@ -55,7 +55,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">
-                                    <#if loggedIn>Hello ${owner}!
+                                    <#if loggedIn>Hello ${owner.displayName}!
                                     <#else>Login
                                     </#if>
                                 </span>
@@ -78,14 +78,11 @@
                                 <div class="dropdown-divider"></div>
 
                                 <#else>
-                                <!---------add link to logout----------->
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
                                     <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                     Logout
                                 </a>
-                                 <!---------add link to manage account----------->
-                                <a class="dropdown-item  text-white" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=myAccount">
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Manage Account
                                 </a>
@@ -202,7 +199,6 @@
                                                             </a>
 
                                                             <hr>
-                                                            <!--FIX THIS PART WITH JAVA CODE to make the log in-->
                                                         </div>
 
                                                 </form>

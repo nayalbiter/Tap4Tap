@@ -60,7 +60,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">
-                                    <#if loggedIn>Hello ${owner}!
+                                    <#if loggedIn>Hello ${owner.displayName}!
                                         <#else>Login
                                     </#if>
                                 </span>
@@ -86,10 +86,7 @@
                                             <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                             Logout
                                         </a>
-
-                                        <!---------add link to Manage Account----------->
-                                        <a class="dropdown-item  text-white" href="#" data-toggle="modal"
-                                            data-target="#logoutModal">
+                                        <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=myAccount">
                                             <i class="fa fa-user mr-2 text-gray-100"></i>
                                             Manage Account
                                         </a>
@@ -160,25 +157,24 @@
                                                         <#list breweries as brewery>
                                                             <tr>
                                                                 <td>
-                                                                    <a href="/tap4tap/servlet?cmd=breweryDetails">
-                                                                        <!--TO DO: FIX THIS PART WITH JAVA CODE --- a href="/tap4tap/servlet?cmd=breweryDetails?breweryId=${brewery.breweryId}" -->
-                                                                        <i class="fa fa-beer fa-2x "
-                                                                            aria-hidden="true"></i>
+                                                                    <a href="/tap4tap/servlet?cmd=breweryDetails&breweryId=${brewery.breweryId}">
+                                                                        <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
                                                                         ${brewery.name}
+                                                                    </a>
                                                                 </td>
-                                                                </a>
+
                                                                 <td>
 
                                                                     <#if brewery.longitude !=0>
-
-                                                                        <a
-                                                                            href="https://www.google.com/maps?q=${brewery.latitude},${brewery.longitude}">
-
-                                                                            <i class="fa fa-map fa-2x"
-                                                                                aria-hidden="true"></i>
+                                                                        <a href="https://www.google.com/maps?q=#{brewery.latitude; M10},#{brewery.longitude; M10}">
+                                                                            <i class="fa fa-map fa-2x" aria-hidden="true"></i>
                                                                         </a>
                                                                     </#if>
-                                                                    ${brewery.address1}
+                                                                    <#if brewery.address1?has_content>
+                                                                        ${brewery.address1}
+                                                                    <#else>
+                                                                        NOT AVAILABLE
+                                                                    </#if>
                                                                 </td>
                                                             </tr>
                                                         </#list>
