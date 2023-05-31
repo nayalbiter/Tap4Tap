@@ -74,7 +74,10 @@
                                     <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                     Logout
                                 </a>
-
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=myAccount">
+                                    <i class="fa fa-user mr-2 text-gray-100"></i>
+                                    Manage Account
+                                </a>
                                 <div class="dropdown-divider"></div>
 
                             </div>
@@ -113,11 +116,11 @@
 
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                First Name:
+                                                Display Name:
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <i class="fa fa-user fa-lg" aria-hidden="true"></i>
-                                                Jonh <!--fix this part-->
+                                                ${owner.displayName}
                                             </div>
                                         </div>
 
@@ -125,11 +128,11 @@
 
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Last Name:
+                                                Username:
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <i class="fa fa-address-card fa-lg" aria-hidden="true"></i>
-                                                Doe <!--fix this part-->
+                                                ${owner.username}
                                             </div>
                                         </div>
 
@@ -166,6 +169,7 @@
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             <h3 class="m-0 font-weight-bold text-primary">My List</h3>
+                                            <div class="text-white-50 medium text-left">${message}</div>
                                         </div>
                                         <div class="card-body bg-gradient-light text-black-50">
                                             <div class="table-responsive">
@@ -180,22 +184,21 @@
                                                     <tfoot>
                                                         <tr>
                                                             <th>Brewery Name</th>
-
                                                         </tr>
                                                     </tfoot>
                                                     <tbody>
-                                                        <tr>
-                                                            <!--TO DO: fix this part with java code-->
-                                                            <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
-                                                                brewey 1</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td><i class="fa fa-beer fa-2x" aria-hidden="true"></i>
-                                                                brewey 2</td>
-
-                                                        </tr>
-
+                                                        <#if breweryList?has_content>
+                                                            <#list breweryList as brewery>
+                                                            <tr>
+                                                                <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
+                                                                    ${brewery.name}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><i class="fa fa-beer fa-2x" aria-hidden="true"></i>
+                                                                    ${brewery.name}</td>
+                                                            </tr>
+                                                            </#list>
+                                                        </#if>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -205,7 +208,7 @@
                                 </div>
                                 <hr>
 
-                                <!--add the log out buttom and fix this part here-->
+                                <!--add the log out button and fix this part here-->
                                 <a href="/tap4tap/servlet?cmd=logout" class="btn btn-dark btn-user btn-block">
                                     <i class="fa fa-sign-out fa-lg"></i> Log Out
                                     <!--FIX THIS PART WITH JAVA CODE to make the search-->

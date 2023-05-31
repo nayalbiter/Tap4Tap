@@ -11,6 +11,7 @@ public interface FavoriteDAO {
 
     // Retrieve ------------------------------------------
     Favorite retrieveByID(int id);
+    List<Favorite> retrieveByUserId(int id);
 
     // Update ---------------------------------------------
     boolean update(Favorite item);

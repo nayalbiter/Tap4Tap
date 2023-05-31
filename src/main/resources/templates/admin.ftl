@@ -61,7 +61,11 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">
-                                    Admin
+
+                                    <#if loggedIn>Hello ${owner.displayName}!
+                                    <#else>Login
+                                    </#if>
+
                                 </span>
 
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
@@ -73,10 +77,19 @@
 
                                 <div class="dropdown-divider"></div>
 
+
+                                <#else>
+
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
                                     <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                     Logout
                                 </a>
+
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=myAccount">
+                                    <i class="fa fa-user mr-2 text-gray-100"></i>
+                                    Manage Account
+                                </a>
+                                </#if>
 
                             </div>
                         </li>

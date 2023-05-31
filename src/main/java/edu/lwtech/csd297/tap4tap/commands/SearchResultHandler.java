@@ -49,12 +49,10 @@ public class SearchResultHandler implements CommandHandler<Tap4tapServlet> {
         if (zipString != null && !zipString.isEmpty()){
             params.add(new SearchParameter("postal_code", zipString, false));
         }
-
         templateFields.put("breweries", servlet.getBreweryDAD().search(params));
 
 
         String html = CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
-        // logger.error("Returning page: " + html);
         return html;
     }
 }
