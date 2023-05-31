@@ -44,8 +44,8 @@ public class BrewerySqlDAO implements BreweryDAO {
             stmt.setString(11, brewery.getPhone());
             stmt.setString(12, brewery.getWebsiteUrl());
 
-            stmt.setString(13, brewery.getLongitude());
-            stmt.setString(14, brewery.getLatitude());
+            stmt.setDouble(13, brewery.getLongitude());
+            stmt.setDouble(14, brewery.getLatitude());
             logger.debug("Executing SQL Insert: {}", query);
              // Execute the INSERT statement
             stmt.executeUpdate();
@@ -196,8 +196,8 @@ public class BrewerySqlDAO implements BreweryDAO {
         String postalCode = result.getString("postal_code");
         String websiteUrl = result.getString("website_url");
         String phone = result.getString("phone");
-        String latitude = result.getString("latitude");
-        String longitude = result.getString("longitude");
+        double latitude = result.getDouble("latitude");
+        double longitude = result.getDouble("longitude");
         return new Brewery(id,name, breweryType,
         address1, address2, address3, city,
         stateProvince, postalCode, country,
