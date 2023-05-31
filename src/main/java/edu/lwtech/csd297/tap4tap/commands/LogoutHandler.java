@@ -10,6 +10,7 @@ public class LogoutHandler implements CommandHandler<Tap4tapServlet> {
 
     @Override
     public String handle(HttpServletRequest request, Tap4tapServlet servlet) {
+        boolean loggedIn = false;
         String template = "confirm.ftl";
         Map<String, Object> templateFields = new HashMap<>();
         CommandUtils.getSessionVariables(request, templateFields);
@@ -20,6 +21,7 @@ public class LogoutHandler implements CommandHandler<Tap4tapServlet> {
             session.invalidate();
         }
         templateFields.put("message", "You have been successfully logged out.<br /><a href='?cmd=home'>Home</a>");
+        templateFields.put("loggedIn", loggedIn);
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
     }
 

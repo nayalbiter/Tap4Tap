@@ -132,17 +132,17 @@ public class BreweryMemoryDAO implements BreweryDAO {
      public void addDemoBreweryData(){
           logger.debug(("Creating demo Breweries"), breweryDB);
 
-          insert(new Brewery(new UUID(0, 0), "Tap", "micro", "1st fl 155th st NE", "", "", "Redmond", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", "7.2786", "12.3986"));
+          insert(new Brewery(new UUID(0, 0), "Tap", "micro", "1st fl 155th st NE", "", "", "Redmond", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", 7.2786, 12.3986));
 
-          insert(new Brewery(new UUID(2, 0), "Chill", "micro", "100tt fl 80th st NE", "", "", "Renton", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", "7.2956", "12.4956"));
+          insert(new Brewery(new UUID(2, 0), "Chill", "micro", "100tt fl 80th st NE", "", "", "Renton", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", 7.2956, 12.4956));
 
-          insert(new Brewery(new UUID(0, 1), "Brew", "micro", "11st fl 170th st SE", "", "", "Bellevue", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", "7.2986", "12.4986"));
+          insert(new Brewery(new UUID(0, 1), "Brew", "micro", "11st fl 170th st SE", "", "", "Bellevue", "Washington", "98052", "United States", "http://www.tap.com","425-809-9895", 7.2986, 12.4986));
 
-          insert(new Brewery(new UUID(1, 0), "Beer Crawl", "micro", "5st fl 134th st NE", "", "", "Seoul", "Seoul", "", "South Korea", "http://www.crawlinbeer.com","784-809-9895", "5.2986", "1.4986"));
+          insert(new Brewery(new UUID(1, 0), "Beer Crawl", "micro", "5st fl 134th st NE", "", "", "Seoul", "Seoul", "", "South Korea", "http://www.crawlinbeer.com","784-809-9895", 5.2986, 1.4986));
 
-          insert(new Brewery(new UUID(1, 1), "Beer Hub", "micro", "6st fl 132nd Ave NE", "", "", "Busan", "Seoul", "", "South Korea", "http://www.crawlinbeer.com","784-809-9895", "1.2986", "1.4980"));
+          insert(new Brewery(new UUID(1, 1), "Beer Hub", "micro", "6st fl 132nd Ave NE", "", "", "Busan", "Seoul", "", "South Korea", "http://www.crawlinbeer.com","784-809-9895", 1.2986, 1.4980));
 
-          insert(new Brewery(new UUID(1, 1), "together Hub", "micro", "6st fl 132nd Ave NE", "", "", "London", "London", "", "England", "http://www.crawlinbeer.com","784-809-9895", "6.2986", "1.4976"));
+          insert(new Brewery(new UUID(1, 1), "together Hub", "micro", "6st fl 132nd Ave NE", "", "", "London", "London", "", "England", "http://www.crawlinbeer.com","784-809-9895", 6.2986, 1.4976));
 
           logger.debug("{} lists inserted", breweryDB.size());
      }

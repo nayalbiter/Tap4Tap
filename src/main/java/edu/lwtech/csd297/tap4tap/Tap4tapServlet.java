@@ -25,6 +25,7 @@ public class Tap4tapServlet extends HttpServlet {
 
     private UserDAO userDAO = null;
     private BreweryDAO breweryDAO = null;
+    private FavoriteDAO favoriteDAO = null;
     private Connection conn = null;
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -80,10 +81,12 @@ public class Tap4tapServlet extends HttpServlet {
             }
             breweryDAO = new BrewerySqlDAO(conn);
             userDAO = new UserSqlDAO(conn);
+            favoriteDAO = new FavoriteSqlDAO(conn);
         } else {
             logger.info("using memory DAOs");
             breweryDAO = new BreweryMemoryDAO();
             userDAO = new UserMemoryDAO();
+            //favoriteDAO = new FavoriteMemoryDAO();
     }
 
         logger.info("Initializing the DAOs...");
@@ -183,6 +186,9 @@ public class Tap4tapServlet extends HttpServlet {
 
     public BreweryDAO getBreweryDAD(){
         return breweryDAO;
+    }
+    public FavoriteDAO getFavoriteDAO(){
+        return favoriteDAO;
     }
 
     // TODO: Add other DAO getters here

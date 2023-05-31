@@ -59,35 +59,44 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-900">Login</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-900">
+                                    <#if loggedIn>Hello ${owner.displayName}!
+                                    <#else>Login
+                                    </#if>
+                                </span>
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
-
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
+                                <#if !loggedIn>
                                 <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
                                     <i class="fa fa-sign-in mr-2 text-gray-100"></i>
                                     Login
                                 </a>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=showLogin">
 
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=createAccount">
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
                                 <div class="dropdown-divider"></div>
 
-                                <!-- JOY:Check this please, this (log out) is going to be hidden until the user log in-->
-                                <a class="dropdown-item  text-white" href="#" data-toggle="modal"
-                                    data-target="#logoutModal" style="visibility: hidden;">
+                                <#else>
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
                                     <i class="fa fa-sign-out mr-2 text-gray-100"></i>
                                     Logout
                                 </a>
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=myAccount">
+                                    <i class="fa fa-user mr-2 text-gray-100"></i>
+                                    Manage Account
+                                </a>
+                                </#if>
                             </div>
                         </li>
 
                     </ul>
+
 
                 </nav>
                 <!-- End of Topbar -->
@@ -116,7 +125,7 @@
                                     <div class="col-12">
                                         <br />
                                         <h1 class="logo-sm mb-1 text-gray-900 text-center"> Find all the details about
-                                            the brewery that you selected:</h1>
+                                            the brewery: ${brewery.name}</h1>
                                     </div>
 
                                 </div>
@@ -139,7 +148,7 @@
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <i class="fa fa-beer fa-lg" aria-hidden="true"></i>
-                                                        micro
+                                                        ${brewery.breweryType}
                                                     </div>
                                                 </div>
 
@@ -156,8 +165,19 @@
                                                         Brewery Address:
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    <#if brewery.longitude !=0>
+                                                        <a href="https://www.google.com/maps?q=#{brewery.latitude; M10},#{brewery.longitude; M10}">
                                                         <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
-                                                        9200 Redmond
+                                                        <#if brewery.address1?has_content>
+                                                        ${brewery.address1}
+                                                            <#if brewery.address2?has_content>
+                                                            , ${brewery.address2}
+                                                            </#if>
+                                                        <#else>
+                                                            Not available
+                                                        </#if>
+                                                        </a>
+                                                    </#if>
                                                     </div>
                                                 </div>
 
@@ -175,7 +195,11 @@
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <i class="fa fa-university fa-lg" aria-hidden="true"></i>
-                                                        Redmond
+                                                        <#if brewery.city?has_content>
+                                                            ${brewery.city}
+                                                            <#else>
+                                                            Not available
+                                                            </#if>
                                                     </div>
                                                 </div>
 
@@ -193,7 +217,11 @@
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <i class="fa fa-flag fa-lg" aria-hidden="true"></i>
-                                                        Washington
+                                                        <#if brewery.stateProvince?has_content>
+                                                        ${brewery.stateProvince}
+                                                        <#else>
+                                                            Not available
+                                                            </#if>
                                                     </div>
                                                 </div>
 
@@ -211,7 +239,7 @@
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
-                                                        98052
+                                                        ${brewery.postalCode}
                                                     </div>
                                                 </div>
 
@@ -229,7 +257,7 @@
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <i class="fa fa-globe fa-lg" aria-hidden="true"></i>
-                                                        United States
+                                                        ${brewery.country}
                                                     </div>
                                                 </div>
 
@@ -243,11 +271,15 @@
                                                 <div class="col mr-2">
                                                     <div
                                                         class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                        Phone (if available):
+                                                        Phone:
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
-                                                        12345
+                                                        <#if brewery.phone?has_content>
+                                                        ${brewery.phone}
+                                                        <#else>
+                                                            Not available
+                                                            </#if>
                                                     </div>
                                                 </div>
 
@@ -261,11 +293,15 @@
                                                 <div class="col mr-2">
                                                     <div
                                                         class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                        Website (if available):
+                                                        Website:
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                         <i class="fa fa-internet-explorer fa-lg" aria-hidden="true"></i>
-                                                        www.google.com
+                                                        <#if brewery.websiteUrl?has_content>
+                                                            <a href="${brewery.websiteUrl}">${brewery.websiteUrl}</a>
+                                                        <#else>
+                                                            Not available
+                                                        </#if>
                                                     </div>
                                                 </div>
 
@@ -284,11 +320,16 @@
                                 <!--add the save it to my list buttom here and fix it with an on click-->
 
                                 <hr> <!--TO DO fix this part-->
-                                <a href="/tap4tap/servlet?cmd=myAccount" class="btn btn-google btn-user btn-block">
+                                <#if loggedIn>
+                                <a href="/tap4tap/servlet?cmd=myAccount&breweryId=${brewery.breweryId}&user=${owner.userId}" class="btn btn-google btn-user btn-block">
                                     <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!
                                     <!--FIX THIS PART WITH JAVA CODE to save it into a list-->
                                 </a>
-
+                                <#else>
+                                <a href="/tap4tap/servlet?cmd=showLogin" class="btn btn-google btn-user btn-block">
+                                    <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!
+                                </a>
+                                </#if>
                                 <hr>
 
                                 <br />

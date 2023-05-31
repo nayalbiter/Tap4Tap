@@ -15,13 +15,13 @@ public class Brewery {
     private String country;
     private String websiteUrl;
     private String phone;
-    private String longitude;
-    private String latitude;
+    private double longitude;
+    private double latitude;
 
     public Brewery(UUID breweryId, String name, String breweryType,
             String address1, String address2, String address3, String city,
             String stateProvince, String postalCode, String country,
-            String websiteUrl, String phone, String longitude, String latitude) {
+            String websiteUrl, String phone, double longitude, double latitude) {
                 this.breweryId = breweryId;
                 this.name = name;
                 this.breweryType = breweryType;
@@ -86,11 +86,11 @@ public class Brewery {
         return phone;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 

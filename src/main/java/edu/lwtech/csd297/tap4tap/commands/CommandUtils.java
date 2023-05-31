@@ -3,7 +3,7 @@ package edu.lwtech.csd297.tap4tap.commands;
 import java.io.*;
 import java.util.*;
 import javax.servlet.http.*;
-
+import edu.lwtech.csd297.tap4tap.pojos.*;
 import freemarker.template.*;
 import freemarker.template.utility.NullArgumentException;
 
@@ -19,12 +19,12 @@ public class CommandUtils {
 
     // Get the user's session variables (if they exist)
     public static void getSessionVariables(HttpServletRequest request, Map<String, Object> templateFields) {
-        String loggedInUser = "";
+        User loggedInUser = null;
         boolean loggedIn = false;
         HttpSession session = request.getSession(false);            // false == don't create a new session if one doesn't exist
         if (session != null) {
             try {
-                loggedInUser = (String)session.getAttribute("owner");
+                loggedInUser = (User)session.getAttribute("loggedInUser");
                 loggedIn = true;
             } catch (NullArgumentException e) {
                 loggedInUser = null;
@@ -32,7 +32,8 @@ public class CommandUtils {
                 loggedIn = false;
             }
         }
-        templateFields.put("owner", loggedInUser);
+        if(loggedInUser != null){templateFields.put("owner", loggedInUser);}
+        else{templateFields.put("owner", "");}
         templateFields.put("loggedIn", loggedIn);
     }
 
