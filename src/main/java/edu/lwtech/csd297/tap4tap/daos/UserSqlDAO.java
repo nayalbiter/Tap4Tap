@@ -162,8 +162,11 @@ public class UserSqlDAO implements UserDAO {
         int userId =  result.getInt(result.findColumn("user_id"));
         String username = result.getString(result.findColumn("username"));
         String hashedPassword = result.getString(result.findColumn("hashed_password"));
+        String securityQuestion = result.getString(result.findColumn("security_question"));
+        String hashedSecurityAnswer = result.getString(result.findColumn("hashed_security_answer"));
         String displayName = result.getString(result.findColumn("display_name"));
-        return new User(userId, username, hashedPassword, displayName);
+        String email = result.getString(result.findColumn("email"));
+        return new User(userId, username, hashedPassword, securityQuestion, hashedSecurityAnswer, displayName, email);
     }
 }
 

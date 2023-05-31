@@ -25,8 +25,11 @@ create table if not exists user
 (
     user_id serial primary key,
     username character varying(64) not null unique,
-    hashed_password character varying(255),
-    display_name character varying(36) not null
+    hashed_password character varying(255) not null,
+    security_question character varying(255) not null,
+    hashed_security_answer character varying(255) not null,
+    display_name character varying(64) not null,
+    email character varying(255)
 );
 
 create table if not exists favorite
