@@ -182,19 +182,15 @@
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
-                                                        <tr>
+                                                        <#--  <tr>
                                                             <th>Brewery Name</th>
-                                                        </tr>
+                                                        </tr>  -->
                                                     </tfoot>
                                                     <tbody>
                                                         <#if breweryList?has_content>
                                                             <#list breweryList as brewery>
                                                             <tr>
                                                                 <td><i class="fa fa-beer fa-2x " aria-hidden="true"></i>
-                                                                    ${brewery.name}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><i class="fa fa-beer fa-2x" aria-hidden="true"></i>
                                                                     ${brewery.name}</td>
                                                             </tr>
                                                             </#list>

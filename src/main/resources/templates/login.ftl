@@ -145,12 +145,15 @@
                                             <br />
                                         </div>
 
-                                        <!--FIX THIS PART WITH JAVA CODE-->
+
                                         <#if loggedIn>
                                             You are already logged in.<br />
+                                        <#else>
+                                            <#if breweryId?has_content>
+                                                <form id="loginForm" class="user" action="?cmd=login&breweryId=${breweryId}" method="post">
                                             <#else>
                                                 <form id="loginForm" class="user" action="?cmd=login" method="post">
-
+                                            </#if>
                                                     <div class="container">
                                                         <div class="row w-100">
                                                             <br /><br /><br />
@@ -165,7 +168,7 @@
                                                                         enctype="multipart/form-data"
                                                                         class="form-control form-control-user "
                                                                         type="email" id="inputEmail"
-                                                                        placeholder="Enter username..." size=60>
+                                                                        placeholder="Enter username" size=60>
                                                                     <br />
                                                                 </div>
                                                             </div>

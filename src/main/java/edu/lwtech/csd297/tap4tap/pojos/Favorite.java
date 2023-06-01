@@ -1,12 +1,17 @@
 package edu.lwtech.csd297.tap4tap.pojos;
+import java.util.*;;
 
 public class Favorite {
     private int favoriteId;
-    private String breweryId;
+    private UUID breweryId;
     private int userId;
 
-    public Favorite(int favoriteId, String breweryId, int userId) {
-        this.favoriteId = favoriteId;
+    public Favorite(int favoriteid,UUID breweryId, int userId){
+        this.favoriteId = favoriteid;
+        this.breweryId = breweryId;
+        this.userId = userId;
+    }
+    public Favorite(UUID breweryId, int userId) {
         this.breweryId = breweryId;
         this.userId = userId;
     }
@@ -15,7 +20,10 @@ public class Favorite {
         return favoriteId;
     }
 
-    public String getBreweryId() {
+    public void setFavoriteId(int id){
+        this.favoriteId = id;
+    }
+    public UUID getBreweryId() {
         return breweryId;
     }
 
