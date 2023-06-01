@@ -20,7 +20,7 @@ public class LogoutHandler implements CommandHandler<Tap4tapServlet> {
         if (session != null) {
             session.invalidate();
         }
-        templateFields.put("message", "You have been successfully logged out.<br /><a href='?cmd=home'>Home</a>");
+        templateFields.put("message", "You have been successfully logged out");
         templateFields.put("loggedIn", loggedIn);
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
     }

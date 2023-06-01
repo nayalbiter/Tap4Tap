@@ -146,22 +146,18 @@
                                         </div>
 
                                         <!--TO DO: FIX THIS PART WITH JAVA CODE-->
-                                        <form method="post" class="user action=" /tap4tap/servlet?cmd=createAccount">
+                                        <form method="post" class="action="/tap4tap/servlet?cmd=createAccount">
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input name="firstName" type="text"
+                                                    <input name="userName" type="text"
                                                         class="form-control form-control-user" id="exampleFirstName"
-                                                        placeholder="First Name:">
+                                                        placeholder="Username:">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input name="lastName" type="text"
+                                                    <input name="displayName" type="text"
                                                         class="form-control form-control-user" id="exampleLastName"
-                                                        placeholder="Last Name:">
+                                                        placeholder="Display Name:">
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <input name="email" type="email" class="form-control form-control-user"
-                                                    id="exampleInputEmail" placeholder="Email Address:">
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">

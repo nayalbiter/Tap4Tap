@@ -130,8 +130,6 @@
 
                                 </div>
 
-
-                                <!--TO DO create the cards with the info here and fix it with the info of the database-->
                                 <div class="container ">
 
                                     <div class="card shadow mb-4">
@@ -317,16 +315,14 @@
                                     </div>
                                 </div>
 
-                                <!--add the save it to my list buttom here and fix it with an on click-->
-
-                                <hr> <!--TO DO fix this part-->
+                                <hr>
                                 <#if loggedIn>
-                                <a href="/tap4tap/servlet?cmd=myAccount&breweryId=${brewery.breweryId}&user=${owner.userId}" class="btn btn-google btn-user btn-block">
+                                <a href="/tap4tap/servlet?cmd=myAccount&breweryId=${brewery.breweryId}" class="btn btn-google btn-user btn-block">
                                     <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!
                                     <!--FIX THIS PART WITH JAVA CODE to save it into a list-->
                                 </a>
                                 <#else>
-                                <a href="/tap4tap/servlet?cmd=showLogin" class="btn btn-google btn-user btn-block">
+                                <a href="/tap4tap/servlet?cmd=showLogin&breweryId=${brewery.breweryId}" class="btn btn-google btn-user btn-block">
                                     <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!
                                 </a>
                                 </#if>

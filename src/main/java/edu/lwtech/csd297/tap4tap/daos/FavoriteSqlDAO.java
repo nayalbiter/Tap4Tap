@@ -28,14 +28,14 @@ public class FavoriteSqlDAO implements FavoriteDAO {
         String[] returnColumns = {};
         try ( PreparedStatement stmt = conn.prepareStatement(query, returnColumns); ){
             // Substitute in the argument values for the question marks
-            stmt.setString(1, favorite.getBreweryId());
+            stmt.setObject(1, favorite.getBreweryId());
             stmt.setInt(2, favorite.getUserId());
 
             logger.debug("Executing SQL Insert: {}", query);
              // Execute the INSERT statement
             stmt.executeUpdate();
 
-            logger.debug("Favorite successfully inserted with ID = {}", favorite.getFavoriteId());
+            logger.debug("Favorite successfully inserted");
             return true;
         }catch (SQLException e) {
             logger.error("SQL Exception caught in executeSQLInsert: {}, {}", query, e);
@@ -152,7 +152,7 @@ public class FavoriteSqlDAO implements FavoriteDAO {
 
     private Favorite convertResultToFavorite(ResultSet result) throws SQLException {
         int favoriteId =  result.getInt(result.findColumn("favorite_id"));
-        String breweryId = result.getString(result.findColumn("brewery_id"));
+        UUID breweryId = (UUID)result.getObject(result.findColumn("brewery_id"));
         int userId = result.getInt(result.findColumn("user_id"));
         return new Favorite(favoriteId, breweryId, userId);
     }

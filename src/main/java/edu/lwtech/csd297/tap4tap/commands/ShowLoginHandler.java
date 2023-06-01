@@ -15,6 +15,8 @@ public class ShowLoginHandler implements CommandHandler<Tap4tapServlet> {
         logger.debug("showlogin handler is initialized");
         String template = "login.ftl";
         Map<String, Object> templateFields = new HashMap<>();
+        String breweryId = request.getParameter("breweryId");
+        templateFields.put("breweryId", breweryId);
         CommandUtils.getSessionVariables(request, templateFields);
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
     }

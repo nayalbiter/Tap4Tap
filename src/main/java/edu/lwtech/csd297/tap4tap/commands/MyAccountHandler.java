@@ -14,23 +14,26 @@ public class MyAccountHandler implements CommandHandler<Tap4tapServlet> {
         String template = "myAccount.ftl";
         Map<String, Object> templateFields = new HashMap<>();
         CommandUtils.getSessionVariables(request, templateFields);
-        String userId = request.getParameter("user");
-        int userID = Integer.parseInt(userId);
+        HttpSession session = request.getSession(false);
+        User user = (User)session.getAttribute("loggedInUser");
+        int userID = user.getUserId();
         String breweryId = request.getParameter("breweryId");
-        Favorite item = new Favorite(1, breweryId, userID);
-        boolean insert = servlet.getFavoriteDAO().insert(item);
+        List<Brewery> breweryList = new ArrayList<>();
         String message = "";
-        if(insert){
-            message = "Selected brewery inserted to your list";
-        }
-        else{
-            message = "Error inserting to your list";
+        if(breweryId != null){
+            UUID breweryID = UUID.fromString(breweryId);
+            Favorite item = new Favorite(breweryID, userID);
+            boolean insert = servlet.getFavoriteDAO().insert(item);
+            if(insert){
+                message = "Selected brewery inserted to your list";
+            }
+            else{
+                message = "Error inserting to your list";
+            }
         }
         List<Favorite> favoriteList = servlet.getFavoriteDAO().retrieveByUserId(userID);
-        List<Brewery> breweryList = new ArrayList<Brewery>();
         for(Favorite favorite: favoriteList){
-            breweryId = favorite.getBreweryId();
-            UUID breweryID = UUID.fromString(breweryId);
+            UUID breweryID = favorite.getBreweryId();
             Brewery brewery = servlet.getBreweryDAD().retrieveByID(breweryID);
             breweryList.add(brewery);
         }
