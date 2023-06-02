@@ -26,11 +26,11 @@ public class User {
     }
 
     public User(String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName) {
-        this(0, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, null);
+        this(0, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, null, false);
     }
 
     public User(String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName, String email) {
-        this(0, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, email);
+        this(0, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, email, false);
     }
     public int getUserId() {
         return userId;
