@@ -138,6 +138,10 @@
                                     </div>
 
                                 </div>
+                                <#--  <div class="card bg-danger text-white shadow text-left">  -->
+
+                                    <div class="text-left">* required field</div>
+                                <#--  </div>  -->
                                 <div class="row bg-gradient-warning">
 
                                     <div class="col-12">
@@ -145,55 +149,51 @@
                                             <br />
                                         </div>
 
-                                        <!--TO DO: FIX THIS PART WITH JAVA CODE-->
-                                        <form method="post" class="action="/tap4tap/servlet?cmd=createAccount">
+                                        <form method="post" class="user" action="?cmd=confirmCreateAccount">
                                             <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="text" class="form-control form-control-user" id="userName"
-                                                        placeholder="Username:">
+                                                 <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input name="username" type="text" class="form-control form-control-user" id="userName"
+                                                        placeholder="*Username:">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control form-control-user" id="displayName"
-                                                        placeholder="Display Name:">
+                                                    <input name="displayName" type="text" class="form-control form-control-user" id="displayName"
+                                                        placeholder="*Display Name:">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="password" class="form-control form-control-user"
-                                                        id="exampleInputPassword" placeholder="Password:">
+                                                    <input name="password" type="password" class="form-control form-control-user"
+                                                        id="exampleInputPassword" placeholder="*Password:">
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="password" class="form-control form-control-user"
-                                                        id="exampleRepeatPassword" placeholder="Confirm Password:">
+                                                    <input name="confirmPassword" type="password" class="form-control form-control-user"
+                                                        id="exampleRepeatPassword" placeholder="*Confirm Password:">
                                                 </div>
                                             </div>
 
 
                                             <div class="form-group">
-                                                <input type="securityQuestion" class="form-control form-control-user" id="securityQuestion"
-                                                    placeholder="Type your security question:">
+                                                <input name="securityQuestion" type="securityQuestion" class="form-control form-control-user" id="securityQuestion"
+                                                    placeholder="*Type your security question:">
                                             </div>
 
                                             <div class="form-group">
-                                                <input type="securityAnswer" class="form-control form-control-user" id="securityAnswer"
-                                                    placeholder="Type your security answer:">
+                                                <input name="securityAnswer" type="securityAnswer" class="form-control form-control-user" id="securityAnswer"
+                                                    placeholder="*Type your security answer:">
                                             </div>
 
                                             <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                                <input name="email" type="email" class="form-control form-control-user" id="exampleInputEmail"
                                                     placeholder="Email Address:">
                                             </div>
-
 
                                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                                 Create Account
                                             </button>
 
                                             <hr>
-
                                         </form>
-
                                         <hr>
                                         <div class="text-center">
                                             <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an

@@ -20,18 +20,25 @@ public class UserSqlDAO implements UserDAO {
     @Override
     public boolean insert(User user) {
         //!!implement to check if user was already inserted
-
         String query = "INSERT INTO user";
-        query += "(user_id, username, hashed_password, display_name)";
-        query += "VALUES (?,?,?,?)";
+        query += " (username, hashed_password, security_question, hashed_security_answer, display_name, email)";
+        query += " VALUES (?,?,?,?,?,?)";
 
         String[] returnColumns = {};
         try ( PreparedStatement stmt = conn.prepareStatement(query, returnColumns); ){
+            logger.debug("entering try block");
             // Substitute in the argument values for the question marks
-            stmt.setObject(1, user.getUserId());
-            stmt.setString(2, user.getUsername());
-            stmt.setString(3, user.getHashedPasword());
-            stmt.setString(4, user.getDisplayName());
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getHashedPasword());
+            stmt.setString(3, user.getSecurityQuestion());
+            stmt.setString(4, user.getHashedSecurityAnswer());
+            stmt.setString(5, user.getDisplayName());
+            if(user.getEmail()!= null){
+                stmt.setString(6, user.getEmail());
+            }
+            else{
+                stmt.setString(6, null);
+            }
 
             logger.debug("Executing SQL Insert: {}", query);
              // Execute the INSERT statement
@@ -39,8 +46,8 @@ public class UserSqlDAO implements UserDAO {
 
             logger.debug("User successfully inserted with ID = {}", user.getUserId());
             return true;
-        }catch (SQLException e) {
-            logger.error("SQL Exception caught in executeSQLInsert: {}, {}", query, e);
+        }catch (Exception e) {
+            logger.error("Exception caught in executeSQLInsert: {}, {}", query, e);
             return false;
         }
     }
@@ -58,7 +65,7 @@ public class UserSqlDAO implements UserDAO {
         try(PreparedStatement stmt = conn.prepareStatement(query);){
             // Substitute in the argument values for the question marks
             stmt.setObject(1, username);
-            logger.debug("setting name to query {}", stmt.toString());
+            logger.debug("setting name to query {}", stmt);
             // Execute the SELECT query
             sqlResults = stmt.executeQuery();
 

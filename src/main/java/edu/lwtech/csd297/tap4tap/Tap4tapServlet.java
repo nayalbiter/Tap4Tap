@@ -62,6 +62,7 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("breweryDetails", new BreweryDetailsHandler());
         supportedCommands.put("myAccount", new MyAccountHandler());
         supportedCommands.put("errors", new HTTPErrorHandler());
+        supportedCommands.put("confirmCreateAccount",new ConfirmCreateAccountHandler());
         //to connect to database
 
         boolean useSqlDao = true;

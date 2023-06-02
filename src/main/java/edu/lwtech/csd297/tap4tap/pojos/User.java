@@ -28,6 +28,10 @@ public class User {
     public User(String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName) {
         this(0, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, null);
     }
+
+    public User(String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName, String email) {
+        this(0, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, email);
+    }
     public int getUserId() {
         return userId;
     }

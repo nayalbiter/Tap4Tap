@@ -212,9 +212,7 @@
                                         <br />
                                         <div class="card bg-danger text-white shadow text-center">
                                             <div class="card-body">
-                                                <div class="text-white-50 medium text-center">${message}</div>
-                                                <#--  <div class="text-white-50 medium text-left">If you've forgotten your password, click on the link below.</div>  -->
-                                            </div>
+                                                <div class="text-white-50 medium text-center">${message}</div>                                            </div>
                                         </div>
                                         <hr>
                                         <#if !loggedIn?has_content>

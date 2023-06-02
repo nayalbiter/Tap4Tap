@@ -186,7 +186,7 @@
                                                                     <br />
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <#--  <div class="form-group">
                                                                 <div class="custom-control custom-checkbox small">
                                                                     <input type="checkbox" name="rememberme"
                                                                         class="custom-control-input" id="customCheck">
@@ -194,7 +194,7 @@
                                                                         for="customCheck">Remember
                                                                         Me</label>
                                                                 </div>
-                                                            </div>
+                                                            </div>  -->
 
                                                             <a id="loginSubmitButton" href="#"
                                                                 class="btn btn-primary btn-user btn-block">
