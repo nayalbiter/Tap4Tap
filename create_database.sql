@@ -29,7 +29,8 @@ create table if not exists user
     security_question character varying(255) not null,
     hashed_security_answer character varying(255) not null,
     display_name character varying(64) not null,
-    email character varying(255)
+    email character varying(255),
+    admin boolean not null
 );
 
 create table if not exists favorite

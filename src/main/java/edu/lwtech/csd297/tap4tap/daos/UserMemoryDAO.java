@@ -90,11 +90,11 @@ public class UserMemoryDAO implements UserDAO{
     public void addDemoUserData(){
         logger.debug("Creating demo users: {}", userDB);
 
-        insert(new User(1, "fred", BCrypt.withDefaults().hashToString(12,"fred".toCharArray()), "What's the name of your first pet?", BCrypt.withDefaults().hashToString(12,"Spot".toCharArray()), "Fred", "fred@example.com"));
+        insert(new User(1, "fred", BCrypt.withDefaults().hashToString(12,"fred".toCharArray()), "What's the name of your first pet?", BCrypt.withDefaults().hashToString(12,"Spot".toCharArray()), "Fred", "fred@example.com", false));
 
-        insert(new User(3, "mary", "mary", "what's your name?", "Mary", "Mary", "mary@example.com"));
+        insert(new User(3, "mary", "mary", "what's your name?", "Mary", "Mary", "mary@example.com", false));
 
-        insert(new User(4, "anne", "anne", "What's your friends name?", "Fred", "Anne"));
+        insert(new User(4, "anne", "anne", "What's your friends name?", "Fred", "Anne", false));
 
         logger.debug("inserted {} users", userDB.size());
     }

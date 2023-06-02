@@ -8,8 +8,9 @@ public class User {
     private String hashedSecurityAnswer;
     private String displayName;
     private String email;
+    private boolean admin;
 
-    public User(int userId, String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName, String email) {
+    public User(int userId, String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName, String email, boolean admin) {
         this.userId = userId;
         this.username = username;
         this.hashedPasword = hashedPasword;
@@ -17,10 +18,11 @@ public class User {
         this.hashedSecurityAnswer = hashedSecurityAnswer;
         this.displayName = displayName;
         this.email = email;
+        this.admin = admin;
     }
 
-    public User(int userId, String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName) {
-        this(userId, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, null);
+    public User(int userId, String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName, boolean admin) {
+        this(userId, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, null, admin);
     }
 
     public int getUserId() {
@@ -49,6 +51,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean getAdmin() {
+        return admin;
     }
 
     public String toString(){
