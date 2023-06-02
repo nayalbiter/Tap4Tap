@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author carme
  */
 public class HTTPErrorHandler implements CommandHandler<Tap4tapServlet>{
-    
+
     @Override
     public String handle(HttpServletRequest request, Tap4tapServlet servlet){
         String template = "404.ftl";
@@ -27,7 +27,7 @@ public class HTTPErrorHandler implements CommandHandler<Tap4tapServlet>{
                 break;
             case "500":
                 templateFields.put("errorMessage", "Try again Later");
-                break;  
+                break;
             case "400":
                 templateFields.put("errorMessage", "This account already exists / You are already logged in");
                 break;
@@ -36,11 +36,11 @@ public class HTTPErrorHandler implements CommandHandler<Tap4tapServlet>{
                 break;
             default:
                 templateFields.put("errorMessage", "");
-                
-                
+
+
         }
         templateFields.put("errorCode", errorCode);
         return CommandUtils.mergeTemplate(template, templateFields, servlet.getFreeMarkerConfig());
     }
-    
+
 }

@@ -113,7 +113,7 @@ public class BrewerySqlDAO implements BreweryDAO {
             for (int i = 0; i < params.size(); i++){
                 // Substitute in the argument values for the question marks
                 if(params.get(i).isExact()){stmt.setString(i + 1, params.get(i).getValue());}
-                else{stmt.setString(1 + i, "%" + params.get(i).getValue().trim() + "%");}
+                else{stmt.setString(1 + i, "%" + params.get(i).getValue().strip() + "%");}
             }
             logger.debug(stmt);
             sqlResults = stmt.executeQuery();

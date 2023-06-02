@@ -8,7 +8,7 @@
     <meta name="description" content=" tap4tap website">
     <meta name="author" content="Created by Carmen Albiter, Carolina Solar-Morales and Joy Hyunjung Oh">
 
-    <title>404NotFound</title>
+    <title>Error</title>
 
     <!-- Custom fonts for this page-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"

@@ -8,7 +8,7 @@
     <meta name="description" content=" tap4tap website">
     <meta name="author" content="Created by Carmen Albiter, Carolina Solar-Morales and Joy Hyunjung Oh">
 
-    <title>Forgot Password</title>
+    <title>Create an account</title>
 
     <!-- Custom fonts for this page-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -104,7 +104,7 @@
                         <div class="col-12">
                             <!-- Logo Text -->
                             <div class="text-center">
-                                <div class="logo text-gray-400" data-text="Tap4Tap">Tap4Tap</div>
+                                <div class="logo text-gray-400" data-text="Tap4Tap">Welcome!</div>
                                 <br /><br />
                             </div>
                         </div>
@@ -114,12 +114,13 @@
                     <div class="row bg-gradient-warning">
                         <div class="col-lg">
                             <br />
+
                             <section class="Image">
 
                                 <div class="imageContainer">
 
                                     <!--add the beer picture here  -->
-                                    <img src="resources/img/11.jpg" alt="forgotPAssword1" class="center">
+                                    <img src="resources/img/13.jpg" alt="cheers" class="center">
 
                                 </div>
 
@@ -128,15 +129,15 @@
                         </div>
                         <div class="col-lg">
                             <div class="container">
-                                <div class="row">
+                                <#--  <div class="row">
 
                                     <div class="col-12">
                                         <br />
-                                        <h1 class="logo-sm mb-1 text-gray-900 text-center"> Forgot your Password?</h1>
+                                        <h1 class="logo-sm mb-1 text-gray-900 text-center"> Create an Account</h1>
 
                                     </div>
 
-                                </div>
+                                </div>  -->
                                 <div class="row bg-gradient-warning">
 
                                     <div class="col-12">
@@ -144,39 +145,68 @@
                                             <br />
                                         </div>
 
-                                        <div class="col-12">
-
-                                            <div class="text-center">
-                                                <p class="mb-4">We get it, stuff happens. Just enter your email
-                                                    address below and we'll send you a link to reset your password!</p>
-                                            </div>
-
-                                            <!--FIX THIS PART WITH JAVA CODE-->
-                                            <form class="user" action="forgotPassw.php">
-                                                <div class="form-group">
-                                                    <input type="email" class="form-control form-control-user"
-                                                        id="exampleInputEmail" aria-describedby="emailHelp"
-                                                        placeholder="Enter Email Address...">
+                                        <!--TO DO: FIX THIS PART WITH JAVA CODE-->
+                                        <#--  <form method="post" class="user" action="?cmd=createAccount">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user" id="userName"
+                                                        placeholder="Username:">
                                                 </div>
-                                                <a href="/tap4tap/" class="btn btn-primary btn-user btn-block">
-                                                    Reset Password
-                                                </a>
-                                            </form>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-user" id="displayName"
+                                                        placeholder="Display Name:">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="password" class="form-control form-control-user"
+                                                        id="exampleInputPassword" placeholder="Password:">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="password" class="form-control form-control-user"
+                                                        id="exampleRepeatPassword" placeholder="Confirm Password:">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <input type="securityQuestion" class="form-control form-control-user" id="securityQuestion"
+                                                    placeholder="Type your security question:">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="securityAnswer" class="form-control form-control-user" id="securityAnswer"
+                                                    placeholder="Type your security answer:">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                                    placeholder="Email Address:">
+                                            </div>
+
+
+                                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                                Create Account
+                                            </button>
+
                                             <hr>
-                                            <br/>
-                                            <div class="text-center">
-                                                <a class="large" href="/tap4tap/servlet?cmd=createAccount">Create an
-                                                    Account!</a>
-                                            </div>
-                                            <br/>
 
-                                            <div class="text-center">
-                                                <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an account?
-                                                    Login!</a>
-                                            </div>
+                                        </form>  -->
 
+                                        <#--  <hr>
+                                        <div class="text-center">
+                                            <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an
+                                                account?
+                                                Login!</a>
+                                        </div>  -->
+
+                                        <br />
+                                        <div class="card bg-danger text-white shadow text-center">
+                                            <div class="card-body">
+                                                <div class="text-white-50 medium text-center">${message}</div>
+                                            </div>
                                         </div>
-
 
                                     </div>
 
@@ -208,7 +238,8 @@
                 </div>
                 <div class="text-white text-center">
                     <br />
-                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales
+                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina
+                        Solar-Morales
                         and Joy Hyunjung
                         Oh.</span>
                 </div>
