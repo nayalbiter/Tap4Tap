@@ -25,6 +25,9 @@ public class User {
         this(userId, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, null, admin);
     }
 
+    public User(String username, String hashedPasword, String securityQuestion, String hashedSecurityAnswer, String displayName) {
+        this(0, username, hashedPasword, securityQuestion, hashedSecurityAnswer, displayName, null);
+    }
     public int getUserId() {
         return userId;
     }

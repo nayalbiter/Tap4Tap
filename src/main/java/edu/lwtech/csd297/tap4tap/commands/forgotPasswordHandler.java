@@ -5,7 +5,8 @@ import javax.servlet.http.*;
 
 import edu.lwtech.csd297.tap4tap.Tap4tapServlet;
 
-public class forgotPasswordHandler implements CommandHandler<Tap4tapServlet>{
+public class ForgotPasswordHandler implements CommandHandler<Tap4tapServlet>{
+
     @Override
     public String handle(HttpServletRequest request, Tap4tapServlet servlet){
         String template = "forgotPassword.ftl";

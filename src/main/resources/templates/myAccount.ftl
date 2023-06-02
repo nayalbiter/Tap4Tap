@@ -137,6 +137,16 @@
                                         </div>
 
                                         <br />
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Email:
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+                                                ${owner.email}
+                                            </div>
+                                        </div>
+                                        <br/>
 
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">

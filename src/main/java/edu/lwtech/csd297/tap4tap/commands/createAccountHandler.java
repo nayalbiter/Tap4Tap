@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 
 import edu.lwtech.csd297.tap4tap.Tap4tapServlet;
 
-public class createAccountHandler implements CommandHandler<Tap4tapServlet>{
+public class CreateAccountHandler implements CommandHandler<Tap4tapServlet>{
     @Override
     public String handle(HttpServletRequest request, Tap4tapServlet servlet){
         String template = "createAccount.ftl";
