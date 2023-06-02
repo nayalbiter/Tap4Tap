@@ -143,7 +143,9 @@
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+                                                <#if owner.email?has_content>
                                                 ${owner.email}
+                                                </#if>
                                             </div>
                                         </div>
                                         <br/>
