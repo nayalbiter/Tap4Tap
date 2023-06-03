@@ -69,6 +69,20 @@ public class UserMemoryDAO implements UserDAO{
         return false;
     }
     @Override
+    public boolean setPassword(int userId, String hashedPassword){
+        if(hashedPassword == null) throw new IllegalArgumentException("username nor password can't be null");
+        logger.debug("updating user id {}", userId);
+        for(int i = 0; i < userDB.size(); i++){
+            if(userDB.get(i).getUserId() == userId){
+                User user = userDB.get(i);
+                user.setHashedPassword(hashedPassword);
+                userDB.set(i, user);
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
     public int delete(int id){
         if(id <= 0)throw new IllegalArgumentException("id can't be 0 or negative to delete");
         logger.debug("deleting user id: {}", id);

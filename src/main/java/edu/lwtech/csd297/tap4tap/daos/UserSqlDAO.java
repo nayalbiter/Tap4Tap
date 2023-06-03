@@ -107,15 +107,17 @@ public class UserSqlDAO implements UserDAO {
             return null;
         }
     }
-
+    @Override
     public boolean update(User user) {
         logger.debug("Trying to update User with User: {}", user);
-
-        String query = "UPDATE FROM user WHERE user_id = ?";
+        String hashedPassword = user.getHashedPasword();
+        String query = "UPDATE user SET hashed_password=?";
+        query += "WHERE user_id = ?";
         int userId = user.getUserId();
         try{
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setObject(1, userId);
+            stmt.setString(1, hashedPassword);
+            stmt.setInt(2, userId);
             int rows = stmt.executeUpdate();
             return rows > 0;
         }
@@ -124,7 +126,23 @@ public class UserSqlDAO implements UserDAO {
             return false;
         }
     }
-
+    @Override
+    public boolean setPassword(int userId, String hashedPassword){
+        logger.debug("Trying to update password for user id: {}", userId);
+        String query = "UPDATE user SET hashed_password=?";
+        query += "WHERE user_id=?";
+        try{
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, hashedPassword);
+            stmt.setInt(2, userId);
+            int rows = stmt.executeUpdate();
+            return rows > 0;
+        }
+        catch(Exception e){
+            logger.error("Exception caught");
+            return false;
+        }
+    }
     public int delete(int userId) {
         logger.debug("Trying to delete User with ID: {}", userId);
 
