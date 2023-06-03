@@ -138,10 +138,7 @@
                                     </div>
 
                                 </div>
-                                <#--  <div class="card bg-danger text-white shadow text-left">  -->
-
                                     <div class="text-left">* required field</div>
-                                <#--  </div>  -->
                                 <div class="row bg-gradient-warning">
 
                                     <div class="col-12">

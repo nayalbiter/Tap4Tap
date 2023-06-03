@@ -43,7 +43,10 @@ public class User {
     public String getHashedPasword() {
         return hashedPasword;
     }
-
+    public boolean setHashedPassword(String hashedPassword){
+        this.hashedPasword = hashedPassword;
+        return this.hashedPasword.equals(hashedPassword);
+    }
     public String getSecurityQuestion() {
         return securityQuestion;
     }

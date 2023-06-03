@@ -129,78 +129,12 @@
                         </div>
                         <div class="col-lg">
                             <div class="container">
-                                <#--  <div class="row">
-
-                                    <div class="col-12">
-                                        <br />
-                                        <h1 class="logo-sm mb-1 text-gray-900 text-center"> Create an Account</h1>
-
-                                    </div>
-
-                                </div>  -->
                                 <div class="row bg-gradient-warning">
 
                                     <div class="col-12">
                                         <div class="text-center">
                                             <br />
                                         </div>
-
-                                        <!--TO DO: FIX THIS PART WITH JAVA CODE-->
-                                        <#--  <form method="post" class="user" action="?cmd=createAccount">
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="text" class="form-control form-control-user" id="userName"
-                                                        placeholder="Username:">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control form-control-user" id="displayName"
-                                                        placeholder="Display Name:">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="password" class="form-control form-control-user"
-                                                        id="exampleInputPassword" placeholder="Password:">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <input type="password" class="form-control form-control-user"
-                                                        id="exampleRepeatPassword" placeholder="Confirm Password:">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <input type="securityQuestion" class="form-control form-control-user" id="securityQuestion"
-                                                    placeholder="Type your security question:">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="securityAnswer" class="form-control form-control-user" id="securityAnswer"
-                                                    placeholder="Type your security answer:">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                                    placeholder="Email Address:">
-                                            </div>
-
-
-                                            <button type="submit" class="btn btn-primary btn-user btn-block">
-                                                Create Account
-                                            </button>
-
-                                            <hr>
-
-                                        </form>  -->
-
-                                        <#--  <hr>
-                                        <div class="text-center">
-                                            <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an
-                                                account?
-                                                Login!</a>
-                                        </div>  -->
-
                                         <br />
                                         <div class="card bg-danger text-white shadow text-center">
                                             <div class="card-body">

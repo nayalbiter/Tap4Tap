@@ -14,7 +14,7 @@ public interface UserDAO {
     User retrieveByUsername(String username);
     // Update ---------------------------------------------
     boolean update(User item);
-
+    boolean setPassword(int userId, String hashedPassword);
     // Delete ---------------------------------------------
     int delete(int id);
 

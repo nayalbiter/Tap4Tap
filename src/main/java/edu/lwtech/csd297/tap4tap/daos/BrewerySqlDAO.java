@@ -146,7 +146,7 @@ public class BrewerySqlDAO implements BreweryDAO {
             return rows > 0;
         }
         catch(SQLException e){
-            logger.error("Error caught in excuteUpdate: {}", e);
+            logger.error("Error caught in executeUpdate: {}", e);
             return false;
         }
     }
@@ -174,7 +174,7 @@ public class BrewerySqlDAO implements BreweryDAO {
         try(PreparedStatement stmt = conn.prepareStatement(query)){
             sqlResults = stmt.executeQuery();
         }catch(SQLException e){
-            logger.error("Error caught in excuteQuery: {}", e);
+            logger.error("Error caught in executeQuery: {}", e);
             return -1;
         }
         int count = 0;

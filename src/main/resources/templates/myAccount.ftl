@@ -156,76 +156,71 @@
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i>
-                                                ******** <!--fix this part-->
+                                                *************
                                             </div>
                                         </div>
                                         <br />
 
                                         <div class="col mr-2">
-                                            <!--fix this part with java code-->
-
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#exampleModalChangePassword">
                                                 <i class="fa fa-unlock fa-2x" aria-hidden="true"></i> Change Password:
                                             </button>
 
                                         </div>
-
-
+                                            <br>
+                                            <div class="text-red-50 medium text-left">${changePasswordMessage}</div>
                                         <!-- Modal used to change a password -->
                                         <div class="modal fade" id="exampleModalChangePassword" tabindex="-1"
                                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you
-                                                            want to change your password?</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <!--fix this part with java code-->
+                                                        <p>Your security question: ${owner.securityQuestion}</p>
+                                                    </div>
+                                                    <div class="modal-body">
                                                         <p>Type the answer of your security question here:</p>
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <form method="post" class="user action=" #">
+                                                        <form method="post" class="user" action="?cmd=myAccount">
 
                                                             <div class="form-group">
-                                                                <input name="ShowSecurityAnswer" type="text"
+                                                                <input name="securityAnswer" type="text"
                                                                     class="form-control form-control-user"
                                                                     id="securityAnswer" placeholder="Security Answer:">
                                                             </div>
 
                                                             <hr>
-                                                        </form>
 
-                                                        <hr>
-
-                                                        <form method="post" class="user action=" #">
                                                             <div class="form-group">
-                                                                <input type="password"
+                                                                <input name="newPassword" type="password"
                                                                     class="form-control form-control-user"
                                                                     id="exampleInputPassword"
                                                                     placeholder="Enter your new Password:">
                                                             </div>
                                                             <div class="form-group">
-                                                                <input type="password"
+                                                                <input name="repeatNewPassword" type="password"
                                                                     class="form-control form-control-user"
                                                                     id="exampleRepeatPassword"
                                                                     placeholder="Confirm your new Password:">
                                                             </div>
+                                                            <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary"> Change Password
+                                                        </button>
                                                         </form>
 
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Cancel</button>
-                                                        <button type="button" class="btn btn-primary"> Change Password
-                                                        </button>
                                                     </div>
 
                                                 </div>

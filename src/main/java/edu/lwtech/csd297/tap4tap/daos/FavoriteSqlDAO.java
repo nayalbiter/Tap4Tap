@@ -87,9 +87,9 @@ public class FavoriteSqlDAO implements FavoriteDAO {
             while(sqlResults.next()){
                 favoriteList.add(convertResultToFavorite(sqlResults));
             }
-            logger.error("Returning " + favoriteList.size() + "favorites");
-        }catch(SQLException e){
-            logger.error("SQL Exception caught in getting results: {}", e);
+            logger.error("Returning {} favorites", favoriteList.size());
+        }catch(Exception e){
+            logger.error("Exception caught in getting results: {}", e);
             return null;
         }
         return favoriteList;
@@ -106,7 +106,7 @@ public class FavoriteSqlDAO implements FavoriteDAO {
             return rows > 0;
         }
         catch(SQLException e){
-            logger.error("Error caught in excuteUpdate: {}", e);
+            logger.error("Error caught in executeUpdate: {}", e);
             return false;
         }
     }
@@ -133,7 +133,7 @@ public class FavoriteSqlDAO implements FavoriteDAO {
         try(PreparedStatement stmt = conn.prepareStatement(query)){
             sqlResults = stmt.executeQuery();
         }catch(SQLException e){
-            logger.error("Error caught in excuteQuery: {}", e);
+            logger.error("Error caught in executeQuery: {}", e);
             return -1;
         }
         int count = 0;
