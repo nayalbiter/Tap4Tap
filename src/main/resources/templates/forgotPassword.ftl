@@ -57,7 +57,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-900">
                                     <#if loggedIn>Hello ${owner.displayName}!
-                                    <#else>Login
+                                        <#else>Login
                                     </#if>
                                 </span>
                                 <img class="img-profile rounded-circle" src="resources/img/undraw_profile.svg">
@@ -66,27 +66,27 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
                                 <#if !loggedIn>
-                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
+                                    <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
-                                    <i class="fa fa-sign-in mr-2 text-gray-100"></i>
-                                    Login
-                                </a>
+                                        <i class="fa fa-sign-in mr-2 text-gray-100"></i>
+                                        Login
+                                    </a>
 
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=createAccount">
-                                    <i class="fa fa-user mr-2 text-gray-100"></i>
-                                    Create Account
-                                </a>
-                                <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=createAccount">
+                                        <i class="fa fa-user mr-2 text-gray-100"></i>
+                                        Create Account
+                                    </a>
+                                    <div class="dropdown-divider"></div>
 
-                                <#else>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
-                                    <i class="fa fa-sign-out mr-2 text-gray-100"></i>
-                                    Logout
-                                </a>
-                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=myAccount">
-                                    <i class="fa fa-user mr-2 text-gray-100"></i>
-                                    Manage Account
-                                </a>
+                                    <#else>
+                                        <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
+                                            <i class="fa fa-sign-out mr-2 text-gray-100"></i>
+                                            Logout
+                                        </a>
+                                        <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=myAccount">
+                                            <i class="fa fa-user mr-2 text-gray-100"></i>
+                                            Manage Account
+                                        </a>
                                 </#if>
                             </div>
                         </li>
@@ -147,31 +147,106 @@
                                         <div class="col-12">
 
                                             <div class="text-center">
-                                                <p class="mb-4">We get it, stuff happens. Just enter your email
-                                                    address below and we'll send you a link to reset your password!</p>
+                                                <p class="mb-4">We get it, stuff happens. Just enter your username below
+                                                    and we'll get you security question!</p>
                                             </div>
 
                                             <!--FIX THIS PART WITH JAVA CODE-->
-                                            <form class="user" action="forgotPassw.php">
+                                            <form method="post" class="user" action="#">
                                                 <div class="form-group">
-                                                    <input type="email" class="form-control form-control-user"
-                                                        id="exampleInputEmail" aria-describedby="emailHelp"
-                                                        placeholder="Enter Email Address...">
+                                                    <input type="text" class="form-control form-control-user"
+                                                        id="userName" placeholder="Enter your username:">
                                                 </div>
-                                                <a href="/tap4tap/" class="btn btn-primary btn-user btn-block">
-                                                    Reset Password
-                                                </a>
+
+                                                <div class="col mr-2">
+                                                    <!--fix this part with java code-->
+
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#exampleModalGetSecurityQuestion">
+                                                        <i class="fa fa-lock fa-2x" aria-hidden="true"></i> Get my
+                                                        security question
+                                                    </button>
+
+                                                </div>
+
                                             </form>
                                             <hr>
-                                            <br/>
+
+                                            <!-- Modal used to show the security question -->
+                                            <div class="modal fade" id="exampleModalGetSecurityQuestion" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Security
+                                                                Question:</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!--fix this part with java code-->
+                                                            <p>This part should show the security question here:</p>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <form method="post" class="user action=" #">
+
+                                                                <div class="form-group">
+                                                                    <input name="ShowSecurityAnswer" type="text"
+                                                                        class="form-control form-control-user"
+                                                                        id="securityAnswer"
+                                                                        placeholder="Security Answer:">
+                                                                </div>
+
+                                                                <hr>
+                                                            </form>
+
+                                                            <hr>
+
+                                                            <!--fix this part with java code-->
+
+                                                            <form method="post" class="user action=" #">
+                                                                <div class="form-group">
+                                                                    <input type="password"
+                                                                        class="form-control form-control-user"
+                                                                        id="exampleInputPassword"
+                                                                        placeholder="Enter your new Password:">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="password"
+                                                                        class="form-control form-control-user"
+                                                                        id="exampleRepeatPassword"
+                                                                        placeholder="Confirm your new Password:">
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Cancel</button>
+                                                            <button type="button" class="btn btn-primary"> Change
+                                                                Password
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Modal -->
+                                            <hr>
+                                            <br />
                                             <div class="text-center">
                                                 <a class="large" href="/tap4tap/servlet?cmd=createAccount">Create an
                                                     Account!</a>
                                             </div>
-                                            <br/>
+                                            <br />
 
                                             <div class="text-center">
-                                                <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an account?
+                                                <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an
+                                                    account?
                                                     Login!</a>
                                             </div>
 
@@ -208,7 +283,8 @@
                 </div>
                 <div class="text-white text-center">
                     <br />
-                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina Solar-Morales
+                    <span class="authors1">Kirkland, WA &copy 2023 Tap4Tap created by Carmen Albiter, Carolina
+                        Solar-Morales
                         and Joy Hyunjung
                         Oh.</span>
                 </div>
