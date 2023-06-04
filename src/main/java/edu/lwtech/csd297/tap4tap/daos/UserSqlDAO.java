@@ -21,8 +21,8 @@ public class UserSqlDAO implements UserDAO {
     public boolean insert(User user) {
         //!!implement to check if user was already inserted
         String query = "INSERT INTO user";
-        query += " (username, hashed_password, security_question, hashed_security_answer, display_name, email)";
-        query += " VALUES (?,?,?,?,?,?)";
+        query += " (username, hashed_password, security_question, hashed_security_answer, display_name, email, admin)";
+        query += " VALUES (?,?,?,?,?,?,?)";
 
         String[] returnColumns = {};
         try ( PreparedStatement stmt = conn.prepareStatement(query, returnColumns); ){
@@ -39,7 +39,7 @@ public class UserSqlDAO implements UserDAO {
             else{
                 stmt.setString(6, null);
             }
-
+            stmt.setBoolean(7, user.getAdmin());
             logger.debug("Executing SQL Insert: {}", query);
              // Execute the INSERT statement
             stmt.executeUpdate();
