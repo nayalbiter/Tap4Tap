@@ -41,9 +41,15 @@ public class LoginHandler implements CommandHandler<Tap4tapServlet> {
                 HttpSession session = request.getSession(true);      // true == Create a new session for this user
                 session.setAttribute("loggedInUser", loggedInUser);
                 logger.debug("getting breweryId: {}", breweryId);
-                if(breweryId == null){
+                if(user.getAdmin()){
+                    message = "Welcome back, " + user.getDisplayName() + "<br /><a href='?cmd=admin'>Admin Page</a> <br /><a href='?cmd=home'>Search brewery</a>";
+                    HashMap<UUID, Brewery> breweryList= new HashMap<>();
+                    session.setAttribute("breweryMapList", breweryList);
+                }
+                else if(breweryId == null){
                     message = "You have been successfully logged in to your account.<br /><a href='?cmd=home'>Home</a>";
-                }else{
+                }
+                else{
                     message = "You have been successfully logged in to your account.<br />Brewery is added to you list.<br/><a href='?cmd=myAccount&breweryId=" + breweryId + "'>My Account</a>";
                 }
 

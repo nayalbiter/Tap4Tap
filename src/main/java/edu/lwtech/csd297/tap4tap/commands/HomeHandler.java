@@ -11,7 +11,8 @@ public class HomeHandler implements CommandHandler<Tap4tapServlet> {
  private static final Logger logger = LogManager.getLogger(Tap4tapServlet.class);
     @Override
     public String handle(HttpServletRequest request, Tap4tapServlet servlet) {
-        if(request.getSession(false) != null)logger.debug("coming back home {}", request.getSession().getAttribute("owner"));
+        if(request.getSession(false) != null)
+            logger.debug("coming back home {}", request.getSession().getAttribute("owner"));
         logger.debug("welcome home");
         String template = "home.ftl";
         Map<String, Object> templateFields = new HashMap<>();

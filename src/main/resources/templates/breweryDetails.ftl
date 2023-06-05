@@ -80,7 +80,6 @@
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
-                                <div class="dropdown-divider"></div>
 
                                 <#else>
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
@@ -91,6 +90,12 @@
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Manage Account
                                 </a>
+                                    <#if owner.admin>
+                                    <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=admin">
+                                        <i class="fa fa-user mr-2 text-gray-100"></i>
+                                        Admin Page
+                                    </a>
+                                    </#if>
                                 </#if>
                             </div>
                         </li>
@@ -302,25 +307,23 @@
                                                         </#if>
                                                     </div>
                                                 </div>
-
-
                                             </div>
 
                                             <br />
-
-
-
                                         </div>
-
                                     </div>
                                 </div>
 
                                 <hr>
                                 <#if loggedIn>
-                                <a href="/tap4tap/servlet?cmd=myAccount&breweryId=${brewery.breweryId}" class="btn btn-google btn-user btn-block">
-                                    <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!
-                                    <!--FIX THIS PART WITH JAVA CODE to save it into a list-->
-                                </a>
+                                    <#if owner.admin>
+                                        <a href="/tap4tap/servlet?cmd=admin&breweryId=${brewery.breweryId}" class="btn btn-google btn-user btn-block">
+                                            <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to brewery list to edit
+                                        </a>
+                                    </#if>
+                                        <a href="/tap4tap/servlet?cmd=myAccount&breweryId=${brewery.breweryId}" class="btn btn-google btn-user btn-block">
+                                            <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!
+                                        </a>
                                 <#else>
                                 <a href="/tap4tap/servlet?cmd=showLogin&breweryId=${brewery.breweryId}" class="btn btn-google btn-user btn-block">
                                     <i class="fa fa-bookmark-o fa-lg" aria-hidden="true"></i> Save it to my list!

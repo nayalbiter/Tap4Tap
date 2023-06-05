@@ -76,7 +76,6 @@
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
-                                <div class="dropdown-divider"></div>
 
                                 <#else>
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
@@ -87,6 +86,12 @@
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Manage Account
                                 </a>
+                                <#if owner.admin>
+                                    <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=admin">
+                                        <i class="fa fa-user mr-2 text-gray-100"></i>
+                                        Admin Page
+                                    </a>
+                                    </#if>
                                 </#if>
                             </div>
                         </li>
@@ -189,7 +194,7 @@
                                                                 <br />
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
+                                                        <#--  <div class="form-group">
                                                             <div class="custom-control custom-checkbox small">
                                                                 <input type="checkbox" name="rememberme"
                                                                     class="custom-control-input" id="customCheck">
@@ -197,7 +202,7 @@
                                                                     for="customCheck">Remember
                                                                     Me</label>
                                                             </div>
-                                                        </div>
+                                                        </div>  -->
 
                                                         <a id="loginSubmitButton" href="#"
                                                             class="btn btn-primary btn-user btn-block">
@@ -215,7 +220,7 @@
                                                 <div class="text-white-50 medium text-center">${message}</div>                                            </div>
                                         </div>
                                         <hr>
-                                        <#if !loggedIn?has_content>
+                                        <#if !loggedIn>
                                         <div class="text-center">
                                             <a class="large" href="/tap4tap/servlet?cmd=forgotPassword">Forgot Password?</a>
                                         </div>

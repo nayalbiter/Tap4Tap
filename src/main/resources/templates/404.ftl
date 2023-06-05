@@ -80,7 +80,6 @@
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Create Account
                                 </a>
-                                <div class="dropdown-divider"></div>
 
                                 <#else>
                                 <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
@@ -91,6 +90,12 @@
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Manage Account
                                 </a>
+                                <#if owner.admin>
+                                    <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=admin">
+                                        <i class="fa fa-user mr-2 text-gray-100"></i>
+                                        Admin Page
+                                    </a>
+                                </#if>
                                 </#if>
                             </div>
                         </li>
