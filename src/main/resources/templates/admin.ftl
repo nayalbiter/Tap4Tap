@@ -27,6 +27,10 @@
     <link href="resources/css/breweryResults.css" rel="stylesheet">
     <link href="resources/css/dataTables.css" rel="stylesheet">
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 
@@ -74,8 +78,17 @@
                             <!-- Dropdown - Admin Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-primary"
                                 aria-labelledby="userDropdown">
+                                <#if !loggedIn>
+                                <a class="dropdown-item text-white" href="/tap4tap/servlet?cmd=showLogin">
 
-                                <div class="dropdown-divider"></div>
+                                    <i class="fa fa-sign-in mr-2 text-gray-100"></i>
+                                    Login
+                                </a>
+
+                                <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=createAccount">
+                                    <i class="fa fa-user mr-2 text-gray-100"></i>
+                                    Create Account
+                                </a>
 
 
                                 <#else>
@@ -89,6 +102,12 @@
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Manage Account
                                 </a>
+                                <#if owner.admin>
+                                    <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=admin">
+                                        <i class="fa fa-user mr-2 text-gray-100"></i>
+                                        Admin Page
+                                    </a>
+                                </#if>
                                 </#if>
 
                             </div>
@@ -123,7 +142,7 @@
                                 <!--button add a new brewery here-->
 
                                 <hr>
-                                <!--TO DO FIX THIS PART WITH JAVA CODE -->
+
                                 <button type="button" class="btn btn-google btn-user btn-block" data-toggle="modal"
                                     data-target="#exampleModalAdd">
                                     <i class="fa fa-plus-square fa-lg" aria-hidden="true"></i> Add new brewery
@@ -131,7 +150,9 @@
                                 </button>
 
                                 <hr>
-
+                                <#if message?has_content>
+                                        <div class="text-red-50 medium text-left">${message}</div>
+                                </#if>
                                 <br />
 
                                 <!--create table here-->
@@ -162,8 +183,8 @@
                                                         </tr>
                                                     </tfoot>
                                                     <tbody>
-
-                                                        <#list breweries as brewery>
+                                                        <#if breweryList?has_content>
+                                                        <#list breweryList as UUID, brewery>
                                                             <tr>
                                                                 <td>
                                                                     <i class="fa fa-beer fa-2x " aria-hidden="true"></i>
@@ -178,33 +199,39 @@
                                                                                 aria-hidden="true"></i>
                                                                         </a>
                                                                     </#if>
-                                                                    ${brewery.address1}
+                                                                    <#if brewery.address1?has_content>
+                                                                        ${brewery.address1}
+                                                                        <#else>
+                                                                        Not available
+                                                                        </#if>
                                                                 </td>
 
                                                                 <td>
-                                                                    <!--fix this part with java code to edit a brewery-->
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#exampleModalEdit">
-                                                                        <i class="fa fa-pencil fa-2x"
-                                                                            aria-hidden="true"></i>
-                                                                    </button>
+                                                                    <form action="/tap4tap/servlet" method="get">
+                                                                        <input type="hidden" name="cmd" value="admin" />
+                                                                        <input type="hidden" name="breweryId" value="${brewery.breweryId}" />
+                                                                        <input type="hidden" name="modal" value="edit" />
+                                                                        <button class="btn btn-primary" data-toggle="modal" data-targer="#edit">
+                                                                            <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+                                                                        </button>
+                                                                    </form>
 
                                                                 </td>
 
                                                                 <td>
                                                                     <!--fix this part with java code to delete the brewery selected-->
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        data-toggle="modal"
-                                                                        data-target="#exampleModalDelete">
-                                                                        <i class="fa fa-trash fa-2x"
-                                                                            aria-hidden="true"></i>
-                                                                    </button>
-
+                                                                    <form action="/tap4tap/servlet" method="get">
+                                                                        <input type="hidden" name="cmd" value="admin" />
+                                                                        <input type="hidden" name="breweryId" value="${brewery.breweryId}" />
+                                                                        <input type="hidden" name="modal" value="delete" />
+                                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#delete">                                                     <i class="fa fa-trash fa-2x"
+                                                                                aria-hidden="true"></i>
+                                                                        </button>
+                                                                    </form>
                                                                 </td>
                                                             </tr>
                                                         </#list>
-
+                                                        </#if>
 
                                                     </tbody>
                                                 </table>
@@ -239,80 +266,91 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
-                        <div class="modal-body">
-                            <!--TO DO: FIX THIS PART WITH JAVA CODE-->
-                            <form method="post" class="user action=" #">
+                        <form name="insert" method="post" class="user" action="?cmd=admin">
+                            <div class="modal-body">
+                                <div class="text-left">* required field</div>
 
                                 <div class="form-group">
                                     <i class="fa fa-beer fa-lg " aria-hidden="true"></i>
                                     <input name="breweryName" type="text" class="form-control form-control-user"
-                                        id="breweryName" placeholder="Brewery Name:">
+                                        id="breweryName" placeholder="*Brewery Name:">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-glass fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryType" type="text" class="form-control form-control-user"
-                                        id="breweryType" placeholder="Brewery Type:">
+                                        id="breweryType" placeholder="*Brewery Type:">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryAddress" type="text" class="form-control form-control-user"
-                                        id="breweryAddress" placeholder="Brewery Address:">
+                                        id="breweryAddress" placeholder="*Brewery Address:">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-university fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryCity" type="text" class="form-control form-control-user"
-                                        id="breweryCity" placeholder="City:">
+                                        id="breweryCity" placeholder="*City:">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-flag fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryState" type="text" class="form-control form-control-user"
-                                        id="breweryState" placeholder="State:">
+                                        id="breweryState" placeholder="*State:">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryZipCode" type="text" class="form-control form-control-user"
-                                        id="breweryZipCode" placeholder="Zip Code:">
+                                        id="breweryZipCode" placeholder="*Zip Code:">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-globe fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryCountry" type="text" class="form-control form-control-user"
-                                        id="breweryCountry" placeholder="Country:">
+                                        id="breweryCountry" placeholder="*Country:">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryPhone" type="text" class="form-control form-control-user"
-                                        id="breweryPhone" placeholder="Phone:">
+                                        id="breweryPhone" placeholder="*Phone:">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-internet-explorer fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryWebsite" type="text" class="form-control form-control-user"
-                                        id="breweryWebsite" placeholder="Website:">
+                                        id="breweryWebsite" placeholder="*Website:">
                                 </div>
 
-                                <hr>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary">Create new brewery</button>
-                        </div>
+                                <div class="form-group">
+                                    <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+
+                                    <input name="breweryLongitude" type="text" class="form-control form-control-user"
+                                        id="breweryLongitude" placeholder="*Longitude:">
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+
+                                    <input name="breweryLatitude" type="text" class="form-control form-control-user"
+                                        id="breweryLatitude" placeholder="*Latitude:">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Create new brewery</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -321,7 +359,8 @@
 
 
             <!-- Modal used to edit a brewery -->
-            <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog"
+            <#if edit>
+            <div class="modal fade" id="edit" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -332,108 +371,182 @@
                             </button>
                         </div>
 
-                        <div class="modal-body">
-                            <!--TO DO: FIX THIS PART WITH JAVA CODE-->
-                            <form method="post" class="user action=" #">
-
+                        <form method="post" action="?cmd=admin&breweryToEditId=${chosenBrewery.breweryId}&action=edit">
+                            <div class="modal-body">
                                 <div class="form-group">
                                     <i class="fa fa-beer fa-lg " aria-hidden="true"></i>
+                                    <#if chosenBrewery??>
+                                    <#if chosenBrewery.name?has_content>
                                     <input name="breweryName" type="text" class="form-control form-control-user"
-                                        id="breweryName" placeholder="Brewery Name:">
+                                        id="breweryName" placeholder="Brewery Name: ${chosenBrewery.name}">
+                                    <#else>
+                                    <input name="breweryName" type="text" class="form-control form-control-user"
+                                        id="breweryName" placeholder="Brewery Name: not available">
+                                    </#if>
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-glass fa-lg" aria-hidden="true"></i>
-
+                                    <#if chosenBrewery.breweryType?has_content>
                                     <input name="breweryType" type="text" class="form-control form-control-user"
-                                        id="breweryType" placeholder="Brewery Type:">
+                                        id="breweryType" placeholder="Brewery Type: ${chosenBrewery.breweryType}">
+                                        <#else>
+                                        <input name="breweryType" type="text" class="form-control form-control-user"
+                                        id="breweryType" placeholder="Brewery Type: not available">
+                                        </#if>
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>
-
+                                    <#if chosenBrewery.address1?has_content>
                                     <input name="breweryAddress" type="text" class="form-control form-control-user"
-                                        id="breweryAddress" placeholder="Brewery Address:">
+                                        id="breweryAddress" placeholder="Brewery Address: ${chosenBrewery.address1}">
+                                        <#if chosenBrewery.address2?has_content>
+                                        <input name="breweryAddress" type="text" class="form-control form-control-user"
+                                        id="breweryAddress" placeholder="Brewery Address: ${chosenBrewery.address1} ${chosenBrewery.address2}">
+                                            <#if chosenBrewery.address3?has_content>
+                                            <input name="breweryAddress" type="text" class="form-control form-control-user"
+                                        id="breweryAddress" placeholder="Brewery Address: ${chosenBrewery.address1} ${chosenBrewery.address2} ${chosenBrewery.address3}">
+                                            </#if>
+                                        </#if>
+                                    <#else>
+                                    <input name="breweryAddress" type="text" class="form-control form-control-user"
+                                        id="breweryAddress" placeholder="Brewery Address: not available">
+                                    </#if>
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-university fa-lg" aria-hidden="true"></i>
-
+                                    <#if chosenBrewery.city?has_content>
                                     <input name="breweryCity" type="text" class="form-control form-control-user"
-                                        id="breweryCity" placeholder="City:">
+                                        id="breweryCity" placeholder="City: ${chosenBrewery.city}">
+                                    <#else>
+                                    <input name="breweryCity" type="text" class="form-control form-control-user"
+                                        id="breweryCity" placeholder="City: not available">
+                                    </#if>
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-flag fa-lg" aria-hidden="true"></i>
-
+                                    <#if chosenBrewery.stateProvince?has_content>
                                     <input name="breweryState" type="text" class="form-control form-control-user"
-                                        id="breweryState" placeholder="State:">
+                                        id="breweryState" placeholder="State: ${chosenBrewery.stateProvince}">
+                                    <#else>
+                                        <input name="breweryState" type="text" class="form-control form-control-user"
+                                        id="breweryState" placeholder="State: not available">
+                                    </#if>
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
-
+                                    <#if chosenBrewery.postalCode?has_content>
                                     <input name="breweryZipCode" type="text" class="form-control form-control-user"
-                                        id="breweryZipCode" placeholder="Zip Code:">
+                                        id="breweryZipCode" placeholder="Zip Code: ${chosenBrewery.postalCode}">
+                                    <#else>
+                                    <input name="breweryZipCode" type="text" class="form-control form-control-user"
+                                        id="breweryZipCode" placeholder="Zip Code: not available">
+                                    </#if>
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-globe fa-lg" aria-hidden="true"></i>
 
                                     <input name="breweryCountry" type="text" class="form-control form-control-user"
-                                        id="breweryCountry" placeholder="Country:">
+                                        id="breweryCountry" placeholder="Country: ${chosenBrewery.country}">
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
-
+                                    <#if chosenBrewery.phone?has_content>
                                     <input name="breweryPhone" type="text" class="form-control form-control-user"
-                                        id="breweryPhone" placeholder="Phone:">
+                                        id="breweryPhone" placeholder="Phone: ${chosenBrewery.phone}">
+                                    <#else>
+                                    <input name="breweryPhone" type="text" class="form-control form-control-user"
+                                        id="breweryPhone" placeholder="Phone: not available">
+                                        </#if>
                                 </div>
 
                                 <div class="form-group">
                                     <i class="fa fa-internet-explorer fa-lg" aria-hidden="true"></i>
-
+                                    <#if chosenBrewery.wesiteUrl?has_content>
                                     <input name="breweryWebsite" type="text" class="form-control form-control-user"
-                                        id="breweryWebsite" placeholder="Website:">
+                                        id="breweryWebsite" placeholder="Website: ${chosenBrewery.websiteUrl}">
+                                    <#else>
+                                        <input name="breweryWebsite" type="text" class="form-control form-control-user"
+                                        id="breweryWebsite" placeholder="Website: not available">
+                                    </#if>
                                 </div>
 
-                                <hr>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                                <div class="form-group">
+                                    <i class="fa fa-internet-explorer fa-lg" aria-hidden="true"></i>
+                                    <#if chosenBrewery.longitude?has_content>
+                                    <input name="breweryLongitude" type="text" class="form-control form-control-user"
+                                        id="breweryLongitude" placeholder="Longitude: ${chosenBrewery.longitude}">
+                                    <#else>
+                                        <input name="breweryLongitude" type="text" class="form-control form-control-user"
+                                        id="breweryLongitude" placeholder="Longitude: not available">
+                                    </#if>
+                                </div>
+
+                                <div class="form-group">
+                                    <i class="fa fa-internet-explorer fa-lg" aria-hidden="true"></i>
+                                    <#if chosenBrewery.latitude?has_content>
+                                    <input name="breweryLatitude" type="text" class="form-control form-control-user"
+                                        id="breweryWebsite" placeholder="Latitude: ${chosenBrewery.latitude}">
+                                    <#else>
+                                        <input name="breweryLatitude" type="text" class="form-control form-control-user"
+                                        id="breweryLatitude" placeholder="Latitude: not available">
+                                    </#if>
+                                    </#if>
+                                </div>
+                                <#--  <hr>  -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
 
+            <script>
+                $("#edit").modal('show');
+            </script>
+            </#if>
             <!-- End of Modal to edit a brewery -->
 
 
 
             <!-- Modal used to delete a brewery -->
-            <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to delete this entry?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary">Delete Brewery</button>
+            <#if delete>
+                <div class="modal fade" id="delete" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post" action="?cmd=admin&breweryToDeleteId=${chosenBrewery.breweryId}&action=delete">
+                                <div class="modal-body">
+                                <p>Are you sure you want to delete this entry?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="sumbit" class="btn btn-primary">Delete Brewery</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
+                <script>
+                    $("#delete").modal('show');
+                </script>
+            </#if>
             <!-- End of Modal -->
 
             <!-- End of Main Content -->
@@ -463,10 +576,6 @@
 
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="resources/js/jquery-easing.js"></script>

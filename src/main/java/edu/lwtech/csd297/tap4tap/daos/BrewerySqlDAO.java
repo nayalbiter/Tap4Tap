@@ -20,7 +20,7 @@ public class BrewerySqlDAO implements BreweryDAO {
 
     @Override
     public boolean insert(Brewery brewery) {
-        logger.debug("Inserting {}, from city {}, state/province {}, country {}, address {}, {}, {}...", brewery.getName(), brewery.getCity(), brewery.getStateProvince(), brewery.getCountry(), brewery.getAddress1(), brewery.getAddress2(), brewery.getAddress3());
+        logger.debug("Inserting {}, from city {}, state/province {}, country {}, address {}, {}, {}, longitude {}, latitude {}...", brewery.getName(), brewery.getCity(), brewery.getStateProvince(), brewery.getCountry(), brewery.getAddress1(), brewery.getAddress2(), brewery.getAddress3(), brewery.getLongitude(), brewery.getLatitude());
 
         //!!implement to check if brewery was already inserted
 
@@ -70,15 +70,17 @@ public class BrewerySqlDAO implements BreweryDAO {
         try(PreparedStatement stmt = conn.prepareStatement(query);){
             // Substitute in the argument values for the question marks
             stmt.setObject(1, breweryId);
-
+            logger.debug("setObject");
             // Execute the SELECT query
             sqlResults = stmt.executeQuery();
+            logger.debug("sql result generated");
         } catch(SQLException e){
             logger.debug("Sql Exception caught while selecting brewery by Id: {}", breweryId);
             return null;
         }
         try{
             while(sqlResults.next()){
+                logger.debug("returning the result {}", convertResultToBrewery(sqlResults));
                 return convertResultToBrewery(sqlResults);
             }
         }
@@ -137,15 +139,31 @@ public class BrewerySqlDAO implements BreweryDAO {
     public boolean update(Brewery brewery) {
         logger.debug("Trying to update Brewery with Brewery: {}", brewery);
 
-        String query = "UPDATE FROM brewery WHERE brewery_id = ?";
-        UUID breweryId = brewery.getBreweryId();
-        try{
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setObject(1, breweryId);
+        String query = "UPDATE brewery SET ";
+        query += "name=?, brewery_type=?, address_1=?, address_2=?, address_3=?, city=?, state_province=?, postal_code=?, country=?, website_url=?, phone=?, longitude=?, latitude=? ";
+        query += "WHERE brewery_id = ?";
+
+        String[] returnColumns = {};
+        try(PreparedStatement stmt = conn.prepareStatement(query, returnColumns);){
+            stmt.setString(1, brewery.getName());
+            stmt.setString(2, brewery.getBreweryType());
+            stmt.setObject(3, brewery.getAddress1());
+            stmt.setObject(4, null);
+            stmt.setObject(5, null);
+            stmt.setString(6, brewery.getCity());
+            stmt.setString(7, brewery.getStateProvince());
+            stmt.setString(8, brewery.getPostalCode());
+            stmt.setString(9, brewery.getCountry());
+            stmt.setObject(10, brewery.getWebsiteUrl());
+            stmt.setObject(11, brewery.getPhone());
+            stmt.setDouble(12, brewery.getLongitude());
+            stmt.setDouble(13, brewery.getLatitude());
+            stmt.setObject(14, brewery.getBreweryId());
+
             int rows = stmt.executeUpdate();
             return rows > 0;
         }
-        catch(SQLException e){
+        catch(Exception e){
             logger.error("Error caught in executeUpdate: {}", e);
             return false;
         }

@@ -78,8 +78,12 @@
                                     <i class="fa fa-user mr-2 text-gray-100"></i>
                                     Manage Account
                                 </a>
-                                <div class="dropdown-divider"></div>
-
+                                <#if owner.admin>
+                                    <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=admin">
+                                        <i class="fa fa-user mr-2 text-gray-100"></i>
+                                        Admin Page
+                                    </a>
+                                </#if>
                             </div>
                         </li>
 
@@ -215,7 +219,7 @@
                                                             <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Cancel</button>
                                                             <button type="submit" class="btn btn-primary"> Change Password
-                                                        </button>
+                                                            </button>
                                                         </form>
 
                                                     </div>

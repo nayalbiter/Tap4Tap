@@ -63,9 +63,10 @@ public class Tap4tapServlet extends HttpServlet {
         supportedCommands.put("myAccount", new MyAccountHandler());
         supportedCommands.put("errors", new HTTPErrorHandler());
         supportedCommands.put("confirmCreateAccount",new ConfirmCreateAccountHandler());
+        supportedCommands.put("admin", new AdminHandler());
         //to connect to database
-
         boolean useSqlDao = true;
+
         // Get connection parameters
         String hostname = "localhost";
         String port = "3306";
@@ -143,6 +144,9 @@ public class Tap4tapServlet extends HttpServlet {
                 output = command.handle(request, this);
             } catch (UserInputException e) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.toString());
+                return;
+            } catch (PermissionDeniedException e) {
+                response.sendRedirect("?cmd=errors&errorCode=403");
                 return;
             }
             if (output == null || output.isBlank()) {
