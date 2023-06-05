@@ -24,6 +24,10 @@
     <!-- Custom styles for this page-->
     <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="resources/css/tap4tap.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 
@@ -76,8 +80,6 @@
                                         <i class="fa fa-user mr-2 text-gray-100"></i>
                                         Create Account
                                     </a>
-                                    <div class="dropdown-divider"></div>
-
                                     <#else>
                                         <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=logout">
                                             <i class="fa fa-sign-out mr-2 text-gray-100"></i>
@@ -87,6 +89,12 @@
                                             <i class="fa fa-user mr-2 text-gray-100"></i>
                                             Manage Account
                                         </a>
+                                        <#if owner.admin>
+                                        <a class="dropdown-item  text-white" href="/tap4tap/servlet?cmd=admin">
+                                            <i class="fa fa-user mr-2 text-gray-100"></i>
+                                            Admin Page
+                                        </a>
+                                        </#if>
                                 </#if>
                             </div>
                         </li>
@@ -119,7 +127,7 @@
                                 <div class="imageContainer">
 
                                     <!--add the beer picture here  -->
-                                    <img src="resources/img/11.jpg" alt="forgotPAssword1" class="center">
+                                    <img src="resources/img/11.jpg" alt="forgotPassword1" class="center">
 
                                 </div>
 
@@ -145,99 +153,101 @@
                                         </div>
 
                                         <div class="col-12">
+                                            <#if !reset>
+                                                <#if !message?has_content>
+                                                    <div class="text-center">
+                                                        <p class="mb-4">We get it, stuff happens. Just enter your username below
+                                                            and we'll get you security question!</p>
+                                                    </div>
 
-                                            <div class="text-center">
-                                                <p class="mb-4">We get it, stuff happens. Just enter your username below
-                                                    and we'll get you security question!</p>
-                                            </div>
+                                                    <form method="post" class="user" action="?cmd=forgotPassword&action=update">
+                                                        <div class="form-group">
+                                                            <input type="text" name ="userName" class="form-control form-control-user"
+                                                                id="userName" placeholder="Enter your username:">
+                                                        </div>
 
-                                            <!--FIX THIS PART WITH JAVA CODE-->
-                                            <form method="post" class="user" action="#">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control form-control-user"
-                                                        id="userName" placeholder="Enter your username:">
-                                                </div>
+                                                        <div class="col mr-2">
 
-                                                <div class="col mr-2">
-                                                    <!--fix this part with java code-->
+                                                            <button class="btn btn-primary btn-user btn-block" data-toggle="modal"
+                                                                data-target="#GetSecurityQuestion">
+                                                                <i class="fa fa-lock fa-2x" aria-hidden="true"></i> Get my
+                                                                security question
+                                                            </button>
+                                                            <br>
+                                                        </div>
 
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#exampleModalGetSecurityQuestion">
-                                                        <i class="fa fa-lock fa-2x" aria-hidden="true"></i> Get my
-                                                        security question
-                                                    </button>
-
-                                                </div>
-
-                                            </form>
-                                            <hr>
+                                                    </form>
+                                                <#else>
+                                                     <div class="text-red-50 medium text-left">${message}</div>
+                                                </#if>
+                                            <#else>
+                                                 <div class="text-red-50 medium text-left">${message}</div>
+                                            </#if>
 
                                             <!-- Modal used to show the security question -->
-                                            <div class="modal fade" id="exampleModalGetSecurityQuestion" tabindex="-1"
+                                            <#if showModal>
+                                            <div class="modal fade" id="GetSecurityQuestion" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">Security
-                                                                Question:</h5>
+                                                                Question: </h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!--fix this part with java code-->
-                                                            <p>This part should show the security question here:</p>
+
+                                                            <#if securityQuestion?has_content>
+                                                                <p>${securityQuestion}</p>
+                                                                </#if>
                                                         </div>
+                                                        <#if validUser>
+                                                            <form method="post" class="user" action="?cmd=forgotPassword&userName=${username}">
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <input name="securityAnswer" type="text"
+                                                                            class="form-control form-control-user"
+                                                                            id="securityAnswer"
+                                                                            placeholder="Security Answer:">
+                                                                    </div>
 
-                                                        <div class="modal-body">
-                                                            <form method="post" class="user action=" #">
+                                                                    <div class="form-group">
+                                                                        <input type="password" name="newPassword"
+                                                                            class="form-control form-control-user"
+                                                                            id="exampleInputPassword"
+                                                                            placeholder="Enter your new Password:">
+                                                                    </div>
 
-                                                                <div class="form-group">
-                                                                    <input name="ShowSecurityAnswer" type="text"
-                                                                        class="form-control form-control-user"
-                                                                        id="securityAnswer"
-                                                                        placeholder="Security Answer:">
+                                                                    <div class="form-group">
+                                                                        <input type="password" name="newPasswordRepeat"
+                                                                            class="form-control form-control-user"
+                                                                            id="exampleRepeatPassword"
+                                                                            placeholder="Confirm your new Password:">
+                                                                    </div>
                                                                 </div>
-
-                                                                <hr>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancel</button>
+                                                                    <#if validUser>
+                                                                    <button type="sumbit" class="btn btn-primary"> Change
+                                                                        Password
+                                                                    </button>
+                                                                    </#if>
+                                                                </div>
                                                             </form>
-
-                                                            <hr>
-
-                                                            <!--fix this part with java code-->
-
-                                                            <form method="post" class="user action=" #">
-                                                                <div class="form-group">
-                                                                    <input type="password"
-                                                                        class="form-control form-control-user"
-                                                                        id="exampleInputPassword"
-                                                                        placeholder="Enter your new Password:">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="password"
-                                                                        class="form-control form-control-user"
-                                                                        id="exampleRepeatPassword"
-                                                                        placeholder="Confirm your new Password:">
-                                                                </div>
-                                                            </form>
-
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Cancel</button>
-                                                            <button type="button" class="btn btn-primary"> Change
-                                                                Password
-                                                            </button>
-                                                        </div>
-
+                                                        </#if>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <script>
+                                                $("#GetSecurityQuestion").modal('show');
+                                            </script>
+                                            </#if>
                                             <!-- End of Modal -->
                                             <hr>
-                                            <br />
                                             <div class="text-center">
                                                 <a class="large" href="/tap4tap/servlet?cmd=createAccount">Create an
                                                     Account!</a>
@@ -293,10 +303,6 @@
 
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

@@ -95,6 +95,8 @@ public class AdminHandler implements CommandHandler<Tap4tapServlet> {
             breweryLatitude = request.getParameter("breweryLatitude").strip();
         }
         logger.debug("check action {}", action);
+
+        boolean validLongitudeLatitude = true;
         if(action != null && action.equals("edit")){
             UUID breweryToEditID = UUID.fromString(breweryToEditId);
             Brewery breweryToEdit = breweryDAO.retrieveByID(breweryToEditID);
@@ -125,9 +127,28 @@ public class AdminHandler implements CommandHandler<Tap4tapServlet> {
             if(breweryLatitude.isEmpty())
                 breweryLatitude = Double.toString(breweryToEdit.getLatitude());
 
-            Brewery breweryToUpdate = new Brewery(breweryToEditID, breweryName, breweryType, breweryAddress, null, null, breweryCity, breweryState, breweryZipCode, breweryCountry, breweryWebsite, breweryPhone, Double.parseDouble(breweryLongitude), Double.parseDouble(breweryLatitude));
-            updated = breweryDAO.update(breweryToUpdate);
-            breweryMapList.replace(breweryToEditID, breweryToUpdate);
+            if(breweryCountry.equals("united states") || breweryCountry.equals("south korea") || breweryCountry.equals("portugal") || breweryCountry.equals("ireland") || breweryCountry.equals("england") || breweryCountry.equals("france") || breweryCountry.equals("poland") || breweryCountry.equals("scotland") || breweryCountry.equals("isle of man") || breweryCountry.equals("austria")){
+                logger.debug("validating country :{}", breweryCountry);
+                validCountry = true;
+            }
+            validLongitudeLatitude = true;
+            double longitude = 0;
+            double latitude = 0;
+            try{longitude = Double.parseDouble(breweryLongitude);
+            }
+            catch(NumberFormatException e){ validLongitudeLatitude = false;
+            }
+
+            try{latitude = Double.parseDouble(breweryLatitude);
+            }
+            catch(NumberFormatException e){ validLongitudeLatitude = false;
+            }
+            if(validCountry && validLongitudeLatitude){
+                Brewery breweryToUpdate = new Brewery(breweryToEditID, breweryName, breweryType, breweryAddress, null, null, breweryCity, breweryState, breweryZipCode, breweryCountry, breweryWebsite, breweryPhone, longitude, latitude);
+                updated = breweryDAO.update(breweryToUpdate);
+                breweryMapList.replace(breweryToEditID, breweryToUpdate);
+            }
+
         }
         else if(action != null && action.equals("delete")){
             UUID breweryToDeleteID = UUID.fromString(breweryToDeleteId);
@@ -149,16 +170,21 @@ public class AdminHandler implements CommandHandler<Tap4tapServlet> {
                 logger.debug("validating country :{}", breweryCountry);
                 validCountry = true;
 
+                validLongitudeLatitude = true;
                 //creating a new brewery
                 UUID uuid=UUID.randomUUID();
                 double longitude = 0;
                 double latitude = 0;
-                longitude = Double.parseDouble(breweryLongitude);
-                latitude = Double.parseDouble(breweryLatitude);
-                Brewery newBrewery = new Brewery(uuid, breweryName, breweryType, breweryAddress, null, null, breweryCity, breweryState, breweryZipCode, breweryCountry, breweryWebsite, breweryPhone,longitude, latitude);
-                logger.debug("new brewery {}", newBrewery);
+                try{longitude = Double.parseDouble(breweryLongitude);}
+                catch(NumberFormatException e){ validLongitudeLatitude = false;}
+                try{latitude = Double.parseDouble(breweryLatitude);}
+                catch(NumberFormatException e){ validLongitudeLatitude = false;}
+                if(validLongitudeLatitude){
+                    Brewery newBrewery = new Brewery(uuid, breweryName, breweryType, breweryAddress, null, null, breweryCity, breweryState, breweryZipCode, breweryCountry, breweryWebsite, breweryPhone,longitude, latitude);
+                    logger.debug("new brewery {}", newBrewery);
 
-                inserted = breweryDAO.insert(newBrewery);
+                    inserted = breweryDAO.insert(newBrewery);
+                }
             }
         }
         logger.debug("deleted variable = {}", deleted);
@@ -178,6 +204,9 @@ public class AdminHandler implements CommandHandler<Tap4tapServlet> {
         }
         else if(breweryName != null && !validCountry){
             message = "Not supporting country field. Contact developer";
+        }
+        else if(!validLongitudeLatitude){
+            message = "Not valid longitude, and/or latitude";
         }
         else if(breweryName != null && (!inserted || !updated)){
             message = "Can't update/insert.<br>if trying to insert -> Check if address is not repeated by other brewery";
