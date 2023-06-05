@@ -195,9 +195,6 @@
                                                                     <a class="countryOption dropdown-item  text-white"
                                                                         href="#">United States</a>
 
-                                                                    <div role="separator"
-                                                                        class="dropdown-divider text-white"></div>
-
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -193,10 +193,10 @@
                                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                                 Create Account
                                             </button>
-
+                                            <br>
                                             <hr>
                                         </form>
-                                        <hr>
+
                                         <div class="text-center">
                                             <a class="large" href="/tap4tap/servlet?cmd=showLogin">Already have an
                                                 account?

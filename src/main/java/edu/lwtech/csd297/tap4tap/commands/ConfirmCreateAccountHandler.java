@@ -18,13 +18,16 @@ public class ConfirmCreateAccountHandler implements CommandHandler<Tap4tapServle
         String password = request.getParameter("password").strip();
         String confirmPassword = request.getParameter("confirmPassword").strip();
         String hashedPassword = "";
+
         if(password.equals(confirmPassword)){hashedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());}
         String securityQuestion = request.getParameter("securityQuestion").strip();
         String securityAnswer = request.getParameter("securityAnswer").strip();
         String hashedAnswer = BCrypt.withDefaults().hashToString(12, securityAnswer.toCharArray());
         String email = request.getParameter("email").strip();
+
         Map<String, Object> templateFields = new HashMap<>();
         CommandUtils.getSessionVariables(request, templateFields);
+
         User newUser = null;
         if(username.isEmpty()|| displayName.isEmpty()|| password.isEmpty()||securityQuestion.isEmpty()|| securityAnswer.isEmpty()){
             message = "Required fields can't be empty. Try again.<br /><a href='?cmd=createAccount'>Create Account</a>";

@@ -219,7 +219,6 @@
                                                                 </td>
 
                                                                 <td>
-                                                                    <!--fix this part with java code to delete the brewery selected-->
                                                                     <form action="/tap4tap/servlet" method="get">
                                                                         <input type="hidden" name="cmd" value="admin" />
                                                                         <input type="hidden" name="breweryId" value="${brewery.breweryId}" />
@@ -266,7 +265,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form name="insert" method="post" class="user" action="?cmd=admin">
+                        <form id="addBreweryForm" name="insert" method="post" class="user" action="?cmd=admin">
                             <div class="modal-body">
                                 <div class="text-left">* required field</div>
 
@@ -499,11 +498,10 @@
                                     </#if>
                                     </#if>
                                 </div>
-                                <#--  <hr>  -->
-                                <div class="modal-footer">
+                            </div>
+                            <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
                             </div>
                         </form>
 

@@ -92,8 +92,6 @@ public class Tap4tapServlet extends HttpServlet {
     }
 
         logger.info("Initializing the DAOs...");
-
-
         logger.info("Successfully initialized the DAOs!");
 
         logger.warn("");
