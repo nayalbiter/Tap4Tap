@@ -267,9 +267,12 @@
                                                         <#if breweryList?has_content>
                                                             <#list breweryList as brewery>
                                                                 <tr>
-                                                                    <td><i class="fa fa-beer fa-2x "
-                                                                            aria-hidden="true"></i>
-                                                                        ${brewery.name}</td>
+                                                                    <td>
+                                                                    <a href="/tap4tap/servlet?cmd=breweryDetails&breweryId=${brewery.breweryId}">
+                                                                        <i class="fa fa-beer fa-2x" aria-hidden="true"></i>
+                                                                        ${brewery.name}
+                                                                    </a>
+                                                                </td>
                                                                 </tr>
                                                             </#list>
                                                         </#if>
