@@ -19,7 +19,6 @@ public class UserSqlDAO implements UserDAO {
 
     @Override
     public boolean insert(User user) {
-        //!!implement to check if user was already inserted
         String query = "INSERT INTO user";
         query += " (username, hashed_password, security_question, hashed_security_answer, display_name, email, admin)";
         query += " VALUES (?,?,?,?,?,?,?)";

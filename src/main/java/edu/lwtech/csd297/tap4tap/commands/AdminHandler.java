@@ -127,7 +127,7 @@ public class AdminHandler implements CommandHandler<Tap4tapServlet> {
             if(breweryLatitude.isEmpty())
                 breweryLatitude = Double.toString(breweryToEdit.getLatitude());
 
-            if(breweryCountry.equals("united states") || breweryCountry.equals("south korea") || breweryCountry.equals("portugal") || breweryCountry.equals("ireland") || breweryCountry.equals("england") || breweryCountry.equals("france") || breweryCountry.equals("poland") || breweryCountry.equals("scotland") || breweryCountry.equals("isle of man") || breweryCountry.equals("austria")){
+            if(breweryCountry.equalsIgnoreCase("united states") || breweryCountry.equalsIgnoreCase("south korea") || breweryCountry.equalsIgnoreCase("portugal") || breweryCountry.equalsIgnoreCase("ireland") || breweryCountry.equals("england") || breweryCountry.equals("france") || breweryCountry.equalsIgnoreCase("poland") || breweryCountry.equalsIgnoreCase("scotland") || breweryCountry.equalsIgnoreCase("isle of man") || breweryCountry.equalsIgnoreCase("austria")){
                 logger.debug("validating country :{}", breweryCountry);
                 validCountry = true;
             }
@@ -166,7 +166,7 @@ public class AdminHandler implements CommandHandler<Tap4tapServlet> {
                 logger.debug("require field message");
                 missingField = true;
             }
-            else if(breweryCountry.equals("united states") || breweryCountry.equals("south korea") || breweryCountry.equals("portugal") || breweryCountry.equals("ireland") || breweryCountry.equals("england") || breweryCountry.equals("france") || breweryCountry.equals("poland") || breweryCountry.equals("scotland") || breweryCountry.equals("isle of man") || breweryCountry.equals("austria")){
+            else if(breweryCountry.equalsIgnoreCase("united states") || breweryCountry.equalsIgnoreCase("south korea") || breweryCountry.equalsIgnoreCase("portugal") || breweryCountry.equalsIgnoreCase("ireland") || breweryCountry.equalsIgnoreCase("england") || breweryCountry.equalsIgnoreCase("france") || breweryCountry.equalsIgnoreCase("poland") || breweryCountry.equalsIgnoreCase("scotland") || breweryCountry.equalsIgnoreCase("isle of man") || breweryCountry.equalsIgnoreCase("austria")){
                 logger.debug("validating country :{}", breweryCountry);
                 validCountry = true;
 
